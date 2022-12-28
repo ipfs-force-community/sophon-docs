@@ -1,9 +1,6 @@
-# Venus Docs
+# Sophon Docs
 
-This repository contains documentation content for the [Venus](https://github.com/filecoin-project/venus) implementation **only**. It is hosted at **[venus.filecoin.io](https://venus.filecoin.io)**. For mandarin speakers, please visit [https://venus.filecoin.io/zh/](https://venus.filecoin.io/zh/).
-
-For general [Filecoin Documentation](https://docs.filecoin.io), please visit [docs.filecoin.io](https://docs.filecoin.io). The repository with its source can be found in [/filecoin-project/filecoin-docs](https://github.com/filecoin-project/filecoin-docs).
-
+This repository contains documentation content for the [Sophon](https://github.com/filecoin-project/venus). It is hosted at **[sophon.venus-fil.io](https://sophon.venus-fil.io)**. For mandarin speakers, please visit [https://sophon.venus-fil.io/zh/](https://sophon.venus-fil.io/zh/).
 
 ## Contributing
 
