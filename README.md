@@ -1,6 +1,6 @@
 # Sophon Docs
 
-This repository contains documentation content for the [Sophon](https://github.com/filecoin-project/venus). It is hosted at **[sophon.venus-fil.io](https://sophon.venus-fil.io)**. For mandarin speakers, please visit [https://sophon.venus-fil.io/zh/](https://sophon.venus-fil.io/zh/).
+This repository contains documentation content for the [Sophon](https://github.com/filecoin-project/venus). It is hosted at **[sophon.venus-fil.io](https://sophon.venus-fil.io)**. For mandarin speakers, please visit [https://sophon.venus-fil.io/zh/](https://sophon.venus-fil.io/zh/). 
 
 ## Contributing
 
