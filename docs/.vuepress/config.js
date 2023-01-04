@@ -26,7 +26,7 @@ module.exports = {
     head: [
         ['link', {
             rel: 'icon',
-            href: '/assets/venus-logo.png'
+            href: '/assets/sophon-icon.png'
         }],
         [
             'script',
@@ -56,7 +56,7 @@ module.exports = {
         }
     },
     themeConfig: {
-        logo: '/assets/sophon-icon.svg',
+        logo: '/assets/sophon-icon.png',
         lastUpdated: 'Last Updated',
         // Optional options for generating "Edit this page" link
         // if your docs are in a different repo from your main project:

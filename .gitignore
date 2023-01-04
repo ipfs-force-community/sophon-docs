@@ -1,5 +1,8 @@
 # fs & dev
 .DS_Store
+._.DS_Store
+**/.DS_Store
+**/._.DS_Store
 node_modules
 dist
 .temp
