@@ -1,5 +1,5 @@
 :::tip
-本文介绍了一个简易的实现负载均衡的方式，使用`chain-co`的负载均衡方式请参照[这里](/zh/operation/)。
+本文介绍了一个简易的实现负载均衡的方式，使用`chain-co`的负载均衡方式请参照[这里](https://venus.filecoin.io/zh/operation/#%E9%83%A8%E7%BD%B2%E8%8A%82%E7%82%B9)。
 :::
 
 ## 前期准备

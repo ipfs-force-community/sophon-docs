@@ -1,5 +1,5 @@
 :::warning
-For a more complex chain service, please refer to [this document](/operation/) for a full scale HA solution.
+For a more complex chain service, please refer to [this document](https://venus.filecoin.io/operation/) for a full scale HA solution.
 :::
 
 ## Preparation
