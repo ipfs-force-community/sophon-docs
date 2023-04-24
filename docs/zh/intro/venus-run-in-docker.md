@@ -84,6 +84,7 @@ docker run -d --name venus --net=host -v /path/to/snapshot.car:/snapshot.car \
 filvenus/venus daemon \
 --network=<NETTYPE> \
 --auth-url=<VENUS_AUTH_URL> \
+--auth-token=<VENUS_AUTH_/TOKEN>
 --import-snapshot /snapshot.car 
 ```
 
@@ -92,7 +93,8 @@ filvenus/venus daemon \
 ```shell
 docker run -d --name venus-gateway --net=host filvenus/venus-gateway \
 --listen /ip4/0.0.0.0/tcp/45132 \
-run --auth-url <http://VENUS_AUTH_IP_ADDRESS:PORT>
+run --auth-url <http://VENUS_AUTH_IP_ADDRESS:PORT> \
+--auth-token <venus-auth token>
 ```
 
 
@@ -110,7 +112,6 @@ docker run -d  --name venus-messager  --net=host filvenus/venus-messager run \
 
 ```shell
 docker run -d  --name venus-miner --net=host filvenus/venus-miner init \
---nettype <NETTYPE> \
 --auth-api <http://VENUS_AUTH_IP_ADDRESS:PORT> \
 --token <SHARED_ADMIN_AUTH_TOKEN> \
 --gateway-api /ip4/<VENUS_GATEWAY_IP_ADDRESS>/tcp/45132 \
@@ -178,6 +179,7 @@ docker run -d --name filvenus/venus --net=host \
 tanlang/venus \
 --network=<NETTYPE> \
 --auth-url=<VENUS_AUTH_URL> \
+--auth-token=<VENUS_AUTH_TOKEN> \
 --import-snapshot /snapshot.car 
 ```
 
