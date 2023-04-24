@@ -139,7 +139,7 @@ github.com/dgraph-io/badger/v3@v3.2011.1/fb/BlockOffset.go:6:2: missing go.sum e
 $ ./venus-gateway --listen /ip4/0.0.0.0/tcp/45132 run \
 # Use either a http or https url
 --auth-url <http://VENUS_AUTH_IP_ADDRESS:PORT> \
---auth-token <venus-auth token> \
+--auth-token <SHARED_ADMIN_AUTH_TOKEN> \
 > venus-gateway.log 2>&1 &
 ```
 
@@ -148,7 +148,7 @@ $ ./venus-gateway --listen /ip4/0.0.0.0/tcp/45132 run \
 启动`venus`进程进行链同步。 使用 `--network` 来指定`venus`连接的网络。
 
 ```shell script
-$ nohup ./venus daemon --network=calibrationnet --auth-url=<http://VENUS_AUTH_IP_ADDRESS:PORT> --auth-token=<venus-auth token> > venus.log 2>&1 &
+$ nohup ./venus daemon --network=calibrationnet --auth-url=<http://VENUS_AUTH_IP_ADDRESS:PORT> --auth-token=<SHARED_ADMIN_AUTH_TOKEN> > venus.log 2>&1 &
 ```
 
 :::tip
@@ -178,7 +178,7 @@ vim ~/.venus/config.json
 ```bash
 $ ps -ef | grep venus
 $ kill -9 <VENUS_PID>
-$ nohup ./venus daemon --network=calibrationnet --auth-url=<http://VENUS_AUTH_IP_ADDRESS:PORT> --auth-token=<venus-auth token> > venus.log 2>&1 &
+$ nohup ./venus daemon --network=calibrationnet --auth-url=<http://VENUS_AUTH_IP_ADDRESS:PORT> --auth-token=<SHARED_ADMIN_AUTH_TOKEN> > venus.log 2>&1 &
 ```
 
 在其他机器上执行`telnet` 验证配置生效:

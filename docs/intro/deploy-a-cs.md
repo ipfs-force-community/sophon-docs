@@ -128,7 +128,7 @@ Start venus-gateway.
 $ ./venus-gateway --listen=/ip4/0.0.0.0/tcp/45132 run \
 # Use either a http or https url
 --auth-url=<http://VENUS_AUTH_IP_ADDRESS:PORT> \
---auth-token=<venus-auth token> \
+--auth-token=<SHARED_ADMIN_AUTH_TOKEN> \
 > venus-gateway.log 2>&1 &
 ```
 
@@ -155,7 +155,7 @@ $ make
 Start venus daemon for chain synchronization. Use `--network` to specify the network venus is connecting to.
 
 ```bash
-$ nohup ./venus daemon --network=calibrationnet --auth-url=<http://VENUS_AUTH_IP_ADDRESS:PORT> --auth-token=<venus-auth token> > venus.log 2>&1 &
+$ nohup ./venus daemon --network=calibrationnet --auth-url=<http://VENUS_AUTH_IP_ADDRESS:PORT> --auth-token=<SHARED_ADMIN_AUTH_TOKEN> > venus.log 2>&1 &
 ```
 
 :::tip
@@ -185,7 +185,7 @@ Restart venus daemon for the config to take into effects.
 ```bash
 $ ps -ef | grep venus
 $ kill <VENUS_PID>
-$ nohup ./venus daemon --network=calibrationnet --auth-url <http://VENUS_AUTH_IP_ADDRESS:PORT> --auth-token <venus-auth token> > venus.log 2>&1 &
+$ nohup ./venus daemon --network=calibrationnet --auth-url <http://VENUS_AUTH_IP_ADDRESS:PORT> --auth-token <SHARED_ADMIN_AUTH_TOKEN> > venus.log 2>&1 &
 ```
 
 :::tip
