@@ -80,7 +80,10 @@ venus-auth manages [jwt](https://jwt.io/) tokens used by other venus modules for
 Generate tokens for shared modules.
 
 ```bash
-# --perm specifies admin, sign, wirte or read permission of the token generated
+# add user SHARED
+$ ./venus-auth user add <SHARED>
+
+# --perm specifies admin, sign, write or read permission of the token generated
 $ ./venus-auth token gen --perm admin <SHARED>
 <SHARED_ADMIN_AUTH_TOKEN>
 ```
@@ -125,6 +128,7 @@ Start venus-gateway.
 $ ./venus-gateway --listen=/ip4/0.0.0.0/tcp/45132 run \
 # Use either a http or https url
 --auth-url=<http://VENUS_AUTH_IP_ADDRESS:PORT> \
+--auth-token=<SHARED_ADMIN_AUTH_TOKEN> \
 > venus-gateway.log 2>&1 &
 ```
 
@@ -151,12 +155,12 @@ $ make
 Start venus daemon for chain synchronization. Use `--network` to specify the network venus is connecting to.
 
 ```bash
-$ nohup ./venus daemon --network=calibrationnet --auth-url=<http://VENUS_AUTH_IP_ADDRESS:PORT> > venus.log 2>&1 &
+$ nohup ./venus daemon --network=calibrationnet --auth-url=<http://VENUS_AUTH_IP_ADDRESS:PORT> --auth-token=<SHARED_ADMIN_AUTH_TOKEN> > venus.log 2>&1 &
 ```
 
 :::tip
 
-Use `tail -f venus.log`  or `./venus sync status` to check if there is any errors during sychronization.
+Use `tail -f venus.log`  or `./venus sync status` to check if there is any errors during synchronization.
 
 :::
 
@@ -181,7 +185,7 @@ Restart venus daemon for the config to take into effects.
 ```bash
 $ ps -ef | grep venus
 $ kill <VENUS_PID>
-$ nohup ./venus daemon --network=calibrationnet --auth-url <http://VENUS_AUTH_IP_ADDRESS:PORT> > venus.log 2>&1 &
+$ nohup ./venus daemon --network=calibrationnet --auth-url <http://VENUS_AUTH_IP_ADDRESS:PORT> --auth-token <SHARED_ADMIN_AUTH_TOKEN> > venus.log 2>&1 &
 ```
 
 :::tip
@@ -234,8 +238,6 @@ Initialize venus-miner.
 
 ```bash
 $ ./venus-miner init
-# For nettype, choose from mainnet, debug, 2k, calibnet
---nettype calibnet \
 --auth-api <http://VENUS_AUTH_IP_ADDRESS:PORT> \
 --token <SHARED_ADMIN_AUTH_TOKEN> \
 --gateway-api /ip4/<VENUS_GATEWAY_IP_ADDRESS>/tcp/45132 \
@@ -246,7 +248,7 @@ $ ./venus-miner init
 Run venus-miner.
 
 ```bash
-$ nohup ./venus-miner run >>miner.log 2>& 1 &
+$ nohup ./venus-miner run >> miner.log 2>& 1 &
 ```
 
 ### Miner management

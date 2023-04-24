@@ -23,17 +23,17 @@ Filecoin's blockchain grows relatively fast, so a full sync will take long time.
 
 We recommend most users to perform the initial node sync from a minimal, lightweight snapshot. Trusted state snapshots do not contain the full chain and might not be suitable for nodes that need to perform queries against historical state information, like block explorers, but otherwise work for most users.
 
-A recent minimal trusted state chain snapshot is available [here](https://fil-chain-snapshots-fallback.s3.amazonaws.com/mainnet/minimal_finality_stateroots_latest.car). We can instruct venus to start the daemon and directly import from the URL:
+A recent minimal trusted state chain snapshot is available [here](https://snapshots.mainnet.filops.net/minimal/latest). We can instruct venus to start the daemon and directly import from the URL:
 
 ```sh
-# The snapshot size is about 7GiB. This works for mainnet.
-venus daemon --import-snapshot https://fil-chain-snapshots-fallback.s3.amazonaws.com/mainnet/minimal_finality_stateroots_latest.car
+# The snapshot size is about 100 GiB. This works for mainnet.
+venus daemon --import-snapshot https://snapshots.mainnet.filops.net/minimal/latest
 
 # An alternative is to download first and use the file
 venus daemon --import-snapshot <filename.car>
 
 # The sha256sum is stored alongside the interim snapshot and can be obtained via
-curl -sI https://fil-chain-snapshots-fallback.s3.amazonaws.com/mainnet/minimal_finality_stateroots_latest.car \
+curl -sI https://snapshots.mainnet.filops.net/minimal/latest \
 | perl -ne '/^x-amz-website-redirect-location:(.+)\.car\s*$/ && print "$1.sha256sum"' \
 | xargs curl -s
 ```
@@ -72,5 +72,5 @@ It is possible to _prune_ the current chain data used by Venus to reduce the dis
 1. Start the daemon using a minimal snapshot, as explained above:
 
   ```bash
-  venus daemon --import-snapshot https://fil-chain-snapshots-fallback.s3.amazonaws.com/mainnet/minimal_finality_stateroots_latest.car
+  venus daemon --import-snapshot https://snapshots.mainnet.filops.net/minimal/latest
   ```
