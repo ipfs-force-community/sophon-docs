@@ -62,7 +62,7 @@ venus 和 market 组件默认监听本地IP，如有需要，请注意修改相�
 :::
 
 :::warning
-在miner初始化完成之后,需要将miner关联到merket，参见[将miner的Multiaddrs和PeerID设置为market的对应地址](https://venus.filecoin.io/zh/market/using-venus-market-for-miner.html#%E4%BD%BF%E7%94%A8%E8%87%AA%E5%B7%B1%E7%9A%84venus%E8%8A%82%E7%82%B9)部分
+在miner初始化完成之后,需要将miner关联到market，参见[将miner的Multiaddrs和PeerID设置为market的对应地址](https://venus.filecoin.io/zh/market/using-venus-market-for-miner.html#%E4%BD%BF%E7%94%A8%E8%87%AA%E5%B7%B1%E7%9A%84venus%E8%8A%82%E7%82%B9)部分
 :::
 
 
@@ -84,7 +84,7 @@ docker run -d --name venus --net=host -v /path/to/snapshot.car:/snapshot.car \
 filvenus/venus daemon \
 --network=<NETTYPE> \
 --auth-url=<VENUS_AUTH_URL> \
---auth-token=<VENUS_AUTH_/TOKEN>
+--auth-token=<VENUS_AUTH_TOKEN>
 --import-snapshot /snapshot.car 
 ```
 
