@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Sample code of curl | 智子</title>
+    <meta name="generator" content="VuePress 1.8.0">
+    <link rel="icon" href="/assets/sophon-icon.png">
+    <script async="true" src="https://www.googletagmanager.com/gtag/js?id=G-RHJWEBDXVD"></script>
+    <script>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-RHJWEBDXVD');</script>
+    <meta name="description" content="智子，原Venus链服务，是一个Filecoin超级节点解决方案">
+    
+    <link rel="preload" href="/assets/css/0.styles.117964e0.css" as="style"><link rel="preload" href="/assets/js/app.60d17fba.js" as="script"><link rel="preload" href="/assets/js/2.20e7910a.js" as="script"><link rel="preload" href="/assets/js/47.4c75566f.js" as="script"><link rel="prefetch" href="/assets/js/10.f067a250.js"><link rel="prefetch" href="/assets/js/11.2a60a7f2.js"><link rel="prefetch" href="/assets/js/12.0d1843dc.js"><link rel="prefetch" href="/assets/js/13.647f3f5f.js"><link rel="prefetch" href="/assets/js/14.b9b5b679.js"><link rel="prefetch" href="/assets/js/15.29475921.js"><link rel="prefetch" href="/assets/js/16.799ca694.js"><link rel="prefetch" href="/assets/js/17.c49a9aa9.js"><link rel="prefetch" href="/assets/js/18.c2c0e919.js"><link rel="prefetch" href="/assets/js/19.dbdb2f7a.js"><link rel="prefetch" href="/assets/js/20.8d8e80c0.js"><link rel="prefetch" href="/assets/js/21.db508f97.js"><link rel="prefetch" href="/assets/js/22.772ab990.js"><link rel="prefetch" href="/assets/js/23.24e15860.js"><link rel="prefetch" href="/assets/js/24.b845b1f2.js"><link rel="prefetch" href="/assets/js/25.1d9d9e5e.js"><link rel="prefetch" href="/assets/js/26.ebda88e6.js"><link rel="prefetch" href="/assets/js/27.e7f42bb7.js"><link rel="prefetch" href="/assets/js/28.edd468a0.js"><link rel="prefetch" href="/assets/js/29.d821c7da.js"><link rel="prefetch" href="/assets/js/3.206af95e.js"><link rel="prefetch" href="/assets/js/30.51247c35.js"><link rel="prefetch" href="/assets/js/31.928af2d8.js"><link rel="prefetch" href="/assets/js/32.e6c58e13.js"><link rel="prefetch" href="/assets/js/33.cc495748.js"><link rel="prefetch" href="/assets/js/34.494c9b9f.js"><link rel="prefetch" href="/assets/js/35.3a2b7488.js"><link rel="prefetch" href="/assets/js/36.1fc7fd09.js"><link rel="prefetch" href="/assets/js/37.0da01654.js"><link rel="prefetch" href="/assets/js/38.be4ebdb7.js"><link rel="prefetch" href="/assets/js/39.d2bdf8a7.js"><link rel="prefetch" href="/assets/js/4.06777882.js"><link rel="prefetch" href="/assets/js/40.34936e76.js"><link rel="prefetch" href="/assets/js/41.3d8d54b7.js"><link rel="prefetch" href="/assets/js/42.f28f809c.js"><link rel="prefetch" href="/assets/js/43.389f30ad.js"><link rel="prefetch" href="/assets/js/44.fd7b8b05.js"><link rel="prefetch" href="/assets/js/45.d8945a37.js"><link rel="prefetch" href="/assets/js/46.1f30d35a.js"><link rel="prefetch" href="/assets/js/48.7e159d0a.js"><link rel="prefetch" href="/assets/js/49.ed9170d6.js"><link rel="prefetch" href="/assets/js/5.d51f6b5b.js"><link rel="prefetch" href="/assets/js/50.5bab52a8.js"><link rel="prefetch" href="/assets/js/51.001d84d0.js"><link rel="prefetch" href="/assets/js/52.7b3b50ae.js"><link rel="prefetch" href="/assets/js/53.bc22f7f2.js"><link rel="prefetch" href="/assets/js/54.7eba1209.js"><link rel="prefetch" href="/assets/js/55.c6f9dd70.js"><link rel="prefetch" href="/assets/js/56.836a10ab.js"><link rel="prefetch" href="/assets/js/57.1a282f75.js"><link rel="prefetch" href="/assets/js/58.81dca438.js"><link rel="prefetch" href="/assets/js/59.6d81482d.js"><link rel="prefetch" href="/assets/js/6.48d01579.js"><link rel="prefetch" href="/assets/js/60.c074f504.js"><link rel="prefetch" href="/assets/js/61.f7fe6e57.js"><link rel="prefetch" href="/assets/js/62.fd5a9137.js"><link rel="prefetch" href="/assets/js/7.451a0b7b.js"><link rel="prefetch" href="/assets/js/8.24c6bc48.js"><link rel="prefetch" href="/assets/js/9.1659d9a2.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.117964e0.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/zh/" class="home-link router-link-active"><img src="/assets/sophon-icon.png" alt="智子" class="logo"> <span class="site-name can-hide">智子</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/zh/intro/" class="nav-link">
+  功能介绍
+</a></div><div class="nav-item"><a href="/zh/operation/" class="nav-link">
+  部署/运维
+</a></div><div class="nav-item"><a href="/zh/developer/" class="nav-link router-link-active">
+  研发/设计
+</a></div><div class="nav-item"><a href="/zh/about/" class="nav-link">
+  关于
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Select language" class="dropdown-title"><span class="title">选择语言</span> <span class="arrow down"></span></button> <button type="button" aria-label="Select language" class="mobile-dropdown-title"><span class="title">选择语言</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/" class="nav-link">
+  English
+</a></li><li class="dropdown-item"><!----> <a href="/zh/developer/wallet-api.html" aria-current="page" class="nav-link router-link-exact-active router-link-active">
+  简体中文
+</a></li></ul></div></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/zh/intro/" class="nav-link">
+  功能介绍
+</a></div><div class="nav-item"><a href="/zh/operation/" class="nav-link">
+  部署/运维
+</a></div><div class="nav-item"><a href="/zh/developer/" class="nav-link router-link-active">
+  研发/设计
+</a></div><div class="nav-item"><a href="/zh/about/" class="nav-link">
+  关于
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Select language" class="dropdown-title"><span class="title">选择语言</span> <span class="arrow down"></span></button> <button type="button" aria-label="Select language" class="mobile-dropdown-title"><span class="title">选择语言</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/" class="nav-link">
+  English
+</a></li><li class="dropdown-item"><!----> <a href="/zh/developer/wallet-api.html" aria-current="page" class="nav-link router-link-exact-active router-link-active">
+  简体中文
+</a></li></ul></div></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>研发</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/zh/developer/" aria-current="page" class="sidebar-link">本地2k开发网络</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>功能设计</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/zh/developer/data-by-id.html" class="sidebar-link">用户数据隔离</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>RPC 接口参考</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/zh/developer/chain-api-v1.html" class="sidebar-link">Chain api v1</a></li><li><a href="/zh/developer/chain-api-v0.html" class="sidebar-link">Chain api v0</a></li><li><a href="/zh/developer/gateway-api-v1.html" class="sidebar-link">Gateway api v1</a></li><li><a href="/zh/developer/gateway-api-v0.html" class="sidebar-link">Gateway api v0</a></li><li><a href="/zh/developer/messager-api.html" class="sidebar-link">Messager api</a></li><li><a href="/zh/developer/wallet-api.html" aria-current="page" class="active sidebar-link">Wallet api</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/zh/developer/wallet-api.html#common" class="sidebar-link">Common</a></li><li class="sidebar-sub-header"><a href="/zh/developer/wallet-api.html#wallet" class="sidebar-link">Wallet</a></li><li class="sidebar-sub-header"><a href="/zh/developer/wallet-api.html#walletevent" class="sidebar-link">WalletEvent</a></li><li class="sidebar-sub-header"><a href="/zh/developer/wallet-api.html#walletlock" class="sidebar-link">WalletLock</a></li></ul></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="sample-code-of-curl"><a href="#sample-code-of-curl" class="header-anchor">#</a> Sample code of curl</h1> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token comment"># &lt;Inputs&gt; corresponding to the value of Inputs Tag of each API</span>
+<span class="token function">curl</span> http://<span class="token operator">&lt;</span>ip<span class="token operator">&gt;</span>:<span class="token operator">&lt;</span>port<span class="token operator">&gt;</span>/rpc/v0 -X POST -H <span class="token string">&quot;Content-Type: application/json&quot;</span>  -H <span class="token string">&quot;Authorization: Bearer &lt;token&gt;&quot;</span>  -d <span class="token string">'{&quot;method&quot;: &quot;Filecoin.&lt;method&gt;&quot;, &quot;params&quot;: &lt;Inputs&gt;, &quot;id&quot;: 0}'</span>
+</code></pre></div><h1 id="groups"><a href="#groups" class="header-anchor">#</a> Groups</h1> <ul><li><a href="#common">Common</a> <ul><li><a href="#authnew">AuthNew</a></li> <li><a href="#authverify">AuthVerify</a></li> <li><a href="#listsignedrecord">ListSignedRecord</a></li> <li><a href="#loglist">LogList</a></li> <li><a href="#logsetlevel">LogSetLevel</a></li> <li><a href="#version">Version</a></li></ul></li> <li><a href="#wallet">Wallet</a> <ul><li><a href="#walletdelete">WalletDelete</a></li> <li><a href="#walletexport">WalletExport</a></li> <li><a href="#wallethas">WalletHas</a></li> <li><a href="#walletimport">WalletImport</a></li> <li><a href="#walletlist">WalletList</a></li> <li><a href="#walletnew">WalletNew</a></li> <li><a href="#walletsign">WalletSign</a></li></ul></li> <li><a href="#walletevent">WalletEvent</a> <ul><li><a href="#addnewaddress">AddNewAddress</a></li> <li><a href="#addsupportaccount">AddSupportAccount</a></li></ul></li> <li><a href="#walletlock">WalletLock</a> <ul><li><a href="#lock">Lock</a></li> <li><a href="#lockstate">LockState</a></li> <li><a href="#setpassword">SetPassword</a></li> <li><a href="#unlock">Unlock</a></li> <li><a href="#verifypassword">VerifyPassword</a></li></ul></li></ul> <h2 id="common"><a href="#common" class="header-anchor">#</a> Common</h2> <h3 id="authnew"><a href="#authnew" class="header-anchor">#</a> AuthNew</h3> <p>Perms: admin</p> <p>Inputs:</p> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">[</span>
+  <span class="token punctuation">[</span>
+    <span class="token string">&quot;write&quot;</span>
+  <span class="token punctuation">]</span>
+<span class="token punctuation">]</span>
+</code></pre></div><p>Response: <code>&quot;Ynl0ZSBhcnJheQ==&quot;</code></p> <h3 id="authverify"><a href="#authverify" class="header-anchor">#</a> AuthVerify</h3> <p>Auth</p> <p>Perms: read</p> <p>Inputs:</p> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">[</span>
+  <span class="token string">&quot;string value&quot;</span>
+<span class="token punctuation">]</span>
+</code></pre></div><p>Response:</p> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">[</span>
+  <span class="token string">&quot;write&quot;</span>
+<span class="token punctuation">]</span>
+</code></pre></div><h3 id="listsignedrecord"><a href="#listsignedrecord" class="header-anchor">#</a> ListSignedRecord</h3> <p>Perms: read</p> <p>Inputs:</p> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">[</span>
+  <span class="token punctuation">{</span>
+    <span class="token property">&quot;ID&quot;</span><span class="token operator">:</span> <span class="token string">&quot;string value&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;Type&quot;</span><span class="token operator">:</span> <span class="token string">&quot;message&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;Signer&quot;</span><span class="token operator">:</span> <span class="token string">&quot;f01234&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;IsError&quot;</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;Skip&quot;</span><span class="token operator">:</span> <span class="token number">123</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;Limit&quot;</span><span class="token operator">:</span> <span class="token number">123</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;After&quot;</span><span class="token operator">:</span> <span class="token string">&quot;0001-01-01T00:00:00Z&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;Before&quot;</span><span class="token operator">:</span> <span class="token string">&quot;0001-01-01T00:00:00Z&quot;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">]</span>
+</code></pre></div><p>Response:</p> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">[</span>
+  <span class="token punctuation">{</span>
+    <span class="token property">&quot;ID&quot;</span><span class="token operator">:</span> <span class="token string">&quot;string value&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;Type&quot;</span><span class="token operator">:</span> <span class="token string">&quot;message&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;Signer&quot;</span><span class="token operator">:</span> <span class="token string">&quot;f01234&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;Err&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;RawMsg&quot;</span><span class="token operator">:</span> <span class="token string">&quot;Ynl0ZSBhcnJheQ==&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;Signature&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token property">&quot;Type&quot;</span><span class="token operator">:</span> <span class="token number">2</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;Data&quot;</span><span class="token operator">:</span> <span class="token string">&quot;Ynl0ZSBhcnJheQ==&quot;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;CreateAt&quot;</span><span class="token operator">:</span> <span class="token string">&quot;0001-01-01T00:00:00Z&quot;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">]</span>
+</code></pre></div><h3 id="loglist"><a href="#loglist" class="header-anchor">#</a> LogList</h3> <p>Perms: read</p> <p>Inputs: <code>[]</code></p> <p>Response:</p> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">[</span>
+  <span class="token string">&quot;string value&quot;</span>
+<span class="token punctuation">]</span>
+</code></pre></div><h3 id="logsetlevel"><a href="#logsetlevel" class="header-anchor">#</a> LogSetLevel</h3> <p>Perms: write</p> <p>Inputs:</p> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">[</span>
+  <span class="token string">&quot;string value&quot;</span><span class="token punctuation">,</span>
+  <span class="token string">&quot;string value&quot;</span>
+<span class="token punctuation">]</span>
+</code></pre></div><p>Response: <code>{}</code></p> <h3 id="version"><a href="#version" class="header-anchor">#</a> Version</h3> <p>Version provides information about API provider</p> <p>Perms: read</p> <p>Inputs: <code>[]</code></p> <p>Response:</p> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">{</span>
+  <span class="token property">&quot;Version&quot;</span><span class="token operator">:</span> <span class="token string">&quot;string value&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;APIVersion&quot;</span><span class="token operator">:</span> <span class="token number">131840</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h2 id="wallet"><a href="#wallet" class="header-anchor">#</a> Wallet</h2> <h3 id="walletdelete"><a href="#walletdelete" class="header-anchor">#</a> WalletDelete</h3> <p>Perms: admin</p> <p>Inputs:</p> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">[</span>
+  <span class="token string">&quot;f01234&quot;</span>
+<span class="token punctuation">]</span>
+</code></pre></div><p>Response: <code>{}</code></p> <h3 id="walletexport"><a href="#walletexport" class="header-anchor">#</a> WalletExport</h3> <p>Perms: admin</p> <p>Inputs:</p> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">[</span>
+  <span class="token string">&quot;f01234&quot;</span>
+<span class="token punctuation">]</span>
+</code></pre></div><p>Response:</p> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">{</span>
+  <span class="token property">&quot;Type&quot;</span><span class="token operator">:</span> <span class="token string">&quot;bls&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;PrivateKey&quot;</span><span class="token operator">:</span> <span class="token string">&quot;Ynl0ZSBhcnJheQ==&quot;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h3 id="wallethas"><a href="#wallethas" class="header-anchor">#</a> WalletHas</h3> <p>Perms: read</p> <p>Inputs:</p> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">[</span>
+  <span class="token string">&quot;f01234&quot;</span>
+<span class="token punctuation">]</span>
+</code></pre></div><p>Response: <code>true</code></p> <h3 id="walletimport"><a href="#walletimport" class="header-anchor">#</a> WalletImport</h3> <p>Perms: admin</p> <p>Inputs:</p> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">[</span>
+  <span class="token punctuation">{</span>
+    <span class="token property">&quot;Type&quot;</span><span class="token operator">:</span> <span class="token string">&quot;bls&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;PrivateKey&quot;</span><span class="token operator">:</span> <span class="token string">&quot;Ynl0ZSBhcnJheQ==&quot;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">]</span>
+</code></pre></div><p>Response: <code>&quot;f01234&quot;</code></p> <h3 id="walletlist"><a href="#walletlist" class="header-anchor">#</a> WalletList</h3> <p>Perms: read</p> <p>Inputs: <code>[]</code></p> <p>Response:</p> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">[</span>
+  <span class="token string">&quot;f01234&quot;</span>
+<span class="token punctuation">]</span>
+</code></pre></div><h3 id="walletnew"><a href="#walletnew" class="header-anchor">#</a> WalletNew</h3> <p>Perms: admin</p> <p>Inputs:</p> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">[</span>
+  <span class="token string">&quot;bls&quot;</span>
+<span class="token punctuation">]</span>
+</code></pre></div><p>Response: <code>&quot;f01234&quot;</code></p> <h3 id="walletsign"><a href="#walletsign" class="header-anchor">#</a> WalletSign</h3> <p>Perms: sign</p> <p>Inputs:</p> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">[</span>
+  <span class="token string">&quot;f01234&quot;</span><span class="token punctuation">,</span>
+  <span class="token string">&quot;Ynl0ZSBhcnJheQ==&quot;</span><span class="token punctuation">,</span>
+  <span class="token punctuation">{</span>
+    <span class="token property">&quot;Type&quot;</span><span class="token operator">:</span> <span class="token string">&quot;message&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;Extra&quot;</span><span class="token operator">:</span> <span class="token string">&quot;Ynl0ZSBhcnJheQ==&quot;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">]</span>
+</code></pre></div><p>Response:</p> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">{</span>
+  <span class="token property">&quot;Type&quot;</span><span class="token operator">:</span> <span class="token number">2</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;Data&quot;</span><span class="token operator">:</span> <span class="token string">&quot;Ynl0ZSBhcnJheQ==&quot;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h2 id="walletevent"><a href="#walletevent" class="header-anchor">#</a> WalletEvent</h2> <h3 id="addnewaddress"><a href="#addnewaddress" class="header-anchor">#</a> AddNewAddress</h3> <p>Perms: admin</p> <p>Inputs:</p> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">[</span>
+  <span class="token punctuation">[</span>
+    <span class="token string">&quot;f01234&quot;</span>
+  <span class="token punctuation">]</span>
+<span class="token punctuation">]</span>
+</code></pre></div><p>Response: <code>{}</code></p> <h3 id="addsupportaccount"><a href="#addsupportaccount" class="header-anchor">#</a> AddSupportAccount</h3> <p>Perms: admin</p> <p>Inputs:</p> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">[</span>
+  <span class="token string">&quot;string value&quot;</span>
+<span class="token punctuation">]</span>
+</code></pre></div><p>Response: <code>{}</code></p> <h2 id="walletlock"><a href="#walletlock" class="header-anchor">#</a> WalletLock</h2> <h3 id="lock"><a href="#lock" class="header-anchor">#</a> Lock</h3> <p>lock the wallet and disable IWallet logic</p> <p>Perms: admin</p> <p>Inputs:</p> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">[</span>
+  <span class="token string">&quot;string value&quot;</span>
+<span class="token punctuation">]</span>
+</code></pre></div><p>Response: <code>{}</code></p> <h3 id="lockstate"><a href="#lockstate" class="header-anchor">#</a> LockState</h3> <p>show lock state</p> <p>Perms: admin</p> <p>Inputs: <code>[]</code></p> <p>Response: <code>true</code></p> <h3 id="setpassword"><a href="#setpassword" class="header-anchor">#</a> SetPassword</h3> <p>SetPassword do it first after program setup</p> <p>Perms: admin</p> <p>Inputs:</p> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">[</span>
+  <span class="token string">&quot;string value&quot;</span>
+<span class="token punctuation">]</span>
+</code></pre></div><p>Response: <code>{}</code></p> <h3 id="unlock"><a href="#unlock" class="header-anchor">#</a> Unlock</h3> <p>unlock the wallet and enable IWallet logic</p> <p>Perms: admin</p> <p>Inputs:</p> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">[</span>
+  <span class="token string">&quot;string value&quot;</span>
+<span class="token punctuation">]</span>
+</code></pre></div><p>Response: <code>{}</code></p> <h3 id="verifypassword"><a href="#verifypassword" class="header-anchor">#</a> VerifyPassword</h3> <p>VerifyPassword verify that the passwords are consistent</p> <p>Perms: admin</p> <p>Inputs:</p> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">[</span>
+  <span class="token string">&quot;string value&quot;</span>
+<span class="token punctuation">]</span>
+</code></pre></div><p>Response: <code>{}</code></p></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/ipfs-force-community/sophon-docs/edit/main/docs/zh/developer/wallet-api.md" target="_blank" rel="noopener noreferrer">Edit this page</a> <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></div> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/zh/developer/messager-api.html" class="prev">
+        Messager api
+      </a></span> <!----></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.60d17fba.js" defer></script><script src="/assets/js/2.20e7910a.js" defer></script><script src="/assets/js/47.4c75566f.js" defer></script>
+  </body>
+</html>
