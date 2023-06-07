@@ -215,8 +215,8 @@ module.exports = {
                         title: '可选组件',
                         collapsable: false,
                         children: [
-                            ['venus-wallet-builtin.md', 'venus-wallet（内置）'],
-                            ['venus-wallet.md', 'venus-wallet（远程）'],
+                            ['venus-wallet-builtin.md', 'venus-wallet（内置）', "https://github.com/filecoin-project/venus-wallet/blob/master/docs/zh/%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B%5B%E6%9C%AC%E5%9C%B0%5D.md"],
+                            ['venus-wallet.md', 'venus-wallet（远程）', "https://github.com/filecoin-project/venus-wallet/blob/master/docs/zh/%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B%5B%E8%BF%9C%E7%A8%8B%5D.md"],
                         ]
                     },
                     {
