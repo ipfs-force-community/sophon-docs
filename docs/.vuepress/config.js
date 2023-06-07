@@ -164,12 +164,16 @@ module.exports = {
                 description: '智子（原Venus链服务）是一个Filecoin超级节点解决方案',
                 nav: [
                 {
-                    text: '介绍',
+                    text: '功能介绍',
                     link: '/zh/intro/'
                 },
                 {
-                    text: '参考',
-                    link: '/zh/ref/'
+                    text: '部署/运维',
+                    link: '/zh/operation/'
+                },
+                {
+                    text: '研发/设计',
+                    link: '/zh/developer/'
                 },
                 {
                     text: '关于',
@@ -178,25 +182,41 @@ module.exports = {
                 ],
                 sidebar: {
                     '/zh/intro/': [{
-                        title: '简述',
+                        title: '功能特性',
                         collapsable: false,
                         children: [
                             ['', '概要'],
                         ]
                     },
+                    ],
+                    '/zh/operation/': [
                     {
                         title: '部署',
                         collapsable: false,
                         children: [
+                            ['', '部署前准备'],
                             ['deploy-a-cs.md', '部署智子服务'],
+                            ['venus-run-in-docker.md', '使用Docker部署智子服务'],
                             ['join-a-cs.md', '使用智子服务'],
                         ]
                     },
                     {
-                        title: '简易部署',
+                        title: '智子服务组件',
                         collapsable: false,
                         children: [
-                            ['venus-run-in-docker.md', '使用Docker部署智子服务'],
+                            ['venus-daemon.md', 'Venus daemon'],
+                            ['venus-auth.md', 'sophon-auth', "https://github.com/ipfs-force-community/sophon-auth/blob/master/docs/zh/%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B.md"],
+                            ['venus-miner.md', 'sophon-miner', "https://github.com/ipfs-force-community/sophon-miner/blob/master/docs/zh/getting-start.md"],
+                            ['venus-messager.md', 'sophon-messager', "https://github.com/ipfs-force-community/sophon-messager/blob/master/docs/zh/%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B.md"],
+                            ['venus-gateway.md', 'sophon-gateway', "https://github.com/ipfs-force-community/venus-gateway/blob/master/docs/zh/%E5%BF%AB%E9%80%9F%E5%90%AF%E7%94%A8.md"],
+                        ]
+                    },
+                    {
+                        title: '可选组件',
+                        collapsable: false,
+                        children: [
+                            ['venus-wallet-builtin.md', 'venus-wallet（内置）'],
+                            ['venus-wallet.md', 'venus-wallet（远程）'],
                         ]
                     },
                     {
@@ -209,41 +229,28 @@ module.exports = {
                         ]
                     },
                     ],
-                    '/zh/ref/': [{
-                        title: '智子服务组件',
+                    '/zh/developer/': [{
+                        title: '研发',
                         collapsable: false,
                         children: [
-                            ['', 'Venus daemon'],
-                            ['venus-auth.md', 'venus-auth'],
-                            ['venus-miner.md', 'venus-miner'],
-                            ['venus-messager.md', 'venus-messager'],
-                            ['venus-gateway.md', 'venus-gateway'],
+                            ['', '本地2k开发网络'],
                         ]
                     },
                     {
-                        title: '可选组件',
+                        title: '功能设计',
                         collapsable: false,
                         children: [
-                            ['venus-wallet-builtin.md', 'venus-wallet（内置）'],
-                            ['venus-wallet.md', 'venus-wallet（远程）'],
-                        ]
-                    },
-                    {
-                        title: '组件构建',
-                        collapsable: false,
-                        children: [
-                            ['build.md', '全组件构建'],
+                            ['data-by-id.md', '用户数据隔离'],
                         ]
                     },
                     {
                         title: 'RPC 接口参考',
                         collapsable: false,
                         children: [
-                            ['chain-api-v0.md', 'Chain api v0', "https://github.com/filecoin-project/venus/blob/master/venus-shared/api/chain/v0/method.md"],
                             ['chain-api-v1.md', 'Chain api v1', "https://github.com/filecoin-project/venus/blob/master/venus-shared/api/chain/v1/method.md"],
-                            ['gateway-api-v0.md', 'Gateway api v0', "https://github.com/filecoin-project/venus/blob/master/venus-shared/api/gateway/v0/method.md"],
+                            ['chain-api-v0.md', 'Chain api v0', "https://github.com/filecoin-project/venus/blob/master/venus-shared/api/chain/v0/method.md"],
                             ['gateway-api-v1.md', 'Gateway api v1', "https://github.com/filecoin-project/venus/blob/master/venus-shared/api/gateway/v1/method.md"],
-                            ['market-api.md', 'Market api', "https://github.com/filecoin-project/venus/blob/master/venus-shared/api/market/method.md"],
+                            ['gateway-api-v0.md', 'Gateway api v0', "https://github.com/filecoin-project/venus/blob/master/venus-shared/api/gateway/v0/method.md"],
                             ['messager-api.md', 'Messager api', "https://github.com/filecoin-project/venus/blob/master/venus-shared/api/messager/method.md"],
                             ['wallet-api.md', 'Wallet api', "https://github.com/filecoin-project/venus/blob/master/venus-shared/api/wallet/method.md"]
                         ]
