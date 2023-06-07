@@ -237,6 +237,15 @@ module.exports = {
                         ]
                     },
                     {
+                        title: '智子组件设计',
+                        collapsable: false,
+                        children: [
+                            ['miner-design.md', 'miner 设计', "https://github.com/ipfs-force-community/sophon-miner/blob/master/docs/zh/design-spec.md"],
+                            ['messager-design.md', 'messager 设计', "https://github.com/ipfs-force-community/sophon-messager/blob/master/docs/zh/design-specs.md"],
+                            ['gateway-design.md', 'gateway 设计', "https://github.com/ipfs-force-community/venus-gateway/blob/master/docs/zh/%E7%BB%84%E4%BB%B6%E8%AE%BE%E8%AE%A1.md"],
+                        ]
+                    },
+                    {
                         title: '功能设计',
                         collapsable: false,
                         children: [
