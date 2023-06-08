@@ -2,60 +2,45 @@
 
 ## 快速部署
 
-### docker-compose
-可以通过 docker-compose 启动会在当前主机上，部署venus的一套云组件。
+### docker compose
+可以通过 docker compose 在当前主机上，部署venus的一套云组件。
 
-#### 直接通过命令启动 Venus 服务
-
-```shell
-# 下载配置文件
-wget https://raw.githubusercontent.com/filecoin-project/venus-docs/master/script/docker-compose.yaml
-
-# 启动docker集群
-snapshot=/path/to/your/snapshot.car \
-nettype=<nettype> \
-proxy=<socks5|https>://<PROXY_IP>:<PROXY_PORT> \
-piecestorage=/path/to/your/PieceStorage \
-docker-compose up -d
-
-# 关闭集群
-docker-compose down
-```
-:::tip
-配置文件的首行指定了组件镜像版本的要求，当使用组件镜像版本较低时，建议下载配置文件的历史版本
-:::
-
-
-
-#### 直接通过变量文件启动 Venus 服务
+- 获取 compose 配置文件
 
 ```shell
-# 下载配置文件(同上)
+git clone https://github.com/LinZexiao/venus-docker-compose.git -b v1.11
+cd venus-docker-compose
 
-
-# 编写环境变量文件 ./env 
-# 
-nettype=<nettype>    # (default:butterflynet)
-piecestorage=/path/to/your/PieceStorage   # (defaul:./.venus/storage/)
-proofparameters=/path/to/your/proof-parameters-files/ # (default:/var/tmp/filecoin-proof-parameters/)
-genesisfile=/path/to/your/genesisfile  # (optional) 
-snapshot=/path/to/your/snapshot.car   # (optional)
-TZ=<TimeZone> # (optional) your local time zone
-proxy=<socks5|https>://<PROXY_IP>:<PROXY_PORT>   # (optional) proxy for venus node
-
- 
-
-# 启动和关闭集群
-docker-compose --env-file ./env up -d
-docker-compose --env-file ./env down
 ```
+
+- 设置 snapshot 文件路径 和 网络类型
+
+下面以 `calibration` 网络为例子
+
+```shell
+vi chain.env
+```
+
+```shell
+# * The path to you snapshot file
+# Must be a absolute path
+SNAP_SHOT=/path/to/your/snapshot.car
+
+# * The net type you want to start
+# Must be one of mainnet,2k,calibrationnet,interopnet,butterflynet,force, default is mainnet
+NET_TYPE=calibrationnet
+```
+
+- 启动链服务
+
+```shell
+make chain
+```
+
 
 云环境启动后会需要一定的时间进行初始化，初始化完成后，就可以使用auth 组件签发token （详细见 使用 章节），并将下游组件的连接到本主机即可。（另：集群中使用统一的admin token 会导出在 `./.venus/env/` 中）
 为了方便修改配置，默认会将容器中的 repo 映射到本地的 `./.venus/root/`中，修改完配置之后直接重启容器即可
 
-:::tip
-venus 和 market 组件默认监听本地IP，如有需要，请注意修改相应文件
-:::
 
 :::warning
 在miner初始化完成之后要记得通过auth 绑定到相应的用户，参见[添加矿工](https://github.com/filecoin-project/venus-auth/blob/master/docs/zh/%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B.md#miner-%E7%9B%B8%E5%85%B3)
@@ -131,9 +116,21 @@ filvenus/venus-market  pool-run \
 --gateway-url=/ip4/<VENUS_GATEWAY_IP_ADDRESS>/tcp/45132 \
 --messager-url=/ip4/<VENUS_MESSAGER_IP_ADDRESS>/tcp/39812/ \
 --auth-token=<SHARED_ADMIN_AUTH_TOKEN>
-
 ```
 
+
+#### Venus Wallet
+
+```shell
+docker run -d --name venus-market --net=host \
+-v </path/to/your/PieceStorage>:/PieceStorage
+filvenus/venus-market  pool-run \
+--node-url=/ip4/<VENUS_NODE_IP_ADDRESS>/tcp/3453  \
+--auth-url=http://<VENUS_AUTH_IP_ADDRESS:PORT> \
+--gateway-url=/ip4/<VENUS_GATEWAY_IP_ADDRESS>/tcp/45132 \
+--messager-url=/ip4/<VENUS_MESSAGER_IP_ADDRESS>/tcp/39812/ \
+--auth-token=<SHARED_ADMIN_AUTH_TOKEN>
+```
 
 
 ## Docker容器的使用
@@ -160,7 +157,7 @@ docker exec -it filvenus/venus-gateway ./venus-gateway [global options] command 
 docker exec -it filvenus/venus-messager ./venus-messager [global options] command [command options] [arguments...]
 
 # miner
-docker run -it filvenus/venus-miner [global options] command [command options] [arguments...]
+docker exec -it filvenus/venus-miner [global options] command [command options] [arguments...]
 ```
 :::tip
 启动容器的方式不同，容器的名字也不一样，可以使用  `docker container ls` 来查看容器的名字，也可以在容器启动的时候自己指定容器的名字。
@@ -191,34 +188,14 @@ docker exec -it filvenus/venus /bin/bash
 
 ## 自己开发构建镜像
 
-### 基础镜像的构建
-
-基础环境镜像是构建venus组件容器时，需要用到的前置镜像，如果对于venus组件的构建环境和运行环境没有定制化的要求，建议直接使用官方的基础环境镜像。
-如果需要定制制化构建基础环境镜像，比如添加运维工具之类的，可以从[venus-docs仓库](https://github.com/filecoin-project/venus-docs/tree/master/script)下载基础镜像的dockerfile文件。然后运行 `dockers build` 命令构建相应的基础镜像
-
-#### 编译环境的构建
-
-```shell
-# 下载dockerfile
-curl -O https://raw.githubusercontent.com/filecoin-project/venus-docs/master/script/venus-buildenv.dockerfile
-# 构建 运行环境
-docker build -t filvenus/venus-buildenv -f ./venus-buildenv.dockerfile .
-```
-
-#### 运行环境的构建
-
-```shell
-# 下载dockerfile
-curl -O https://raw.githubusercontent.com/filecoin-project/venus-docs/master/script/venus-runtime.dockerfile
-# 构建 运行环境
-docker build -t filvenus/venus-runtime -f ./venus-runtime.dockerfile .
-```
 
 ### 组件的构建
 
 #### 任意组件的构建
 
-在构建完基础镜像后，所有组件都可以到相应根目录下，用一个命令来构建
+在对应组件的根目录下执行 `make docker` 即可构建对应的组件镜像
+
+```shell
 
 ```shell
 # 到对应组件根目录
