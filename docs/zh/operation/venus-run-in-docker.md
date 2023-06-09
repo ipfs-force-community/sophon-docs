@@ -31,7 +31,7 @@ SNAP_SHOT=/path/to/your/snapshot.car
 NET_TYPE=calibrationnet
 ```
 
-- 启动链服务
+- 启动智子服务
 
 ```shell
 make chain
