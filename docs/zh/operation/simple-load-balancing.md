@@ -4,13 +4,13 @@
 
 ## 前期准备
 
-1. 取消venus程序的jwt-token验证;
-2. 本示例有两个venus节点: 192.168.1.125(mainnet),192.168.1.134(calibnet);
-3. 192.168.1.134安装nginx作为负载均衡服务器;
+1. 取消 venus 程序的 jwt-token 验证;
+2. 本示例有两个 venus 节点：192.168.1.125(mainnet),192.168.1.134(calibnet);
+3. 192.168.1.134 安装 nginx 作为负载均衡服务器;
 
-## nginx配置
+## nginx 配置
 
-1. venus节点监听地址改为:/ip4/0.0.0.0/tcp/3453,文件: ~/.venus/api
+1. venus 节点监听地址改为:/ip4/0.0.0.0/tcp/3453，文件：~/.venus/api
    
 2. 负载均衡配置
 
@@ -49,7 +49,7 @@ include /www/server/panel/vhost/nginx/*.conf;
 }
 ```
 
-3. 重启nginx服务,这时就可以用nginx服务代理venus服务了
+3. 重启 nginx 服务，这时就可以用 nginx 服务代理 venus 服务了
 ```shell script
 curl http://192.168.1.134:888/rpc/v0 -X POST -H "Content-Type: application/json"  -d '{"method": "Filecoin.StateNetworkName","params":[],"id":1}'
 {"jsonrpc":"2.0","result":"mainnet","id":1}

@@ -3,7 +3,7 @@
 ## 快速部署
 
 ### docker compose
-可以通过 docker compose 在当前主机上，部署venus的一套云组件。
+可以通过 docker compose 在当前主机上，部署 venus 的一套云组件。
 
 - 获取 compose 配置文件
 
@@ -38,16 +38,16 @@ make chain
 ```
 
 
-云环境启动后会需要一定的时间进行初始化，初始化完成后，就可以使用auth 组件签发token （详细见 使用 章节），并将下游组件的连接到本主机即可。（另：集群中使用统一的admin token 会导出在 `./.venus/env/` 中）
+云环境启动后会需要一定的时间进行初始化，初始化完成后，就可以使用 auth 组件签发 token（详细见 使用 章节），并将下游组件的连接到本主机即可。（另：集群中使用统一的 admin token 会导出在 `./.venus/env/` 中）
 为了方便修改配置，默认会将容器中的 repo 映射到本地的 `./.venus/root/`中，修改完配置之后直接重启容器即可
 
 
 :::warning
-在miner初始化完成之后要记得通过auth 绑定到相应的用户，参见[添加矿工](https://github.com/filecoin-project/venus-auth/blob/master/docs/zh/%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B.md#miner-%E7%9B%B8%E5%85%B3)
+在 miner 初始化完成之后要记得通过 auth 绑定到相应的用户，参见[添加矿工](https://github.com/filecoin-project/venus-auth/blob/master/docs/zh/%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B.md#miner-%E7%9B%B8%E5%85%B3)
 :::
 
 :::warning
-在miner初始化完成之后,需要将miner关联到market，参见[将miner的Multiaddrs和PeerID设置为market的对应地址](https://venus.filecoin.io/zh/market/using-venus-market-for-miner.html#%E4%BD%BF%E7%94%A8%E8%87%AA%E5%B7%B1%E7%9A%84venus%E8%8A%82%E7%82%B9)部分
+在 miner 初始化完成之后，需要将 miner 关联到 market，参见[将 miner 的 Multiaddrs 和 PeerID 设置为 market 的对应地址](https://venus.filecoin.io/zh/market/using-venus-market-for-miner.html#%E4%BD%BF%E7%94%A8%E8%87%AA%E5%B7%B1%E7%9A%84venus%E8%8A%82%E7%82%B9)部分
 :::
 
 
@@ -133,7 +133,7 @@ filvenus/venus-market  pool-run \
 ```
 
 
-## Docker容器的使用
+## Docker 容器的使用
 
 #### 基本使用
 所有组件都可以使用以下通用的命令格式进行调用，组件详细的子命令参见 组件详细文档，以及 --help flag
@@ -165,7 +165,7 @@ docker exec -it filvenus/venus-miner [global options] command [command options] 
 
 #### 环境调整和配置文件
 
-建议将配置文件映射到本地进行配置文件相关的配置,需要在启动容器的时候建立映射。
+建议将配置文件映射到本地进行配置文件相关的配置，需要在启动容器的时候建立映射。
 
 ```shell
 # venus 举例

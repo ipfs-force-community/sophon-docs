@@ -208,7 +208,7 @@ Initialize work space.
 ./dist/bin/venus-sector-manager daemon init
 ```
 
-### Create a miner-id（optional）
+### Create a miner-id (optional)
 
 Skip this step if you already have a miner-id.
 
