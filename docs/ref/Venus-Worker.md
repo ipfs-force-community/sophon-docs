@@ -126,4 +126,4 @@ Running `./venus-sealer storage list`, the result is similar to the following
 
 In venus-sealer, run the command ```venus-sealer sectors pledge``` to accumulate power. Run the command ```venus-sealer sectors list``` to check the status of sealing.
 
-***Note: if the Rust code prompts permission error, you can add /var/tmp/filecoin-parents，/tmp/bellman.gpu.lock/bellman.priority.lock and 777 permissions***
+***Note: if the Rust code prompts permission error, you can add /var/tmp/filecoin-parents,/tmp/bellman.gpu.lock/bellman.priority.lock and 777 permissions***

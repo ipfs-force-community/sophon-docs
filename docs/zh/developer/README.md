@@ -1,10 +1,10 @@
 # 如何启动测试网络
 
-> 本文以在 Ubuntu 系统部署2k网络为例
+> 本文以在 Ubuntu 系统部署 2k 网络为例
 
 :::warning
 
-目前在 CentOS 系统存在问题, 具体请参考：[issue](https://github.com/filecoin-project/lotus/issues/7136)
+目前在 CentOS 系统存在问题，具体请参考：[issue](https://github.com/filecoin-project/lotus/issues/7136)
 
 :::
 
@@ -51,13 +51,13 @@ $ ./venus seed pre-seal --sector-size 2048 --num-sectors 2
 $ ./venus seed genesis new localnet.json
 $ ./venus seed genesis add-miner localnet.json ~/.genesis-sectors/pre-seal-t01000.json
 ```
-> `seed pre-seal` 需要root权限,请在root用户下执行
+> `seed pre-seal` 需要 root 权限，请在 root 用户下执行
 
-- 启动venus
+- 启动 venus
 ```sh
 $ nohup ./venus daemon --make-genesis=devgen.car --genesis-template=localnet.json --network=2k --auth-url=http://127.0.0.1:8989 --auth-token=<venus-auth token>  > venus.log 2>&1 &
 ```
-> venus作为公共服务组件需要监听不同IP时需要修改配置文件 `.venus/config.json`
+> venus 作为公共服务组件需要监听不同 IP 时需要修改配置文件 `.venus/config.json`
 ```bash
 "apiAddress": "/ip4/0.0.0.0/tcp/3453",
 ```
@@ -79,16 +79,16 @@ $ ./venus chain head
 
 ### venus-message
 
-&ensp;&ensp; venus-auth管理着其他venus模块使用的jwt令牌，以便它们在网络上安全地相互通信.为共享模块生成token。
+&ensp;&ensp; venus-auth 管理着其他 venus 模块使用的 jwt 令牌，以便它们在网络上安全地相互通信。为共享模块生成 token。
 
 ```bash
 # --perm specifies admin, sign, wirte or read permission of the token generated
 $ ./venus-auth token gen --perm admin <SHARED>
 <SHARED_ADMIN_AUTH_TOKEN>
 ```
-> SHARED是token名，共享组件可以随便起。
+> SHARED 是 token 名，共享组件可以随便起。
 
-- 为矿工t01000和wallet生成token
+- 为矿工 t01000 和 wallet 生成 token
 ```bash
 $ ./venus-auth user add test
 $ ./venus-auth user miner add test t01000
@@ -96,7 +96,7 @@ $ ./venus-auth token gen --perm write test
 <USER_WRITE_AUTH_TOKEN>
 ```
 
-查询token及user
+查询 token 及 user
 ```bash
 $ ./venus-auth user list
 number: 1
@@ -123,12 +123,12 @@ nohup ./venus-messager run \
 --db-type=sqlite \
 > msg.log 2>&1 &
 ```
-> db-type还支持mysql，配置如下：
+> db-type 还支持 mysql，配置如下：
 ```bash
 --db-type=mysql --mysql-dsn "<USER>:<PASSWORD>@(127.0.0.1:3306)/venus_messager?parseTime=true&loc=Local&readTimeout=10s&writeTimeout=10s"
 ```
 
-2k网络4s出一个块，故需修改配置文件的WaitingChainHeadStableDuration为2s。
+2k 网络 4s 出一个块，故需修改配置文件的 WaitingChainHeadStableDuration 为 2s。
 ```
 # 默认是8s
 [messageService]
@@ -145,7 +145,7 @@ nohup ./venus-messager run \
  --slash-filter local
 ```
 
-&ensp;&ensp; 此时没有启动venus-sealer,所以无法出块,因为获得出块权后需要计算证明，这个是venus-sealer负责的(管理所有的扇区永久存储),故暂时不启动venus-miner。
+&ensp;&ensp; 此时没有启动 venus-sealer，所以无法出块，因为获得出块权后需要计算证明，这个是 venus-sealer 负责的 (管理所有的扇区永久存储),故暂时不启动 venus-miner。
 
 
 ## 创世节点
@@ -168,7 +168,7 @@ $ ./venus-wallet list
 t3sjhgun7xcklmyga6x3c5sq6pbncdlmrjmepfz7ms4fuqimtk4fida37dhq7kpq3tn7nyu5hpnn7mtp3a7lia
 ```
 
-设置接入venus-gateway，提供签名服务,这一步很重要,否则出块,消息等都没法签名,业务无法正常运行.
+设置接入 venus-gateway，提供签名服务，这一步很重要，否则出块，消息等都没法签名，业务无法正常运行。
 ```bash
 # 修改`~/.venus_wallet/config.toml`
 [APIRegisterHub]
@@ -177,12 +177,12 @@ Token = "<USER_WRITE_AUTH_TOKEN>"
 # 矿工集群的别名，在venus-auth中注册
 SupportAccounts = ["test"]
 ```
-***保存后重启venus-wallet,需要unlock***
+***保存后重启 venus-wallet，需要 unlock***
 ```bash
 $ ./venus-wallet unlock
 ```
 
-查看是否成功,在venus-gateway的日志中查询:
+查看是否成功，在 venus-gateway 的日志中查询：
 ```bash
 2021-08-05T10:01:07.665+0800    INFO    event_stream    walletevent/wallet_conn_mgr.go:89       add wallet connection   {"channel": "58309445-87da-4160-831a-44e5236ab3c7", "walletName": "test", "addrs": ["t3sjhgun7xcklmyga6x3c5sq6pbncdlmrjmepfz7ms4fuqimtk4fida37dhq7kpq3tn7nyu5hpnn7mtp3a7lia"], "support": {"test":{}}, "signBytes": "6VzoKBejPzmFp/DvJzSO16s5SziYZKYjU2l2EkDUKy0="}
 2021-08-05T10:01:07.666+0800    INFO    event_stream    walletevent/wallet_event.go:79  add new connections test 58309445-87da-4160-831a-44e5236ab3c7
@@ -210,7 +210,7 @@ $ ./venus-gateway wallet list
         }
  ]
 ```
-> 上面日志即表示wallet注册服务组件成功,可提供签名服务.
+> 上面日志即表示 wallet 注册服务组件成功，可提供签名服务。
 
 
 ### venus-sealer
@@ -256,7 +256,7 @@ Sectors:
         Proving: 2
 ```
 
-查看是不是在服务组件注册成功,gateway日志:
+查看是不是在服务组件注册成功，gateway 日志：
 ```bash
 2021-09-27T14:06:13.135+0800    INFO    proof_stream    proofevent/proof_event.go:71    add new connections 6295d403-275b-430e-a008-1b7491522d86 for miner t01000
 ```
@@ -267,13 +267,13 @@ t01000
 ```
 
 - 开始出块
-&ensp;&ensp; 这个时候我们就可以启动venus-miner了
+&ensp;&ensp; 这个时候我们就可以启动 venus-miner 了
 ```
 # run 
 nohup ./venus-miner run --nettype=2k --nosync > miner.log 2>& 1 &
 ```
 
-启动时会从venus-auth请求当前已加入venus分布式矿池中的miner列表,可以根据命令查询:
+启动时会从 venus-auth 请求当前已加入 venus 分布式矿池中的 miner 列表，可以根据命令查询：
 ```
 $ ./venus-miner address state
 [
@@ -285,12 +285,12 @@ $ ./venus-miner address state
 ]
 ```
 
-在venus-miner的运行过程中可以暂停或继续某个miner_id的出块:
+在 venus-miner 的运行过程中可以暂停或继续某个 miner_id 的出块：
 ```
 ./venus-miner address stop/start f01000
 ```
 
-查看venus-miner日志
+查看 venus-miner 日志
 ```
 2021-08-05T12:04:28.562+0800    INFO    miner   miner/minerwpp.go:88    GenerateWinningPoSt took 3.202841ms
 2021-08-05T12:04:28.562+0800    INFO    miner   miner/warmup.go:94      winning PoSt warmup successful  {"took": 0.00494326}
@@ -321,11 +321,11 @@ $ ./venus chain ls
 
 ## 普通节点
 
-&ensp;&ensp; 普通节点和其他网络接入共享组件流程一致,可参考文档: https://venus.filecoin.io/guide/Using-venus-Shared-Modules.html#pre-requisites
+&ensp;&ensp; 普通节点和其他网络接入共享组件流程一致，可参考文档：https://venus.filecoin.io/guide/Using-venus-Shared-Modules.html#pre-requisites
 
-&ensp;&ensp; 唯一需要说明的是给普通节点钱包转账的问题:因为venus服务组件是限制Send消息的,而2k私网的原始fil在创世钱包里,故需要一个转账节点.
+&ensp;&ensp; 唯一需要说明的是给普通节点钱包转账的问题：因为 venus 服务组件是限制 Send 消息的，而 2k 私网的原始 fil 在创世钱包里，故需要一个转账节点。
 
-- 启动一个venus节点,仅用于转账
+- 启动一个 venus 节点，仅用于转账
 ```sh
  nohup ./venus daemon --genesisfile=devgen.car --network=2k > venus.log 2>&1 &
 ```
@@ -366,22 +366,22 @@ $ ./venus wallet balance <wallet>
 $ ./venus wallet default
 $ ./venus wallet set-default <wallet>
 ```
-> venus转账节点重启后也需要unlock,不然无法转账.
+> venus 转账节点重启后也需要 unlock，不然无法转账。
 
 ## 扇区封装
 
 &ensp;&ensp; 和主网逻辑差不多，请查阅：[扇区封装](https://venus.filecoin.io/zh/guide/Using-venus-Shared-Modules.html#开始封装)，需要注意的是：
 
-1. 文档中init时没有添加storage，故如果要做扇区封装，先attach storage；
+1. 文档中 init 时没有添加 storage，故如果要做扇区封装，先 attach storage；
 
-2. 如果机器上同时运行看了别的占用gpu的程序，如多个venus-worker，需要用TMP_DIR指定不同路径，避免竞争锁。
+2. 如果机器上同时运行看了别的占用 gpu 的程序，如多个 venus-worker，需要用 TMP_DIR 指定不同路径，避免竞争锁。
 
 3. 第一个sector时没有生成/var/tmp/s-basic-unsealed-2048，需要手动执行拷贝命令：
 ```
 cp <unsealed file> /var/tmp/s-basic-unsealed-2048
 ```
 
-&ensp;&ensp; 测试结果: 2~8 是新做的Sector，已上链
+&ensp;&ensp; 测试结果：2~8 是新做的 Sector，已上链
 ```
 $ ./venus-sealer sectors list
 ID  State    OnChain  Active  Expiration                   Deals  DealWeight  

@@ -19,7 +19,7 @@
 
 #### 对于需接入共享模块的用户
 
-如果您尝试连接到第三方托管的共享venus模块，联系上述服务的管理员并让他们为您设置。
+如果您尝试连接到第三方托管的共享 venus 模块，联系上述服务的管理员并让他们为您设置。
 
 :::tip
 
@@ -46,9 +46,9 @@ $ ./venus-auth token gen --perm write <ACCOUNT_NAME>
 
 ### 软件依赖
 
-在运行`Venus`之前，您需要安装[这些](https://lotus.filecoin.io/lotus/install/linux/#software-dependencies)软件。（注：和lotus的软件依赖相同）
+在运行`Venus`之前，您需要安装[这些](https://lotus.filecoin.io/lotus/install/linux/#software-dependencies)软件。（注：和 lotus 的软件依赖相同）
 
-## 安装venus-wallet
+## 安装 venus-wallet
 
 下载并编译`Venus-wallet`的源代码。
 
@@ -93,7 +93,7 @@ Password set successfully
 
 :::warning
 
-请备份您的密码并妥善保存，否则你将无法使用wallet相关的功能。每次venus-wallet run启动时带--password标志会自动解锁钱包,如果没带,在wallet实例启动后你需要手动解锁:
+请备份您的密码并妥善保存，否则你将无法使用 wallet 相关的功能。每次 venus-wallet run 启动时带--password 标志会自动解锁钱包，如果没带，在 wallet 实例启动后你需要手动解锁：
 ```bash
 $ ./venus-wallet unlock
 Password: 
@@ -102,11 +102,11 @@ Password:
 $ ./venus-wallet lock-state
 wallet state: unlocked
 ```
-在扇区封装的过程中需要调用wallet进行签名,如果不解锁,会导致签名失败,进而导致扇区任务失败.
+在扇区封装的过程中需要调用 wallet 进行签名，如果不解锁，会导致签名失败，进而导致扇区任务失败。
 
 :::
 
-生成owner和worker地址。（如果您没有现有的miner ID）
+生成 owner 和 worker 地址。（如果您没有现有的 miner ID）
 
 ```bash
 $ ./venus-wallet new bls
@@ -121,7 +121,7 @@ $ ./venus-wallet new bls
 
 :::
 
-***配置venus-wallet接入共享服务,使用您从共享模块管理员处获得的帐号信息更改 `~/.venus_wallet/config.toml`中的`[APIRegisterHub]` 部分***
+***配置 venus-wallet 接入共享服务，使用您从共享模块管理员处获得的帐号信息更改 `~/.venus_wallet/config.toml`中的`[APIRegisterHub]` 部分***
 
 ```toml
 [APIRegisterHub]
@@ -154,11 +154,11 @@ $ nohup ./venus-wallet run > wallet.log 2>&1 &
 
 :::warning
 
-请确保venus-wallet 处于unlocked状态，要么会在Sealer模块初始化时卡在 "Waiting for confirmation"，导致miner帐号生成不了。
+请确保 venus-wallet 处于 unlocked 状态，要么会在 Sealer 模块初始化时卡在 "Waiting for confirmation"，导致 miner 帐号生成不了。
 
 :::
 
-## 安装venus-cluster
+## 安装 venus-cluster
 
 下载代码。
 
@@ -212,7 +212,7 @@ $ ./venus-sector-manager util miner create
 ```
 :::
 
-### 配置venus-sector-manager
+### 配置 venus-sector-manager
 
 按需配置默认配置文件`~/.venus-sector-manager/sector-manager.cfg`。这里给出一份参考，详细配置说明可以参见[这里](/zh/cluster/Venus-Sector-Manager)。
 
@@ -223,11 +223,11 @@ $ ./venus-sector-manager util miner create
     Chain = "/ip4/{api_host}/tcp/{api_port}"
     # 消息服务地址，必填项，字符串类型
     Messager = "/ip4/{api_host}/tcp/{api_port}"
-    # 市场服务地址，封装真实数据时为必填项，字符串类型，CC数据非必填项
+    # 市场服务地址，封装真实数据时为必填项，字符串类型，CC 数据非必填项
     # Market = "/ip4/{api_host}/tcp/{api_port}"
     # 网关服务地址，必填项，字符串类型
     Gateway = "/ip4/{api_host}/tcp/{api_port}"
-    # 服务 token， 必填项，字符串类型
+    # 服务 token，必填项，字符串类型
     Token = "{auth token}"
    
 [[Common.PieceStores]]
@@ -235,7 +235,7 @@ $ ./venus-sector-manager util miner create
   #Path = "{store_path}"
    
 [[Common.PersistStores]]
-  # 名称， 选填项，字符串类型
+  # 名称，选填项，字符串类型
   Name = "{store_name1}"
   # 路径，必填项，字符串类型，建议使用绝对路径
   Path = "{store_path1}"
@@ -245,31 +245,31 @@ $ ./venus-sector-manager util miner create
   Path = "{store_path2}"
    
 [[Miners]]
-  # `SP` actor id， 必填项，数字类型，t033680->33680
+  # `SP` actor id，必填项，数字类型，t033680->33680
   Actor = 33680
    
   [Miners.Sector]
     # 扇区起始编号，选填项，数字类型，默认值为 0
     InitNumber = 0
-    # 扇区编号上限，选填项，数字类型，默认值为 null， 表示无上限限制
+    # 扇区编号上限，选填项，数字类型，默认值为 null，表示无上限限制
     MaxNumber = 1000000
-    # 是否允许分配扇区， 选填项，布尔类型，默认值为 true， 即开启分配
+    # 是否允许分配扇区，选填项，布尔类型，默认值为 true，即开启分配
     Enabled = true
     # 真实订单
     EnableDeals = true
    
   [Miners.Commitment.Pre]
-    # 发送地址，必填项，地址类型，miner的worker地址
+    # 发送地址，必填项，地址类型，miner 的 worker 地址
     Sender = "t3vi4amwofexsfpontn5g722psgikzochthhhu3ptvofzrqmgajs67gt5n2ririlc4hj667dvfsn3kmxiwgtya"
-    # 单条提交消息的 Gas 估算倍数，选填项，浮点数类型，默认值为1.2
+    # 单条提交消息的 Gas 估算倍数，选填项，浮点数类型，默认值为 1.2
     #GasOverEstimation = 1.2
-    # 单条提交消息的FeeCap 限制，选填项，FIL值类型，默认值为 5 nanoFIL
+    # 单条提交消息的 FeeCap 限制，选填项，FIL 值类型，默认值为 5 nanoFIL
     #MaxFeeCap = "5 nanoFIL"
    
   [Miners.Commitment.Pre.Batch]
-    # 是否启用聚合提交，选填项，布尔类型，默认值为 false， 即不启用
+    # 是否启用聚合提交，选填项，布尔类型，默认值为 false，即不启用
     Enabled = true
-    # 最小聚合条数，选填项，数字类型，默认值为 16，即最小聚合条数为 16条
+    # 最小聚合条数，选填项，数字类型，默认值为 16，即最小聚合条数为 16 条
     #Threshold = 16
     # 最大等待时间，选填项，时间类型，默认值为 1h，即最大等待 1 小时
     #MaxWait = "1h0m0s"
@@ -277,10 +277,10 @@ $ ./venus-sector-manager util miner create
     #CheckInterval = "1m0s"
     # 聚合提交消息的 Gas 估算倍数，选填项，浮点数类型，默认值为 1.2
     #GasOverEstimation = 1.2
-    # 聚合提交消息的FeeCap 限制，选填项，FIL值类型，默认值为 5 nanoFIL
+    # 聚合提交消息的 FeeCap 限制，选填项，FIL 值类型，默认值为 5 nanoFIL
     #MaxFeeCap = "5 nanoFIL"
    
-  #用于配置 ProveCommit 消息提交的策略，其配置项和作用与 Miners.Commitment.Pre内的完全一致。
+  #用于配置 ProveCommit 消息提交的策略，其配置项和作用与 Miners.Commitment.Pre 内的完全一致。
   [Miners.Commitment.Prove]
     Sender = "t3vi4amwofexsfpontn5g722psgikzochthhhu3ptvofzrqmgajs67gt5n2ririlc4hj667dvfsn3kmxiwgtya"
     #GasOverEstimation = 1.2
@@ -304,7 +304,7 @@ $ ./venus-sector-manager util miner create
     #StrictCheck = true
     # WindowPoSt 消息的 Gas 估算倍数，选填项，浮点数类型，默认值为 1.2
     #GasOverEstimation = 1.2
-    # WindowPoSt 消息的FeeCap 限制，选填项，FIL值类型，默认值为 5 nanoFIL
+    # WindowPoSt 消息的 FeeCap 限制，选填项，FIL 值类型，默认值为 5 nanoFIL
     #MaxFeeCap = "5 nanoFIL"
     # 消息的稳定高度，选填项，数字类型，默认值为 10
     #Confidence = 10
@@ -342,15 +342,15 @@ $ ./dist/bin/venus-worker store sealing-init -l <dir1> <dir2> <dir3> <...>
 $ ./dist/bin/venus-worker store file-init -l <dir1>
 ```
 
-规划用于各封装阶段的CPU核、numa 区域等配置。按需完成配置文件。以下为`worker`配置例子，更详细的配置项、作用、配置方法可以参考[这个](/zh/cluster/Venus-Worker-c)文档。
+规划用于各封装阶段的 CPU 核、numa 区域等配置。按需完成配置文件。以下为`worker`配置例子，更详细的配置项、作用、配置方法可以参考[这个](/zh/cluster/Venus-Worker-c)文档。
 
 ```toml
 [worker]
   # 实例名，选填项，字符串类型，默认以连接 `venus-sector-manager` 所使用的网卡 IP 地址作为实例名
   # name = "bytest"
-  # rpc 服务监听地址，选填项，字符串类型， 默认为"0.0.0.0"，即监听本机所有地址
+  # rpc 服务监听地址，选填项，字符串类型，默认为"0.0.0.0"，即监听本机所有地址
   # rpc_server.host = "0.0.0.0"
-  # rpc 服务监听端口，选填项，数字类型，默认为17890
+  # rpc 服务监听端口，选填项，数字类型，默认为 17890
   # rpc_server.port = 17890
 
 [sector_manager]
@@ -369,11 +369,11 @@ $ ./dist/bin/venus-worker store file-init -l <dir1>
   # enable_deals = true
   # 封装过程中遇到 temp 类型的错误时，重试的次数，选填项，数字格式，默认为 5
   # max_retries = 3
-  # 封装过程中遇到 temp 类型的错误时，重试的间隔，选填项，时间字符串格式，默认为 “30s"， 即30秒
+  # 封装过程中遇到 temp 类型的错误时，重试的间隔，选填项，时间字符串格式，默认为“30s"，即 30 秒
   # seal_interval = "30s"
-  # 空闲的 `sealing_store` 申请封装任务的间隔， 选填项，时间字符串格式，默认为 ”30s"， 即30秒
+  # 空闲的 `sealing_store` 申请封装任务的间隔，选填项，时间字符串格式，默认为”30s"，即 30 秒
   # recover_interval = "30s"
-  # rpc 状态轮询请求的间隔，选填项，时间字符串格式，默认为 ”30s"， 即30秒
+  # rpc 状态轮询请求的间隔，选填项，时间字符串格式，默认为”30s"，即 30 秒
   # 封装过程中，部分环节使用了轮询方式来获取非实时的信息，如消息上链等。这个值有助于避免过于频繁的请求占用网络资源
   # rpc_polling_interval = "30s"
   # 是否跳过 proof 的本地校验环节，选填项，布尔格式，默认为 false
@@ -414,9 +414,9 @@ $ ./dist/bin/venus-worker store file-init -l <dir1>
 [[sealing_thread]]
   location = "{path to sealing store8}"
 
-# attached用于配置已完成的扇区持久化数据保存的位置，允许同时配置多个。
+# attached 用于配置已完成的扇区持久化数据保存的位置，允许同时配置多个。
 [[attached]]
-  # 名称， 选填项，字符串类型，默认为路径对应的绝对路径
+  # 名称，选填项，字符串类型，默认为路径对应的绝对路径
   name = "bytest"
   # 路径，必填项，字符串类型，建议直接填写绝对路径
   location = "/xx/xx/xxx"
@@ -442,7 +442,7 @@ $ ./dist/bin/venus-worker store file-init -l <dir1>
   numa_preferred = 0
   # cpu 核绑定和限制选项，选填项，字符串类型，默认值为 null，不设置绑定，值的格式遵循标准 cgroup.cpuset 格式
   cgroup.cpuset = "0-7"
-  # 声明本processor支持的最多并发量
+  # 声明本 processor 支持的最多并发量
   concurrent = 2
   # 外部执行器的附加环境变量，选填项，字典类型，默认值为 null
   envs = { FIL_PROOFS_USE_MULTICORE_SDR = "1" }
@@ -479,13 +479,13 @@ $ /path/to/venus-worker daemon -c /path/to/venus-worker.toml
 ```
 
 :::tip
-以上关于sector-manager.cfg和venus-worker.toml配置文件只是一份最简单的可运行配置，其他配置的详细信息可参[这些文档](/zh/cluster/)。
+以上关于 sector-manager.cfg 和 venus-worker.toml 配置文件只是一份最简单的可运行配置，其他配置的详细信息可参[这些文档](/zh/cluster/)。
 :::
 
 :::tip
 关于配置文件需要注意的是：`venus-worker.toml`的`[[attached]]`中的`name = "xxx"` 和路径要与`sector-manager.cfg`中的`[[Common.PersistStores]] Name = "xxx"`和路径一致。
 :::
 
-## 问题?
+## 问题？
 
 来[Slack](https://filecoinproject.slack.com/archives/C028PCH8L31)上找我们吧！
