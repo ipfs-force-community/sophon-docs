@@ -14,6 +14,6 @@
  
 - venus-docs: [venus.filecoin.io](venus.filecoin.io)
 - VenusHub: [venushub.io](venushub.io)
-- Github: [venus](https://github.com/filecoin-project/venus)
+- Github: [venus](https://github.com/filecoin-project/venus), [sophon-messager](https://github.com/ipfs-force-community/sophon-messager), [sophon-auth](https://github.com/ipfs-force-community/sophon-auth), [sophon-gateway](https://github.com/ipfs-force-community/sophon-gateway), [sophon-miner](https://github.com/ipfs-force-community/sophon-miner), [sophon-co](https://github.com/ipfs-force-community/sophon-co), [damocles](https://github.com/ipfs-force-community/damocles), [droplet](https://github.com/ipfs-force-community/droplet)
 - Social Media: [Twitter](https://twitter.com/venus_filecoin), [Wechat](https://mp.weixin.qq.com/s/p4_ch03QeMMXxPyakr_8XQ)
 - 安全审计报告：[link](https://leastauthority.com/static/publications/LeastAuthority_Filecoin_Foundation_Venus_Final_Audit_Report.pdf)
