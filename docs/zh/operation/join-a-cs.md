@@ -23,7 +23,7 @@
 
 :::tip
 
-venus-wallet 可以部署为链服务或者本地组件，具体取决于您的安全要求。
+`venus-wallet` 可以部署为链服务或者本地组件，具体取决于您的安全要求。
 
 :::
 
@@ -33,14 +33,14 @@ venus-wallet 可以部署为链服务或者本地组件，具体取决于您的�
 
 ```bash
 # 创建user,默认激活状态
-$ ./venus-auth user add <ACCOUNT_NAME>
+$ ./sophon-auth user add <ACCOUNT_NAME>
 # 激活user
-$ ./venus-auth user update --name <ACCOUNT_NAME> --state 1
+$ ./sophon-auth user update --name <ACCOUNT_NAME> --state 1
 # 绑定节点号
-$ ./venus-auth user miner add <ACCOUNT_NAME> <MinerID>
+$ ./sophon-auth user miner add <ACCOUNT_NAME> <MinerID>
 
 # 为此账号分配token，用于接入服务层验证
-$ ./venus-auth token gen --perm write <ACCOUNT_NAME>
+$ ./sophon-auth token gen --perm write <ACCOUNT_NAME>
 <AUTH_TOKEN_FOR_ACCOUNT_NAME>
 ```
 
@@ -48,7 +48,7 @@ $ ./venus-auth token gen --perm write <ACCOUNT_NAME>
 
 在运行`Venus`之前，您需要安装[这些](https://lotus.filecoin.io/lotus/install/linux/#software-dependencies)软件。（注：和 lotus 的软件依赖相同）
 
-## 安装 venus-wallet
+## 安装/启动 venus-wallet
 
 下载并编译`Venus-wallet`的源代码。
 
@@ -140,7 +140,7 @@ $ kill [PID]
 $ nohup ./venus-wallet run > wallet.log 2>&1 &
 ```
 
-如成功连接 `venus-gateway`，您将看到以下日志。
+如成功连接 `sophon-gateway`，您将看到以下日志。
 
 ```bash
 2021-07-12T15:14:12.457+0800    INFO    wallet_event    wallet_event/listenevent.go:197 connect to server fcf714b2-eeb6-498b-aafc-5e58eccd9d0f  {"api hub": "/ip4/<IP_ADDRESS>/tcp/45132"}
@@ -158,32 +158,32 @@ $ nohup ./venus-wallet run > wallet.log 2>&1 &
 
 :::
 
-## 安装 venus-cluster
+## 安装/启动 damocles
 
 下载代码。
 
 ```bash
-$ git clone https://github.com/ipfs-force-community/venus-cluster.git
+$ git clone https://github.com/ipfs-force-community/damocles.git
 ```
 
-编译`venus-cluster`。
+编译`damocles`。
 
 ```bash
-$ cd venus-cluster
+$ cd damocles
 $ git checkout <LATEST_RELEASE>
 $ make all
 ```
 
 :::tip
-编译完成后，会在 ./dist/bin 目录下有`venus-worker`和`venus-sector-manager`两个可执行文件。
+编译完成后，会在 ./dist/bin 目录下有`damocles-worker`和`damocles-manager`两个可执行文件。
 :::
 
-### venus-sector-manager
+### damocles-manager
 
 初始化工作目录
 
 ```bash
-./dist/bin/venus-sector-manager daemon init
+./dist/bin/damocles-manager daemon init
 ```
 
 ### 创建矿工号（可选）
@@ -191,7 +191,7 @@ $ make all
 创建矿工号。（如果已经有矿工号可以跳过此步）
 
 ```bash
-$ ./venus-sector-manager util miner create 
+$ ./damocles-manager util miner create 
 --from=<OWNER_ADDRESS> 
 --owner=<OWNER_ADDRESS> 
 --worker=<WORKER_ADDRESS>
@@ -212,9 +212,9 @@ $ ./venus-sector-manager util miner create
 ```
 :::
 
-### 配置 venus-sector-manager
+### 配置 damocles-manager
 
-按需配置默认配置文件`~/.venus-sector-manager/sector-manager.cfg`。这里给出一份参考，详细配置说明可以参见[这里](/zh/cluster/Venus-Sector-Manager)。
+按需配置默认配置文件`~/.damocles-manager/sector-manager.cfg`。这里给出一份参考，详细配置说明可以参见[这里](https://damocles.venus-fil.io/zh/operation/)。
 
 ```toml
 [Common]
@@ -318,35 +318,35 @@ $ ./venus-sector-manager util miner create
     Enabled = true
 ```
 
-启动`venus-sector-manager`
+启动`damocles-manager`
 
 ```bash
-$ ./dist/bin/venus-sector-manager --net=cali daemon run --poster --miner --listen 0.0.0.0:1789
+$ ./dist/bin/damocles-manager --net=cali daemon run --poster --miner --listen 0.0.0.0:1789
 ```
 
 :::tip
 使用`--net`来选择网络，默认为主网。
 :::
 
-### venus-worker
+### damocles-worker
 
 规划用于封装过程中数据的本地存储，并使用以下命令创建并初始化数据目录。
 
 ```bash
-$ ./dist/bin/venus-worker store sealing-init -l <dir1> <dir2> <dir3> <...>
+$ ./dist/bin/damocles-worker store sealing-init -l <dir1> <dir2> <dir3> <...>
 ```
 
 挂载持久化数据目录，并使用以下命令初始化数据目录。
 
 ```bash
-$ ./dist/bin/venus-worker store file-init -l <dir1>
+$ ./dist/bin/damocles-worker store file-init -l <dir1>
 ```
 
 规划用于各封装阶段的 CPU 核、numa 区域等配置。按需完成配置文件。以下为`worker`配置例子，更详细的配置项、作用、配置方法可以参考[这个](/zh/cluster/Venus-Worker-c)文档。
 
 ```toml
 [worker]
-  # 实例名，选填项，字符串类型，默认以连接 `venus-sector-manager` 所使用的网卡 IP 地址作为实例名
+  # 实例名，选填项，字符串类型，默认以连接 `damocles-manager` 所使用的网卡 IP 地址作为实例名
   # name = "bytest"
   # rpc 服务监听地址，选填项，字符串类型，默认为"0.0.0.0"，即监听本机所有地址
   # rpc_server.host = "0.0.0.0"
@@ -469,13 +469,13 @@ $ ./dist/bin/venus-worker store file-init -l <dir1>
   cgroup.cpuset = "40-45"
 ```
 :::tip
-您也可以参考社区`venus-cluster`性能测试的相关[技术文档](https://github.com/filecoin-project/venus/discussions/4866)，作为参考。
+您也可以参考社区`damocles`性能测试的相关[技术文档](https://github.com/filecoin-project/venus/discussions/4866)，作为参考。
 :::
 
-使用启动`venus-worker`。
+使用启动`damocles-worker`。
 
 ```bash
-$ /path/to/venus-worker daemon -c /path/to/venus-worker.toml
+$ /path/to/damocles-worker daemon -c /path/to/damocles-worker.toml
 ```
 
 :::tip
@@ -483,7 +483,7 @@ $ /path/to/venus-worker daemon -c /path/to/venus-worker.toml
 :::
 
 :::tip
-关于配置文件需要注意的是：`venus-worker.toml`的`[[attached]]`中的`name = "xxx"` 和路径要与`sector-manager.cfg`中的`[[Common.PersistStores]] Name = "xxx"`和路径一致。
+关于配置文件需要注意的是：`damocles-worker.toml`的`[[attached]]`中的`name = "xxx"` 和路径要与`sector-manager.cfg`中的`[[Common.PersistStores]] Name = "xxx"`和路径一致。
 :::
 
 ## 问题？
