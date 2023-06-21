@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Configuration parsing | Sophon</title>
+    <meta name="generator" content="VuePress 1.8.0">
+    <link rel="icon" href="/assets/sophon-icon.png">
+    <script async="true" src="https://www.googletagmanager.com/gtag/js?id=G-RHJWEBDXVD"></script>
+    <script>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-RHJWEBDXVD');</script>
+    <meta name="description" content="Sophon, formerly known as Venus Chain Service, is THE Filecoin super node solution.">
+    
+    <link rel="preload" href="/assets/css/0.styles.117964e0.css" as="style"><link rel="preload" href="/assets/js/app.f1c20216.js" as="script"><link rel="preload" href="/assets/js/2.20e7910a.js" as="script"><link rel="preload" href="/assets/js/25.b79df1d0.js" as="script"><link rel="prefetch" href="/assets/js/10.f067a250.js"><link rel="prefetch" href="/assets/js/11.2a60a7f2.js"><link rel="prefetch" href="/assets/js/12.0d1843dc.js"><link rel="prefetch" href="/assets/js/13.647f3f5f.js"><link rel="prefetch" href="/assets/js/14.eda25ec0.js"><link rel="prefetch" href="/assets/js/15.b40303ec.js"><link rel="prefetch" href="/assets/js/16.1bd33d5a.js"><link rel="prefetch" href="/assets/js/17.a0358863.js"><link rel="prefetch" href="/assets/js/18.d75f6d14.js"><link rel="prefetch" href="/assets/js/19.8596106b.js"><link rel="prefetch" href="/assets/js/20.a9204c99.js"><link rel="prefetch" href="/assets/js/21.1b4bc684.js"><link rel="prefetch" href="/assets/js/22.498dee10.js"><link rel="prefetch" href="/assets/js/23.dca2cf97.js"><link rel="prefetch" href="/assets/js/24.92f50afe.js"><link rel="prefetch" href="/assets/js/26.43ea543c.js"><link rel="prefetch" href="/assets/js/27.b2e8c372.js"><link rel="prefetch" href="/assets/js/28.3fa69d11.js"><link rel="prefetch" href="/assets/js/29.15b2220a.js"><link rel="prefetch" href="/assets/js/3.47c5697e.js"><link rel="prefetch" href="/assets/js/30.b093645a.js"><link rel="prefetch" href="/assets/js/31.3d3a4d17.js"><link rel="prefetch" href="/assets/js/32.30104dc2.js"><link rel="prefetch" href="/assets/js/33.af67c98e.js"><link rel="prefetch" href="/assets/js/34.95e71cea.js"><link rel="prefetch" href="/assets/js/35.02bbd196.js"><link rel="prefetch" href="/assets/js/36.7357da2a.js"><link rel="prefetch" href="/assets/js/37.0fc29d8c.js"><link rel="prefetch" href="/assets/js/38.92988a47.js"><link rel="prefetch" href="/assets/js/39.74cb35b6.js"><link rel="prefetch" href="/assets/js/4.06777882.js"><link rel="prefetch" href="/assets/js/40.4b882017.js"><link rel="prefetch" href="/assets/js/41.d39d05a8.js"><link rel="prefetch" href="/assets/js/42.22c41a6f.js"><link rel="prefetch" href="/assets/js/43.cd59cb67.js"><link rel="prefetch" href="/assets/js/44.070e51f2.js"><link rel="prefetch" href="/assets/js/45.e4bf0f2d.js"><link rel="prefetch" href="/assets/js/46.1f30d35a.js"><link rel="prefetch" href="/assets/js/47.6dad2275.js"><link rel="prefetch" href="/assets/js/48.36027998.js"><link rel="prefetch" href="/assets/js/49.96b7bf22.js"><link rel="prefetch" href="/assets/js/5.d51f6b5b.js"><link rel="prefetch" href="/assets/js/50.e6c2facd.js"><link rel="prefetch" href="/assets/js/51.86794129.js"><link rel="prefetch" href="/assets/js/52.e923eb67.js"><link rel="prefetch" href="/assets/js/53.94d2e274.js"><link rel="prefetch" href="/assets/js/54.79191bda.js"><link rel="prefetch" href="/assets/js/55.09256b20.js"><link rel="prefetch" href="/assets/js/56.aa7ac363.js"><link rel="prefetch" href="/assets/js/57.ed6ecbb1.js"><link rel="prefetch" href="/assets/js/58.4e126b1f.js"><link rel="prefetch" href="/assets/js/59.87d86af0.js"><link rel="prefetch" href="/assets/js/6.0f01c240.js"><link rel="prefetch" href="/assets/js/60.4ac2fecf.js"><link rel="prefetch" href="/assets/js/61.a290524c.js"><link rel="prefetch" href="/assets/js/62.1158b9b5.js"><link rel="prefetch" href="/assets/js/63.cc7600b2.js"><link rel="prefetch" href="/assets/js/64.96078b39.js"><link rel="prefetch" href="/assets/js/7.6391f6eb.js"><link rel="prefetch" href="/assets/js/8.a56e2715.js"><link rel="prefetch" href="/assets/js/9.cc0424f5.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.117964e0.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><img src="/assets/sophon-icon.png" alt="Sophon" class="logo"> <span class="site-name can-hide">Sophon</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/intro/" class="nav-link">
+  Introduction
+</a></div><div class="nav-item"><a href="/operation/" class="nav-link router-link-active">
+  Deployment &amp; Operation
+</a></div><div class="nav-item"><a href="/about/" class="nav-link">
+  About
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Select language" class="dropdown-title"><span class="title">Languages</span> <span class="arrow down"></span></button> <button type="button" aria-label="Select language" class="mobile-dropdown-title"><span class="title">Languages</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/operation/venus-miner.html" aria-current="page" class="nav-link router-link-exact-active router-link-active">
+  English
+</a></li><li class="dropdown-item"><!----> <a href="/zh/operation/venus-miner.html" class="nav-link">
+  简体中文
+</a></li></ul></div></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/intro/" class="nav-link">
+  Introduction
+</a></div><div class="nav-item"><a href="/operation/" class="nav-link router-link-active">
+  Deployment &amp; Operation
+</a></div><div class="nav-item"><a href="/about/" class="nav-link">
+  About
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Select language" class="dropdown-title"><span class="title">Languages</span> <span class="arrow down"></span></button> <button type="button" aria-label="Select language" class="mobile-dropdown-title"><span class="title">Languages</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/operation/venus-miner.html" aria-current="page" class="nav-link router-link-exact-active router-link-active">
+  English
+</a></li><li class="dropdown-item"><!----> <a href="/zh/operation/venus-miner.html" class="nav-link">
+  简体中文
+</a></li></ul></div></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>Deployment</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/operation/" aria-current="page" class="sidebar-link">Before deployment</a></li><li><a href="/operation/deploy-a-cs.html" class="sidebar-link">Deploy a Sophon service</a></li><li><a href="/operation/join-a-cs.html" class="sidebar-link">Use a Sophon service</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>Sophon Components</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/operation/venus-daemon.html" class="sidebar-link">venus daemon</a></li><li><a href="/operation/venus-auth.html" class="sidebar-link">venus-auth</a></li><li><a href="/operation/venus-miner.html" aria-current="page" class="active sidebar-link">venus-miner</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/operation/venus-miner.html#old-version" class="sidebar-link">Old version</a></li><li class="sidebar-sub-header"><a href="/operation/venus-miner.html#new-version" class="sidebar-link">New version</a></li></ul></li><li><a href="/operation/venus-messager.html" class="sidebar-link">venus-messager</a></li><li><a href="/operation/venus-gateway.html" class="sidebar-link">venus-gateway</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>Optional Components</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/operation/venus-wallet-builtin.html" class="sidebar-link">venus-wallet (builtin)</a></li><li><a href="/operation/venus-wallet.html" class="sidebar-link">venus-wallet (remote)</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>Operations</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/operation/chain-mng.html" class="sidebar-link">Chain management</a></li><li><a href="/operation/simple-load-balancing.html" class="sidebar-link">Simple load balancing</a></li><li><a href="/operation/ha.html" class="sidebar-link">High availability solution</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="configuration-parsing"><a href="#configuration-parsing" class="header-anchor">#</a> Configuration parsing</h1> <p>   The file is located in <code>~/.sophon-miner/config.toml</code> by default, which is generated when the command <code>sophon-miner init</code> is executed. Behavior comments starting with <code>#</code> in the file.</p> <h2 id="old-version"><a href="#old-version" class="header-anchor">#</a> Old version</h2> <p>version number <code>&lt; v1.7.0</code></p> <div class="language-toml extra-class"><pre class="language-toml"><code><span class="token comment"># venus fullnode API</span>
+<span class="token key property">ListenAPI</span> <span class="token punctuation">=</span> <span class="token string">&quot;/ip4/127.0.0.1/tcp/3453&quot;</span>
+<span class="token key property">Token</span> <span class="token punctuation">=</span> <span class="token string">&quot;eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiYWRtaW4iLCJwZXJtIjoiYWRtaW4iLCJleHQiOiIifQ.RRSdeQ-c1Ei-8roAj-L-wpOr-y6PssDorbGijMPxjoc&quot;</span>
+<span class="token comment"># deprecated, replaced by `slash filter`</span>
+<span class="token key property">BlockRecord</span> <span class="token punctuation">=</span> <span class="token string">&quot;cache&quot;</span>
+
+<span class="token punctuation">[</span><span class="token table class-name">API</span><span class="token punctuation">]</span>
+  <span class="token key property">ListenAddress</span> <span class="token punctuation">=</span> <span class="token string">&quot;/ip4/0.0.0.0/tcp/12308/http&quot;</span>
+
+<span class="token comment"># venus-gateway API</span>
+<span class="token punctuation">[</span><span class="token table class-name">Gateway</span><span class="token punctuation">]</span>
+  <span class="token key property">ListenAPI</span> <span class="token punctuation">=</span> <span class="token punctuation">[</span><span class="token string">&quot;/ip4/127.0.0.1/tcp/45132&quot;</span><span class="token punctuation">]</span>
+  <span class="token key property">Token</span> <span class="token punctuation">=</span> <span class="token string">&quot;eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiYWRtaW4iLCJwZXJtIjoiYWRtaW4iLCJleHQiOiIifQ.RRSdeQ-c1Ei-8roAj-L-wpOr-y6PssDorbGijMPxjoc&quot;</span>
+
+<span class="token punctuation">[</span><span class="token table class-name">Db</span><span class="token punctuation">]</span>
+  <span class="token comment"># deprecated, replaced by ~sophon-auth`</span>
+  <span class="token key property">Type</span> <span class="token punctuation">=</span> <span class="token string">&quot;auth&quot;</span>
+  <span class="token comment"># `slash filter`</span>
+  <span class="token key property">SFType</span> <span class="token punctuation">=</span> <span class="token string">&quot;mysql&quot;</span>
+  <span class="token punctuation">[</span><span class="token table class-name">Db.MySQL</span><span class="token punctuation">]</span>
+    <span class="token key property">Conn</span> <span class="token punctuation">=</span> <span class="token string">&quot;root:kuangfengjuexizhan@tcp(192.168.200.2:3308)/sophon-miner-butterfly-200-19?charset=utf8mb4&amp;parseTime=True&amp;loc=Local&amp;timeout=10s&quot;</span>
+    <span class="token key property">MaxOpenConn</span> <span class="token punctuation">=</span> <span class="token number">100</span>
+    <span class="token key property">MaxIdleConn</span> <span class="token punctuation">=</span> <span class="token number">10</span>
+    <span class="token key property">ConnMaxLifeTime</span> <span class="token punctuation">=</span> <span class="token number">60</span>
+    <span class="token key property">Debug</span> <span class="token punctuation">=</span> <span class="token boolean">false</span>
+  <span class="token punctuation">[</span><span class="token table class-name">Db.Auth</span><span class="token punctuation">]</span>
+    <span class="token key property">ListenAPI</span> <span class="token punctuation">=</span> <span class="token string">&quot;http://127.0.0.1:8989&quot;</span>
+    <span class="token key property">Token</span> <span class="token punctuation">=</span> <span class="token string">&quot;eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiYWRtaW4iLCJwZXJtIjoiYWRtaW4iLCJleHQiOiIifQ.RRSdeQ-c1Ei-8roAj-L-wpOr-y6PssDorbGijMPxjoc&quot;</span>
+
+<span class="token comment"># Jaeger Tracing</span>
+<span class="token punctuation">[</span><span class="token table class-name">Tracing</span><span class="token punctuation">]</span>
+  <span class="token key property">JaegerTracingEnabled</span> <span class="token punctuation">=</span> <span class="token boolean">false</span>
+  <span class="token key property">JaegerEndpoint</span> <span class="token punctuation">=</span> <span class="token string">&quot;localhost:6831&quot;</span>
+  <span class="token key property">ProbabilitySampler</span> <span class="token punctuation">=</span> <span class="token number">1.0</span>
+  <span class="token key property">ServerName</span> <span class="token punctuation">=</span> <span class="token string">&quot;sophon-miner&quot;</span>
+</code></pre></div><h2 id="new-version"><a href="#new-version" class="header-anchor">#</a> New version</h2> <p>version number <code>&gt;= v1.7.0</code></p> <div class="language-toml extra-class"><pre class="language-toml"><code><span class="token key property">PropagationDelaySecs</span> <span class="token punctuation">=</span> <span class="token number">12</span>
+<span class="token key property">MinerOnceTimeout</span> <span class="token punctuation">=</span> <span class="token string">&quot;15s&quot;</span>
+<span class="token key property">MpoolSelectDelaySecs</span> <span class="token punctuation">=</span> <span class="token number">0</span>
+
+<span class="token comment"># `sophon-miner` host address and port</span>
+<span class="token punctuation">[</span><span class="token table class-name">API</span><span class="token punctuation">]</span>
+  <span class="token key property">ListenAddress</span> <span class="token punctuation">=</span> <span class="token string">&quot;/ip4/0.0.0.0/tcp/12308&quot;</span>
+  
+<span class="token comment"># venus fullnode API</span>
+<span class="token punctuation">[</span><span class="token table class-name">FullNode</span><span class="token punctuation">]</span>
+  <span class="token key property">Addr</span> <span class="token punctuation">=</span> <span class="token string">&quot;/ip4/127.0.0.1/tcp/3453&quot;</span>
+  <span class="token key property">Token</span> <span class="token punctuation">=</span> <span class="token string">&quot;eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiY2hhaW4tc2VydmljZSIsInBlcm0iOiJhZG1pbiIsImV4dCI6IiJ9.DxlsJO-XrrdQLvJdA6wdWJxeYOhZt_kMYMHc7NdfQNw&quot;</span>
+
+<span class="token comment"># venus-gateway API</span>
+<span class="token punctuation">[</span><span class="token table class-name">Gateway</span><span class="token punctuation">]</span>
+  <span class="token key property">ListenAPI</span> <span class="token punctuation">=</span> <span class="token punctuation">[</span><span class="token string">&quot;/ip4/127.0.0.1/tcp/45132&quot;</span><span class="token punctuation">]</span>
+  <span class="token key property">Token</span> <span class="token punctuation">=</span> <span class="token string">&quot;eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiY2hhaW4tc2VydmljZSIsInBlcm0iOiJhZG1pbiIsImV4dCI6IiJ9.DxlsJO-XrrdQLvJdA6wdWJxeYOhZt_kMYMHc7NdfQNw&quot;</span>
+
+<span class="token comment"># sophon-auth API</span>
+<span class="token punctuation">[</span><span class="token table class-name">Auth</span><span class="token punctuation">]</span>
+  <span class="token key property">Addr</span> <span class="token punctuation">=</span> <span class="token string">&quot;http://127.0.0.1:8989&quot;</span>
+  <span class="token key property">Token</span> <span class="token punctuation">=</span> <span class="token string">&quot;eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiY2hhaW4tc2VydmljZSIsInBlcm0iOiJhZG1pbiIsImV4dCI6IiJ9.DxlsJO-XrrdQLvJdA6wdWJxeYOhZt_kMYMHc7NdfQNw&quot;</span>
+
+<span class="token comment"># `slash filter`</span>
+<span class="token punctuation">[</span><span class="token table class-name">SlashFilter</span><span class="token punctuation">]</span>
+  <span class="token key property">Type</span> <span class="token punctuation">=</span> <span class="token string">&quot;local&quot;</span> <span class="token comment"># optional: local,mysql</span>
+  <span class="token punctuation">[</span><span class="token table class-name">SlashFilter.MySQL</span><span class="token punctuation">]</span>
+    <span class="token key property">Conn</span> <span class="token punctuation">=</span> <span class="token string">&quot;&quot;</span>
+    <span class="token key property">MaxOpenConn</span> <span class="token punctuation">=</span> <span class="token number">100</span>
+    <span class="token key property">MaxIdleConn</span> <span class="token punctuation">=</span> <span class="token number">10</span>
+    <span class="token key property">ConnMaxLifeTime</span> <span class="token punctuation">=</span> <span class="token number">60</span>
+    <span class="token key property">Debug</span> <span class="token punctuation">=</span> <span class="token boolean">false</span>
+
+<span class="token comment"># Jaeger Tracing</span>
+<span class="token punctuation">[</span><span class="token table class-name">Tracing</span><span class="token punctuation">]</span>
+  <span class="token key property">JaegerTracingEnabled</span> <span class="token punctuation">=</span> <span class="token boolean">false</span>
+  <span class="token key property">JaegerEndpoint</span> <span class="token punctuation">=</span> <span class="token string">&quot;localhost:6831&quot;</span>
+  <span class="token key property">ProbabilitySampler</span> <span class="token punctuation">=</span> <span class="token number">1.0</span>
+  <span class="token key property">ServerName</span> <span class="token punctuation">=</span> <span class="token string">&quot;sophon-miner&quot;</span>
+</code></pre></div><h3 id="metrics-configuration-parsing"><a href="#metrics-configuration-parsing" class="header-anchor">#</a> Metrics Configuration parsing</h3> <p>A basic configuration example of <code>Metrics</code> is as follows：</p> <div class="language-toml extra-class"><pre class="language-toml"><code><span class="token punctuation">[</span><span class="token table class-name">Metrics</span><span class="token punctuation">]</span>
+  <span class="token comment"># Whether to enable metrics statistics, the default is false</span>
+  <span class="token key property">Enabled</span> <span class="token punctuation">=</span> <span class="token boolean">false</span>
+  
+  <span class="token punctuation">[</span><span class="token table class-name">Metrics.Exporter</span><span class="token punctuation">]</span>
+    <span class="token comment"># Metric exporter type, currently optional: prometheus or graphite, default is prometheus</span>
+    <span class="token key property">Type</span> <span class="token punctuation">=</span> <span class="token string">&quot;prometheus&quot;</span>
+    
+    <span class="token punctuation">[</span><span class="token table class-name">Metrics.Exporter.Prometheus</span><span class="token punctuation">]</span>
+      <span class="token comment">#multiaddr</span>
+      <span class="token key property">EndPoint</span> <span class="token punctuation">=</span> <span class="token string">&quot;/ip4/0.0.0.0/tcp/12310&quot;</span>
+      <span class="token comment"># Naming convention: &quot;a_b_c&quot;, no &quot;-&quot;</span>
+      <span class="token key property">Namespace</span> <span class="token punctuation">=</span> <span class="token string">&quot;miner&quot;</span>
+      <span class="token comment"># Indicator registry type, optional: default (with the environment indicators that the program runs) or define (custom)</span>
+      <span class="token key property">RegistryType</span> <span class="token punctuation">=</span> <span class="token string">&quot;define&quot;</span>
+      <span class="token comment"># prometheus service path</span>
+      <span class="token key property">Path</span> <span class="token punctuation">=</span> <span class="token string">&quot;/debug/metrics&quot;</span>
+      <span class="token comment"># Reporting period, in seconds (s)</span>
+      <span class="token key property">ReportingPeriod</span> <span class="token punctuation">=</span> <span class="token number">10</span>
+      
+    <span class="token punctuation">[</span><span class="token table class-name">Metrics.Exporter.Graphite</span><span class="token punctuation">]</span>
+      <span class="token comment"># Naming convention: &quot;a_b_c&quot;, no &quot;-&quot;</span>
+      <span class="token key property">Namespace</span> <span class="token punctuation">=</span> <span class="token string">&quot;miner&quot;</span>
+      <span class="token comment"># graphite exporter collector service address</span>
+      <span class="token key property">Host</span> <span class="token punctuation">=</span> <span class="token string">&quot;127.0.0.1&quot;</span>
+      <span class="token comment"># graphite exporter collector service listening port</span>
+      <span class="token key property">Port</span> <span class="token punctuation">=</span> <span class="token number">12310</span>
+      <span class="token comment"># Reporting period, in seconds (s)</span>
+      <span class="token key property">ReportingPeriod</span> <span class="token punctuation">=</span> <span class="token number">10</span>
+</code></pre></div><p>If you choose <code>Metrics.Exporter</code> as <code>Prometheus</code>, you can quickly view metrics through the command line：</p> <div class="language- extra-class"><pre class="language-text"><code> $ curl http://127.0.0.1:&lt;port&gt;&lt;path&gt;
+ # HELP miner_getbaseinfo_ms Duration of GetBaseInfo in miner
+ # TYPE miner_getbaseinfo_ms histogram
+ miner_getbaseinfo_ms_bucket{miner_id=&quot;t010938&quot;,le=&quot;100&quot;} 50
+ miner_getbaseinfo_ms_bucket{miner_id=&quot;t010938&quot;,le=&quot;200&quot;} 51
+ miner_getbaseinfo_ms_bucket{miner_id=&quot;t010938&quot;,le=&quot;400&quot;} 51
+ miner_getbaseinfo_ms_bucket{miner_id=&quot;t010938&quot;,le=&quot;600&quot;} 51
+ miner_getbaseinfo_ms_bucket{miner_id=&quot;t010938&quot;,le=&quot;800&quot;} 51
+ miner_getbaseinfo_ms_bucket{miner_id=&quot;t010938&quot;,le=&quot;1000&quot;} 51
+ miner_getbaseinfo_ms_bucket{miner_id=&quot;t010938&quot;,le=&quot;2000&quot;} 51
+ miner_getbaseinfo_ms_bucket{miner_id=&quot;t010938&quot;,le=&quot;20000&quot;} 51
+ miner_getbaseinfo_ms_bucket{miner_id=&quot;t010938&quot;,le=&quot;+Inf&quot;} 51
+ miner_getbaseinfo_ms_sum{miner_id=&quot;t010938&quot;} 470.23516
+ ... ...
+</code></pre></div><blockquote><p>If you encounter the error <code>curl: (56) Recv failure: Connection reset by peer</code>, use the native <code>ip</code> address as follows:</p></blockquote> <div class="language- extra-class"><pre class="language-text"><code>$  curl http://&lt;ip&gt;:&lt;port&gt;&lt;path&gt;
+</code></pre></div></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/ipfs-force-community/sophon-docs/edit/main/docs/operation/venus-miner.md" target="_blank" rel="noopener noreferrer">Edit this page</a> <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></div> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/operation/venus-auth.html" class="prev">
+        venus-auth
+      </a></span> <span class="next"><a href="/operation/venus-messager.html">
+        venus-messager
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.f1c20216.js" defer></script><script src="/assets/js/2.20e7910a.js" defer></script><script src="/assets/js/25.b79df1d0.js" defer></script>
+  </body>
+</html>
