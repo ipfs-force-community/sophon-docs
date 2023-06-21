@@ -123,8 +123,8 @@ module.exports = {
                         title: 'Optional Components',
                         collapsable: false,
                         children: [
-                            ['venus-wallet-builtin.md', 'venus-wallet (builtin)'],
-                            ['venus-wallet.md', 'venus-wallet (remote)'],
+                            ['venus-wallet-builtin.md', 'venus-wallet (builtin)', "https://github.com/filecoin-project/venus-wallet/blob/master/docs/en/getting-started-local.md"],
+                            ['venus-wallet.md', 'venus-wallet (remote)', "https://github.com/filecoin-project/venus-wallet/blob/master/docs/en/getting-started-remote.md"],
                         ]
                     },
                     {
