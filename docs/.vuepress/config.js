@@ -81,8 +81,8 @@ module.exports = {
                     link: '/intro/'
                 },
                 {
-                    text: 'Reference',
-                    link: '/ref/'
+                    text: 'Deployment & Operation',
+                    link: '/operation/'
                 },
                 {
                     text: 'About',
@@ -97,33 +97,26 @@ module.exports = {
                             ['', 'Overview'],
                         ]
                     },
+                    ],
+                    '/operation/': [
                     {
                         title: 'Deployment',
                         collapsable: false,
                         children: [
+                            ['', 'Before deployment'],
                             ['deploy-a-cs.md', 'Deploy a Sophon service'],
                             ['join-a-cs.md', 'Use a Sophon service'],
                         ]
                     },
                     {
-                        title: 'Operations',
-                        collapsable: false,
-                        children: [
-                            ['chain-mng.md', 'Chain management'],
-                            ['simple-load-balancing.md', 'Simple load balancing'],
-                            ['ha.md', 'High availability solution'],
-                        ]
-                    },
-                    ],
-                    '/ref/': [{
                         title: 'Sophon Components',
                         collapsable: false,
                         children: [
-                            ['', 'venus daemon'],
-                            ['venus-auth.md', 'venus-auth'],
-                            ['venus-miner.md', 'venus-miner'],
-                            ['venus-messager.md', 'venus-messager'],
-                            ['venus-gateway.md', 'venus-gateway'],
+                            ['venus-daemon.md', 'venus daemon'],
+                            ['venus-auth.md', 'venus-auth', "https://github.com/ipfs-force-community/sophon-auth/blob/master/docs/en/getting-started.md"],
+                            ['venus-miner.md', 'venus-miner', "https://github.com/ipfs-force-community/sophon-miner/blob/master/docs/en/config-desc.md"],
+                            ['venus-messager.md', 'venus-messager', "https://github.com/ipfs-force-community/sophon-messager/blob/master/docs/en/getting-started.md"],
+                            ['venus-gateway.md', 'venus-gateway', "https://github.com/ipfs-force-community/sophon-gateway/blob/master/docs/en/getting-started.md"],
                         ]
                     },
                     {
@@ -135,15 +128,12 @@ module.exports = {
                         ]
                     },
                     {
-                        title: 'RPC API Reference',
+                        title: 'Operations',
                         collapsable: false,
                         children: [
-                            ['chain-api-v0.md', 'Chain api v0', "https://github.com/filecoin-project/venus/blob/master/venus-shared/api/chain/v0/method.md"],
-                            ['chain-api-v1.md', 'Chain api v1', "https://github.com/filecoin-project/venus/blob/master/venus-shared/api/chain/v1/method.md"],
-                            ['gateway-api-v0.md', 'Gateway api v0', "https://github.com/filecoin-project/venus/blob/master/venus-shared/api/gateway/v0/method.md"],
-                            ['gateway-api-v1.md', 'Gateway api v1', "https://github.com/filecoin-project/venus/blob/master/venus-shared/api/gateway/v1/method.md"],
-                            ['messager-api.md', 'Messager api', "https://github.com/filecoin-project/venus/blob/master/venus-shared/api/messager/method.md"],
-                            ['wallet-api.md', 'Wallet api', "https://github.com/filecoin-project/venus/blob/master/venus-shared/api/wallet/method.md"]
+                            ['chain-mng.md', 'Chain management'],
+                            ['simple-load-balancing.md', 'Simple load balancing'],
+                            ['ha.md', 'High availability solution'],
                         ]
                     },
                     ],
