@@ -11,12 +11,12 @@
 
 在遵循其余的教程和成功部署后，您可以开始封装扇区，增加算力并通过您对网络存储容量的贡献最终获得区块奖励！
 
-## venus 组件介绍
+## venus 产品介绍
 
 根据其在挖矿集群中的作用，模块可以大致分为两类：智子服务产品和 SP 本地产品。智子服务可以被认为是开始封装扇区所需的基础。大多数与区块链的交互，如链同步、发送消息、赢得赢票等，都是由智子服务处理的。这允许了许多存储提供者都可以共用一套智子服务，从而减少维护成本。SP 本地产品提供了一整套算力服务。如果您选择使用第三方托管的智子服务，您只要将花费大部分时间在 SP 本地产品上。
 
 | name                                                         | role                                                  | product |
-| ------------------------------------------------------------ | ----------------------------------------------------- | ------------------ |
+| ------ | ----------- | ------------- |
 | [venus](https://github.com/filecoin-project/venus)           | daemon for chain interactions                         | venus              |
 | [sophon-miner](https://github.com/ipfs-force-community/sophon-miner) | block winning and proving                             | sophon service             |
 | [sophon-messager](https://github.com/ipfs-force-community/sophon-messager) | chain message management                              | sophon service             |
@@ -43,7 +43,7 @@
 
 :::
 
-## Venus 组件构建
+## Venus 产品构建
 
 本文档各组件以 `TAG:v1.0.0` 为例说明，实际场景中按需检出。
 
@@ -87,12 +87,15 @@ $ git submodule update --init --recursive
 $ make
 ```
 
+:::tip
+
 如果遇到编译错误：`github.com/dgraph-io/badger/v3@v3.2011.1/fb/BlockOffset.go:6:2: missing go.sum entry for module providing package github.com/google/flatbuffers/go (imported by github.com/dgraph-io/badger/v3/table); to add:
                      go get github.com/dgraph-io/badger/v3/table@v3.2011.1` ,先执行：
  
 ```shell script
 $ go get github.com/google/flatbuffers@v1.12.1
 ```
+:::
 
 ### sophon-messager
 
