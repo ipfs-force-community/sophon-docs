@@ -4,47 +4,47 @@ Before diving into deployment of your mining operation, please make sure you go 
 
 :::warning
 
-It is recommended that you test your setup in calibration network before deploying on mainnet. 
+It is recommended that you test your setup in `calibration` network before deploying on `mainnet`. 
 
 :::
 
 ### Setup your permanent storage
 
-Choose a network file system that you are familiar with (NFS for example) and deploy your storage cluster.
+Choose a network file system that you are familiar with (`NFS` for example) and deploy your storage cluster.
 
-### Get your account setup in shared modules
+### Get your account setup in Sophon service
 
 There are two ways to have your account setup.
 
-#### For miners connecting to shared modules
+#### For miners connecting to Sophon service
 
-If you are trying to connect to a hosted shared venus modules, <!--like ones provided by venus incubation center,--> contact admin of said service and have them set it up for you.
+If you are trying to connect to a hosted Sophon service, <!--like ones provided by venus incubation center,--> contact admin of said service and have them set it up for you.
 
 :::tip
 
-venus-wallet can be deployed as either a chain service or a local component depend on your security requirement.
+venus-wallet can be deployed as either a Sophon service or a local component depend on your security requirement.
 
 :::
 
-#### For admins of shared modules
+#### For admins of Sophon service
 
-If you are an admin hosting shared venus modules, use the following command to create an account for your sealer-cluster.
+If you are an admin hosting Sophon service, use the following command to create an account for your sealer clusters.
 
 ```bash
 # create user, default state=1
-$ ./venus-auth user add <ACCOUNT_NAME>
+$ ./sophon-auth user add <ACCOUNT_NAME>
 # bind miner to user
-$ ./venus-auth user miner add <ACCOUNT_NAME> <MINER_ID> 
+$ ./sophon-auth user miner add <ACCOUNT_NAME> <MINER_ID> 
 
 # The returned token is what miner have to add into their config file in order to gain access to your shared modules
-$ ./venus-auth token gen --perm write <ACCOUNT_NAME>
+$ ./sophon-auth token gen --perm write <ACCOUNT_NAME>
 <AUTH_TOKEN_FOR_ACCOUNT_NAME>
 ```
 
 Update user information if necessary.
 
 ```bash
-./venus-auth user update --user=<ACCOUNT_NAME> --help
+./sophon-auth user update --user=<ACCOUNT_NAME> --help
 ```
 
 ### Software dependencies
@@ -125,7 +125,7 @@ $ ./venus-wallet new bls
 
 :::tip
 
-If you are testing or Calibration, you have to fund all your addresses with test coins from faucets. For calibration, use this [faucet](https://faucet.calibration.fildev.network/funds.html). 
+If you are testing on `Calibration`, you have to fund all your addresses with test coins from faucets. For calibration, use this [faucet](https://faucet.calibration.fildev.network/funds.html). 
 
 :::
 
@@ -135,7 +135,7 @@ Use `./venus-wallet import` command for importing addresses from private keys.
 
 :::
 
-Change `[APIRegisterHub]` section of  `~/.venus_wallet/config.toml` using the credential you get from shared module admin.
+Change `[APIRegisterHub]` section of  `~/.venus_wallet/config.toml` using the credential you get from Sophon service admin.
 
 ```toml
 [APIRegisterHub]
@@ -146,7 +146,7 @@ SupportAccounts = ["<ACCOUNT_NAME>"]
 
 :::warning
 
-Make sure above 3 params are correctly set, or connection to venus shared modules will fail.
+Make sure above 3 params are correctly set, or connection to Sophon service will fail.
 
 :::
 
@@ -162,7 +162,7 @@ $ kill -9 [PID]
 $ nohup ./venus-wallet run > wallet.log 2>&1 &
 ```
 
-You should see logs close to the following indicating successful connection to `venus-gateway`.
+You should see logs close to the following indicating successful connection to `sophon-gateway`.
 
 ```bash
 2021-07-12T15:14:12.457+0800    INFO    wallet_event    wallet_event/listenevent.go:197 connect to server fcf714b2-eeb6-498b-aafc-5e58eccd9d0f  {"api hub": "/ip4/<IP_ADDRESS>/tcp/45132"}
@@ -180,32 +180,32 @@ Pls keep the wallet unlock state. If the state is locked , it will block sealer 
 
 :::
 
-## Install venus-cluster
+## Install Damocles
 
 Download source code.
 
 ```bash
-$ git clone https://github.com/ipfs-force-community/venus-cluster.git
+$ git clone https://github.com/ipfs-force-community/damocles.git
 ```
 
-Compile `venus-cluster`.
+Compile `damocles`.
 
 ```bash
-$ cd venus-cluster
+$ cd damocles
 $ make all
 ```
 
 :::tip
-After compilation, two executable, `venus-worker` and `venus-sector-manager`, will be generated under `./dist/bin`.
+After compilation, two executable, `damocles-worker` and `damocles-manager`, will be generated under `./dist/bin`.
 :::
 
 
-### venus-sector-manager
+### damocles-manager
 
 Initialize work space.
 
 ```bash
-./dist/bin/venus-sector-manager daemon init
+./dist/bin/damocles-manager daemon init
 ```
 
 ### Create a miner-id (optional)
@@ -213,7 +213,7 @@ Initialize work space.
 Skip this step if you already have a miner-id.
 
 ```bash
-$ ./venus-sector-manager util miner create 
+$ ./damocles-manager util miner create 
 --from=<OWNER_ADDRESS> 
 --owner=<OWNER_ADDRESS> 
 --worker=<WORKER_ADDRESS>
@@ -234,9 +234,9 @@ You will see logs similar to the following once successfully created new miner-i
 ```
 :::
 
-### venus-sector-manager configurations
+### damocles-manager configurations
 
-Tailor `~/.venus-sector-manager/sector-manager.cfg` to your own hardware. Detailed instructions on each configurations could be found [here](/zh/cluster/Venus-Sector-Manager).
+Tailor `~/.damocles-manager/sector-manager.cfg` to your own hardware. Detailed instructions on each configurations could be found [here](/zh/cluster/Venus-Sector-Manager).
 
 ```toml
 [Common]
@@ -330,31 +330,31 @@ Tailor `~/.venus-sector-manager/sector-manager.cfg` to your own hardware. Detail
     Enabled = true
 ```
 
-Start `venus-sector-manager`.
+Start `damocles-manager`.
 
 ```bash
-$ ./dist/bin/venus-sector-manager --net=cali daemon run --poster --miner --listen 0.0.0.0:1789
+$ ./dist/bin/damocles-manager --net=cali daemon run --poster --miner --listen 0.0.0.0:1789
 ```
 
 :::tip
 Again, use `--net` param for different network options. Default is mainnet.
 :::
 
-### venus-worker
+### damocles-worker
 
 Plan your sealing storage and init directories.
 
 ```bash
-$ ./dist/bin/venus-worker store sealing-init -l <dir1> <dir2> <dir3> <...>
+$ ./dist/bin/damocles-worker store sealing-init -l <dir1> <dir2> <dir3> <...>
 ```
 
 Attach permanent storage and init directories.
 
 ```bash
-$ ./dist/bin/venus-worker store file-init -l <dir1>
+$ ./dist/bin/damocles-worker store file-init -l <dir1>
 ```
 
-Plan CPU cores, numa, etc for eahc sealing tasks and tailor your configuration file to it. The following is an example configuration for `venus-worker`. More detailed instructions on each configurations could be found [here](/zh/cluster/Venus-Worker-c)
+Plan CPU cores, numa, etc for eahc sealing tasks and tailor your configuration file to it. The following is an example configuration for `damocles-worker`. More detailed instructions on each configurations could be found [here](/zh/cluster/Venus-Worker-c)
 
 ```toml
 [worker]
@@ -473,21 +473,21 @@ Plan CPU cores, numa, etc for eahc sealing tasks and tailor your configuration f
   cgroup.cpuset = "40-45"
 ```
 :::tip
-You can also reference the configurations in `venus-cluster` [community test](https://github.com/filecoin-project/venus/discussions/4866).
+You can also reference the configurations in `damocles` [community test](https://github.com/filecoin-project/venus/discussions/4866).
 :::
 
-Start `venus-worker`.
+Start `damocles-worker`.
 
 ```bash
-$ /path/to/venus-worker daemon -c /path/to/venus-worker.toml
+$ /path/to/damocles-worker daemon -c /path/to/damocles-worker.toml
 ```
 
 :::tip
-The above `sector-manager.cfg` and `venus-worker.toml` are just minimal to get you to start pledging sectors. More detailed information on configurations could be found [here](/zh/cluster/).
+The above `sector-manager.cfg` and `damocles-worker.toml` are just minimal to get you to start pledging sectors. More detailed information on configurations could be found [here](/zh/cluster/).
 :::
 
 :::tip
-Note that `name = "xxx"` under `[[attached]]` in `venus-worker.toml` must be the same `Name = "xxx"` under `[[Common.PersistStores]]` in `sector-manager.cfg`.
+Note that `name = "xxx"` under `[[attached]]` in `damocles-worker.toml` must be the same `Name = "xxx"` under `[[Common.PersistStores]]` in `sector-manager.cfg`.
 :::
 
 ## Questions?
