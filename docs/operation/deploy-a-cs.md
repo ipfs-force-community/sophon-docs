@@ -4,7 +4,7 @@ Before diving into deployment of your mining operation, please make sure you go 
 
 :::warning
 
-It is recommended that you test your setup in calibration network before deploying on mainnet. 
+It is recommended that you test your setup in `calibration` network before deploying on `mainnet`. 
 
 :::
 
@@ -16,32 +16,32 @@ Choose a network file system that you are familiar with (NFS for example) and de
 
 You will need to install these [software dependencies](https://lotus.filecoin.io/lotus/install/linux/#software-dependencies) (same as Lotus) before running venus.
 
-## Install venus-auth
+## Install sophon-auth
 
 Download and compile the source code of venus-auth.
 
 ```shell script
-$ git clone https://github.com/filecoin-project/venus-auth.git
-$ cd venus-auth
+$ git clone https://github.com/ipfs-force-community/sophon-auth.git
+$ cd sophon-auth
 $ git checkout <RELEASE_TAG>
 $ make 
-$ nohup ./venus-auth run > auth.log 2>&1 &
+$ nohup ./sophon-auth run > auth.log 2>&1 &
 ```
 :::tip 
 
-Default config file for Venus-auth is located at `~/.venus-auth/config.toml`.
+Default config file for Venus-auth is located at `~/.sophon-auth/config.toml`.
 
 :::
 
 :::tip Logs
 
-Log defaults printing to console. InfluxDB is supported through configuration.
+Log defaults printing to console. `InfluxDB` is supported through configuration.
 
 :::
 
 :::tip port
 
-The default port of `venus-auth` is `8989`.
+The default port of `sophon-auth` is `8989`.
 
 :::
 
@@ -50,7 +50,7 @@ The default port of `venus-auth` is `8989`.
 MySQL 5.7 or above is supported and can be used as a substitute for the dedault Badger key-value  database. To use MySQL database, modify the db section of the config.
 
 ```shell script
-$ vim ~/.venus-auth/config.toml
+$ vim ~/.sophon-auth/config.toml
 
 # Data source configuration item
 [db]
@@ -65,76 +65,77 @@ maxIdleConns = 128
 maxLifeTime = "120s"
 maxIdleTime = "30s"
 ```
-Restart venus-auth for the configuration to take into effect.
+Restart sophon-auth for the configuration to take into effect.
 
 ```shell script
 $ ps -ef | grep auth
 $ kill <VENUS_AUTH_PID>
-$ nohup ./venus-auth run > auth.log 2>&1 &
+$ nohup ./sophon-auth run > auth.log 2>&1 &
 ```
 
 ### Token gerneration
 
-venus-auth manages [jwt](https://jwt.io/) tokens used by other venus modules for them to talk to each other securely on the network.
+sophon-auth manages [jwt](https://jwt.io/) tokens used by other venus modules for them to talk to each other securely on the network.
 
 Generate tokens for shared modules.
 
 ```bash
 # add user SHARED
-$ ./venus-auth user add <SHARED>
+$ ./sophon-auth user add <SHARED>
 
 # --perm specifies admin, sign, write or read permission of the token generated
-$ ./venus-auth token gen --perm admin <SHARED>
+$ ./sophon-auth token gen --perm admin <SHARED>
 <SHARED_ADMIN_AUTH_TOKEN>
 ```
 
 Generate tokens for independent modules. Tokens can be logically grouped by `<USER>` as individual miner joining the mining pool.
 
 ```shell script
-$ ./venus-auth user add <USER>
+$ ./sophon-auth user add <USER>
 
-$ ./venus-auth token gen --perm write <USER>
+$ ./sophon-auth token gen --perm write <USER>
 <USER_WRITE_AUTH_TOKEN>
-$ ./venus-auth token gen --perm read <USER>
+$ ./sophon-auth token gen --perm read <USER>
 <USER_READ_AUTH_TOKEN>
 ```
 :::tip
 
-Use `./venus-auth user add <USER>` to logically group different tokens. Activate the user, which was just created,  then bind miner to it:
+Use `./sophon-auth user add <USER>` to logically group different tokens. Activate the user, which was just created,  then bind miner to it:
 ```
-$ ./venus-auth user update --name <USER> --state 1
-$ ./venus-auth user miner add <USER> <MINER_ID>
+$ ./sophon-auth user update --name <USER> --state 1
+$ ./sophon-auth user miner add <USER> <MINER_ID>
 
 # 查看user列表
-$ ./venus-auth user list
+$ ./sophon-auth user list
 ```
 
 :::
 
-## Install venus-gateway
+## Install sophon-gateway
 
-Download and compile the source code of venus-gateway.
+Download and compile the source code of sophon-gateway.
 
 ```bash
-$ git clone https://github.com/ipfs-force-community/venus-gateway.git
-$ cd venus-gateway
+$ git clone https://github.com/ipfs-force-community/sophon-gateway.git
+$ cd sophon-gateway
 $ git checkout <RELEASE_TAG>
 $ make
 ```
 
-Start venus-gateway.
+Start sophon-gateway.
 
 ```bash
-$ ./venus-gateway --listen=/ip4/0.0.0.0/tcp/45132 run \
+$ ./sophon-gateway --listen=/ip4/0.0.0.0/tcp/45132 run \
 # Use either a http or https url
 --auth-url=<http://VENUS_AUTH_IP_ADDRESS:PORT> \
 --auth-token=<SHARED_ADMIN_AUTH_TOKEN> \
-> venus-gateway.log 2>&1 &
+> sophon-gateway.log 2>&1 &
 ```
 
 :::tip
 
 If you encounter the following compilation errors, execute first`go get github.com/google/flatbuffers@v1.12.1`
+
 ```bash
 github.com/dgraph-io/badger/v3@v3.2011.1/fb/BlockOffset.go:6:2: missing go.sum entry for module providing package github.com/google/flatbuffers/go (imported by github.com/dgraph-io/badger/v3/table); to add:
         go get github.com/dgraph-io/badger/v3/table@v3.2011.1
@@ -194,20 +195,20 @@ In order for the chain service to interact with the chain, daemon needs to be sy
 
 :::
 
-## Install venus-messager
+## Install sophon-messager
 
-Download and compile the source code of venus-messager.
+Download and compile the source code of sophon-messager.
 
 ```shell script
-$ git clone https://github.com/filecoin-project/venus-messager.git
-$ cd venus-messager
+$ git clone https://github.com/ipfs-force-community/sophon-messager.git
+$ cd sophon-messager
 $ git checkout <RELEASE_TAG>
 $ make 
 ```
-Start venus-messager. Note that `--auth-url`, `--node-url` and `--auth-token` are for venus-messager to be aware of other venus modules and be properly authenticated.
+Start sophon-messager. Note that `--auth-url`, `--node-url` and `--auth-token` are for sophon-messager to be aware of other venus modules and be properly authenticated.
 
 ```bash
-$ nohup ./venus-messager run \
+$ nohup ./sophon-messager run \
 --auth-url=<http://VENUS_AUTH_IP_ADDRESS:PORT> \
 --node-url /ip4/<VENUS_DAEMON_IP_ADDRESS>/tcp/3453 \
 --gateway-url=/ip4/<IP_ADDRESS_OF_VENUS_GATEWAY>/tcp/45132 \
@@ -219,25 +220,25 @@ $ nohup ./venus-messager run \
 
 :::tip
 
-If no database related params are specified, venus-messager will default to use sqlite.
+If no database related params are specified, sophon-messager will default to use sqlite.
 
 :::
 
 
-## Install venus-miner
+## Install sophon-miner
 
-Download and compile the source code of venus-miner.
+Download and compile the source code of sophon-miner.
 
 ```shell script
-$ git clone https://github.com/filecoin-project/venus-miner.git
-$ cd venus-miner
+$ git clone https://github.com/ipfs-force-community/sophon-miner.git
+$ cd sophon-miner
 $ git checkout <RELEASE_TAG>
 $ make
 ```
-Initialize venus-miner.
+Initialize sophon-miner.
 
 ```bash
-$ ./venus-miner init
+$ ./sophon-miner init
 --auth-api <http://VENUS_AUTH_IP_ADDRESS:PORT> \
 --token <SHARED_ADMIN_AUTH_TOKEN> \
 --gateway-api /ip4/<VENUS_GATEWAY_IP_ADDRESS>/tcp/45132 \
@@ -245,18 +246,18 @@ $ ./venus-miner init
 --slash-filter local
 ```
 
-Run venus-miner.
+Run sophon-miner.
 
 ```bash
-$ nohup ./venus-miner run >> miner.log 2>& 1 &
+$ nohup ./sophon-miner run >> miner.log 2>& 1 &
 ```
 
 ### Miner management
 
-Once a user, venus-sealer with proper miner id, connected to your shared modules. You can query the status of said miner id by the following.
+Once a user, [damocles](https://damocles.venus-fil.io/) with proper miner id, connected to your Sophon service. You can query the status of said miner id by the following.
 
 ```bash
-$ ./venus-miner address state 
+$ ./sophon-miner address state 
 [
 	{
 		"Addr": "<MINER_ID>",
@@ -269,18 +270,18 @@ $ ./venus-miner address state
 If `IsMining` of your miner is `false`, you can run the following command to start the miner id.
 
 ```bash
-$ ./venus-miner address start <MINER_ID>
+$ ./sophon-miner address start <MINER_ID>
 ```
 
-List all miner ids that have connected to venus-miner.
+List all miner ids that have connected to sophon-miner.
 
 ```bash
-$ ./venus-miner address list
+$ ./sophon-miner address list
 ```
 
 ## Next steps
 
-Next, please follow this [guide](Using-venus-Shared-Modules.md) to connect to the storage pool you just deployed!
+Next, please follow this [guide](join-a-cs.md) to connect to the Sophon service you just deployed!
 
 ## Questions？
 
