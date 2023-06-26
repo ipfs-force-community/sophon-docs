@@ -1,30 +1,30 @@
 ## 准备
 
-所需组件构建完成，可参考 [组件构建](/operation/)
+所需组件构建完成，可参考 [组件构建](/zh/operation/#venus-%E4%BA%A7%E5%93%81%E6%9E%84%E5%BB%BA)
 
 :::warning
 
-建议您在部署到主网上之前在`calibration`网络中测试您的配置。
+建议您在部署到主网上之前在 `calibration` 网络中测试您的配置。
 
 :::
 
 ### 软件依赖
 
-在运行`Venus`之前，您需要安装[这些](https://lotus.filecoin.io/lotus/install/linux/#software-dependencies)软件。（注：和 lotus 的软件依赖相同）
+在运行 `Venus` 之前，您需要安装[这些](https://lotus.filecoin.io/lotus/install/linux/#software-dependencies)软件。（注：和 lotus 的软件依赖相同）
 
-## 启动 venus-auth
+## 启动 sophon-auth
 
 ```shell script
 $ nohup ./sophon-auth run > auth.log 2>&1 &
 ```
 
 :::tip
-`sophon-auth` 的默认配置文件位于`~/.sophon-auth/config.toml`
+`sophon-auth` 的默认配置文件位于 `~/.sophon-auth/config.toml`
 :::
 
 :::tip Logs
 
-日志默认打印到控制台。通过配置可以支持 InfluxDB。
+日志默认打印到控制台。通过配置可以支持 `InfluxDB`。
 
 :::
 
@@ -41,7 +41,7 @@ Port = "8989"
 
 ### 使用 MySQL (可选)
 
-支持 MySQL 5.7 及以上版本，可替代默认的`Badger`键值数据库。要使用 MySQL 数据库，请修改配置中的 `db`部分。
+支持 MySQL 5.7 及以上版本，可替代默认的 `Badger` 键值数据库。要使用 MySQL 数据库，请修改配置中的 `db` 部分。
 
 ```shell script
 $ vim ~/.sophon-auth/config.toml
@@ -59,7 +59,7 @@ maxIdleConns = 128
 maxLifeTime = "120s"
 maxIdleTime = "30s"
 ```
-重启`sophon-auth`使配置生效。
+重启 `sophon-auth` 使配置生效。
 
 ```shell script
 $ ps -ef | grep auth
@@ -69,11 +69,11 @@ $ nohup ./sophon-auth run > auth.log 2>&1 &
 
 ### user 及 token 生成
 
-`sophon-auth`管理着其他 venus 模块使用的[jwt](https://jwt.io/)令牌，以便它们在网络上安全地相互通信。
+`sophon-auth` 管理着其他 venus 模块使用的[jwt](https://jwt.io/)令牌，以便它们在网络上安全地相互通信。
 
 :::tip
 
-`venus`集群中`token`的理论知识可参考`venus`集群`token`[认证体系](https://github.com/filecoin-project/venus/discussions/4880)
+`venus` 集群中 `token` 的理论知识可参考 `venus` 集群 `token` [认证体系](https://github.com/filecoin-project/venus/discussions/4880)
 :::
 
 
@@ -87,7 +87,7 @@ $ ./sophon-auth token gen --perm admin <SHARED>
 <SHARED_ADMIN_AUTH_TOKEN>
 ```
 
-为独立模块生成令牌。token 可以通过`<USER>` 逻辑分组，作为加入矿池的单个矿工。
+为独立模块生成令牌。token 可以通过 `<USER>` 逻辑分组，作为加入矿池的单个矿工。
 
 ```shell script
 $ ./sophon-auth user add <USER>
@@ -97,7 +97,7 @@ $ ./sophon-auth token gen --perm sign <USER>
 $ ./sophon-auth user add --name=<USER>
 ```
 
-给 `user` 绑定矿工 (`miner`),一个 `user` 可以有多个矿工。
+给 `user` 绑定矿工 (`miner`)，一个 `user` 可以有多个矿工。
 
 ```
 $ ./sophon-auth user miner add <USER> <MINER_ID>
@@ -126,14 +126,15 @@ $ make
 ```
 
 :::tip
- 如果遇到以下编译错误，先执行`go get github.com/google/flatbuffers@v1.12.1`
+ 如果遇到以下编译错误，先执行 `go get github.com/google/flatbuffers@v1.12.1`
+
 ```bash
 github.com/dgraph-io/badger/v3@v3.2011.1/fb/BlockOffset.go:6:2: missing go.sum entry for module providing package github.com/google/flatbuffers/go (imported by github.com/dgraph-io/badger/v3/table); to add:
         go get github.com/dgraph-io/badger/v3/table@v3.2011.1
 ```
 :::
 
-启动`sophon-gateway`
+启动 `sophon-gateway`
 
 ```bash
 $ ./sophon-gateway --listen /ip4/0.0.0.0/tcp/45132 run \
@@ -145,7 +146,7 @@ $ ./sophon-gateway --listen /ip4/0.0.0.0/tcp/45132 run \
 
 ## 启动 venus daemon
 
-启动`venus`进程进行链同步。使用 `--network` 来指定`venus`连接的网络。
+启动 `venus` 进程进行链同步。使用 `--network` 来指定 `venus` 连接的网络。
 
 ```shell script
 $ nohup ./venus daemon --network=calibrationnet --auth-url=<http://VENUS_AUTH_IP_ADDRESS:PORT> --auth-token=<SHARED_ADMIN_AUTH_TOKEN> > venus.log 2>&1 &
@@ -153,7 +154,7 @@ $ nohup ./venus daemon --network=calibrationnet --auth-url=<http://VENUS_AUTH_IP
 
 :::tip
 
-使用`tail -f venus.log` 或 `./venus sync status` 检查同步过程中是否有任何错误。
+使用 `tail -f venus.log` 或 `./venus sync status` 检查同步过程中是否有任何错误。
 
 :::
 
@@ -165,7 +166,7 @@ $ nohup ./venus daemon --network=calibrationnet --auth-url=<http://VENUS_AUTH_IP
 vim ~/.venus/config.json
 ```
 
-将`apiAddress`从` /ip4/127.0.0.1/tcp/3453`更改为`/ip4/0.0.0.0/tcp/3453`。此修改重启后生效
+将 `apiAddress` 从 `/ip4/127.0.0.1/tcp/3453` 更改为 `/ip4/0.0.0.0/tcp/3453`。此修改重启后生效
 
 ```json
 {
@@ -173,7 +174,7 @@ vim ~/.venus/config.json
 }
 ```
 
-重启`Venus daemon`。
+重启 `Venus daemon`。
 
 ```bash
 $ ps -ef | grep venus
@@ -181,7 +182,7 @@ $ kill -9 <VENUS_PID>
 $ nohup ./venus daemon --network=calibrationnet --auth-url=<http://VENUS_AUTH_IP_ADDRESS:PORT> --auth-token=<SHARED_ADMIN_AUTH_TOKEN> > venus.log 2>&1 &
 ```
 
-在其他机器上执行`telnet` 验证配置生效：
+在其他机器上执行 `telnet` 验证配置生效：
 
 ```shell script
 telnet <VENUS_IP_ADDRESS> <PORT>
@@ -190,13 +191,13 @@ telnet <VENUS_IP_ADDRESS> <PORT>
 
 :::tip
 
-为了链服务能够与链进行交互，`daemon`需要与网络其他节点同步最新的链。具体如何导入一个链的`snapshot`进行链同步可参见[这个文档](Chain.md)。
+为了链服务能够与链进行交互，`daemon`需要与网络其他节点同步最新的链。具体如何导入一个链的 `snapshot` 进行链同步可参见[这个文档](/zh/operation/chain-mng)。
 
 :::
 
 ## 启动 sophon-messager
 
-启动`sophon-messager`。请注意，`--auth-url`、`--node-url` 和`--auth-token` 是为了让 sophon-messager 了解其他`venus`模块的存在并进行自身的身份验证。
+启动 `sophon-messager`。请注意，`--auth-url`、`--node-url` 和`--auth-token` 是为了让 sophon-messager 了解其他 `venus` 模块的存在并进行自身的身份验证。
 
 ```shell script
 $ nohup ./sophon-messager run \
@@ -211,14 +212,14 @@ $ nohup ./sophon-messager run \
 
 :::tip
 
-如果没有指定与数据库相关的参数，`sophon-messager`将默认使用 `sqlite3` 数据库。
+如果没有指定与数据库相关的参数，`sophon-messager` 将默认使用 `sqlite3` 数据库。
 
 :::
 
 
 ## 启动 sophon-miner
 
-初始化`sophon-miner`。
+初始化 `sophon-miner`。
 
 ```shell script
 $ ./sophon-miner init \
@@ -230,13 +231,13 @@ $ ./sophon-miner init \
 --mysql-conn "<USER>:<PASSWORD>@(127.0.0.1:3306)/venus_miner?parseTime=true&loc=Local&readTimeout=10s&writeTimeout=10s" 
 ```
 
-启动`sophon-miner`。
+启动 `sophon-miner`。
 
 ```shell script
 $ nohup ./sophon-miner run > miner.log 2>& 1 &
 ```
 
-`sophon-miner`启动后会从`sophon-auth`请求矿工列表，并对每个矿工执行出块的必要检查，如：钱包服务，WinningPoSt 服务是否正常等。检查矿工列表：
+`sophon-miner` 启动后会从 `sophon-auth` 请求矿工列表，并对每个矿工执行出块的必要检查，如：钱包服务，WinningPoSt 服务是否正常等。检查矿工列表：
 
 ```shell script
 $ ./sophon-miner address list 
@@ -249,22 +250,23 @@ $ ./sophon-miner address list
 ]
 ```
 
-如果列表中没有在`sophon-auth`中配置的矿工，则需要从`sophon-auth`检查配置是否正确
-- `检查venus-miner`初始化配置的`auth-token`对应的`user`是激活状态，即`state=enabled`
+如果列表中没有在 `sophon-auth` 中配置的矿工，则需要从 `sophon-auth` 检查配置是否正确
+- `检查venus-miner` 初始化配置的 `auth-token` 对应的 `user`是激活状态，即 `state=enabled`
 ```shell script
 $ ./sophon-auth user list
 name: ***
 state: enabled
 ```
 
-- 检查`sophon-miner`初始化配置的`auth-token`对应的`user`下成功添加了此矿工。
+- 检查 `sophon-miner` 初始化配置的 `auth-token` 对应的 `user`下成功添加了此矿工。
+
 ```shell script
 ./sophon-auth user list
 name: ***
 miners: [***,***,...]
 ```
 :::tip 
-`miners`列表有此矿工为正确。
+`miners` 列表有此矿工为正确。
 :::
 
 修改成功后执行下列命令重新拉取：
@@ -282,12 +284,12 @@ $ ./sophon-miner address stop <MINER_ID>
 
 ## 启动 droplet（可选）
 
-`droplet`可以作为链服务组件之一来进行部署，具体部署文档请参考[文档](https://droplet.venus-fil.io/zh/operation/)
+`droplet` 可以作为链服务组件之一来进行部署，具体部署文档请参考[文档](https://droplet.venus-fil.io/zh/operation/)
 
 ## 下一步
 
-接下来请按照这个[文档](join-a-cs.md)加入到你刚刚部署的链服务吧！
+接下来请按照这个[文档](join-a-cs.md)加入到你刚刚部署的智子服务吧！
 
 ## 问题？
 
-来[Slack](https://filecoinproject.slack.com/archives/C028PCH8L31)上找我们吧！
+欢迎来[Slack](https://filecoinproject.slack.com/archives/C028PCH8L31)上找我们反馈！

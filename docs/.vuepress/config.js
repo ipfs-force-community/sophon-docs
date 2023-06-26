@@ -212,7 +212,7 @@ module.exports = {
                         children: [
                             ['', '部署前准备'],
                             ['deploy-a-cs.md', '部署智子服务'],
-                            ['venus-run-in-docker.md', '使用Docker部署智子服务'],
+                            ['venus-run-in-docker.md', '使用 Docker 部署智子服务'],
                             ['join-a-cs.md', '使用智子服务'],
                         ]
                     },
