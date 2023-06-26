@@ -90,7 +90,7 @@ $ make
 :::tip
 
 如果遇到编译错误：`github.com/dgraph-io/badger/v3@v3.2011.1/fb/BlockOffset.go:6:2: missing go.sum entry for module providing package github.com/google/flatbuffers/go (imported by github.com/dgraph-io/badger/v3/table); to add:
-                     go get github.com/dgraph-io/badger/v3/table@v3.2011.1` ,先执行：
+                     go get github.com/dgraph-io/badger/v3/table@v3.2011.1` ，先执行：
  
 ```shell script
 $ go get github.com/google/flatbuffers@v1.12.1
