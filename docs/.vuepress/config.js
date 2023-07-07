@@ -220,11 +220,21 @@ module.exports = {
                         title: '智子服务组件',
                         collapsable: false,
                         children: [
-                            ['venus-daemon.md', 'Venus daemon'],
+                            ['venus-daemon.md', 'venus daemon'],
                             ['venus-auth.md', 'sophon-auth', "https://github.com/ipfs-force-community/sophon-auth/blob/master/docs/zh/%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B.md"],
                             ['venus-miner.md', 'sophon-miner', "https://github.com/ipfs-force-community/sophon-miner/blob/master/docs/zh/getting-start.md"],
                             ['venus-messager.md', 'sophon-messager', "https://github.com/ipfs-force-community/sophon-messager/blob/master/docs/zh/%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B.md"],
                             ['venus-gateway.md', 'sophon-gateway', "https://github.com/ipfs-force-community/venus-gateway/blob/master/docs/zh/%E5%BF%AB%E9%80%9F%E5%90%AF%E7%94%A8.md"],
+                        ]
+                    },
+                    {
+                        title: '配置文件',
+                        collapsable: false,
+                        children: [
+                            ['venus-auth-config.md', 'sophon-auth', "https://github.com/ipfs-force-community/sophon-auth/blob/master/docs/zh/config-desc.md"],
+                            ['venus-miner-config.md', 'sophon-miner', "https://github.com/ipfs-force-community/sophon-miner/blob/master/docs/zh/config-desc.md"],
+                            ['venus-messager-config.md', 'sophon-messager', "https://github.com/ipfs-force-community/sophon-messager/tree/master/docs/zh/config-desc.md"],
+                            ['venus-gateway-config.md', 'sophon-gateway', "https://github.com/ipfs-force-community/sophon-gateway/tree/master/docs/zh/config-desc.md"],
                         ]
                     },
                     {
