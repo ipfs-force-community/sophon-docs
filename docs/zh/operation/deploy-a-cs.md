@@ -81,20 +81,11 @@ $ nohup ./sophon-auth run > auth.log 2>&1 &
 
 ```shell script
 # 先生成用户
-$ ./sophon-auth user add <SHARED>
+$ ./sophon-auth user add <USERNAME>
 
-$ ./sophon-auth token gen --perm admin <SHARED>
+# 生成用户token
+$ ./sophon-auth token gen --perm admin <USERNAME>
 <SHARED_ADMIN_AUTH_TOKEN>
-```
-
-为独立模块生成令牌。token 可以通过 `<USER>` 逻辑分组，作为加入矿池的单个矿工。
-
-```shell script
-$ ./sophon-auth user add <USER>
-$ ./sophon-auth token gen --perm sign <USER>
-<USER_WRITE_AUTH_TOKEN>
-
-$ ./sophon-auth user add --name=<USER>
 ```
 
 给 `user` 绑定矿工 (`miner`)，一个 `user` 可以有多个矿工。
