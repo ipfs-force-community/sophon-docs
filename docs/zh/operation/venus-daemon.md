@@ -47,36 +47,10 @@ make
 2. 运行单元测试：
 
 ```sh
-go run ./build test
+make test
 ```
 
-3. 或者可以将构建和测试结合起来：
-```sh
-go run ./build best
-```
-
-其他方便的构建命令包括：
-
-```sh
-# Check the code for style and correctness issues
-go run ./build lint
-
-# Run different categories of tests by toggling their flags
-go run ./build test -unit=false -integration=true -functional=true
-
-# Test with a coverage report
-go run ./build test -cover
-
-# Test with Go's race-condition instrumentation and warnings (see https://blog.golang.org/race-detector)
-go run ./build test -race
-
-# Deps, Lint, Build, Test (any args will be passed to `test`)
-go run ./build all
-```
-
-> **注意：** 传递给 `go run ./build test` 的任何标志 (例如 `-cover`) 都将传递给 `go test`。
-
-**对于构建中的所有问题**, 请参阅 [故障排除](https://go.filecoin.io/venus-tutorial/Troubleshooting-&-FAQ.html) 文档内容。
+更多构建和测试命令请查看`Makefile`。
 
 ## 开始运行 Filecoin
 
