@@ -32,11 +32,11 @@ make <network-type>
 
 ```sh
 #build
-git clone https://github.com/ipfs-force-community/chain-co.git
+git clone https://github.com/ipfs-force-community/sophon-co.git
 git checkout <RELEASE TAG>
 make
 #run
-./chain-co  run -listen 0.0.0.0:<port> --auth <venus-auth-token:venus-auth-token> --node <token:rpc-url> --node<token:rpc-url>
+./sophon-co  run -listen 0.0.0.0:<port> --auth <venus-auth-token:venus-auth-url> --node <token:rpc-url> --node<token:rpc-url>
 ```
 
 ## 部署代理 (可选)

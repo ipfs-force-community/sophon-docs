@@ -10,37 +10,34 @@
 
 
 ## 服务组件搭建
-
-&ensp;&ensp; 组件下载及编译请参考文档：https://venus.filecoin.io/guide/How-To-Deploy-MingPool.html#pre-requisites
-
-### venus-auth
+### sophon-auth
 ```bash
-$ nohup ./venus-auth run > auth.log 2>&1 &
+$ nohup ./sophon-auth run > auth.log 2>&1 &
 
 # token列表
-$ ./venus-auth token list
+$ ./sophon-auth token list
  
 # user列表
-$ ./venus-auth user list
+$ ./sophon-auth user list
 ```
 
-### venus-gateway
+### sophon-gateway
 
 ```bash
-$ nohup ./venus-gateway --listen=/ip4/0.0.0.0/tcp/45132 run --auth-url=http://127.0.0.1:8989 --auth-token=<venus-auth token> > gateway.log 2>&1 &
+$ nohup ./sophon-gateway --listen=/ip4/0.0.0.0/tcp/45132 run --auth-url=http://127.0.0.1:8989 --auth-token=<sophon-auth token> > gateway.log 2>&1 &
 
 # wallet列表
-$ ./venus-gateway  wallet list
+$ ./sophon-gateway  wallet list
  
 # miner列表
-$ ./venus-gateway  miner list
+$ ./sophon-gateway  miner list
 ```
 
 日志
 ```
-2021-09-27T11:05:26.736+0800    INFO    main    venus-gateway/main.go:95        venus-gateway current version 1.1.1'+git770f19a', listen /ip4/0.0.0.0/tcp/45032
+2021-09-27T11:05:26.736+0800    INFO    main    sophon-gateway/main.go:95        sophon-gateway current version 1.1.1'+git770f19a', listen /ip4/0.0.0.0/tcp/45032
 2021-09-27T11:05:26.736+0800    INFO    event_stream    walletevent/wallet_event.go:51          {"rand secret": "IkR/US2MFJr1g53mucqPep0GQZ8DzC780QDJIm48yV8="}
-2021-09-27T11:05:26.736+0800    INFO    main    venus-gateway/main.go:104       Setting up control endpoint at /ip4/0.0.0.0/tcp/45032
+2021-09-27T11:05:26.736+0800    INFO    main    sophon-gateway/main.go:104       Setting up control endpoint at /ip4/0.0.0.0/tcp/45032
 ```
 
 ### venus
@@ -55,7 +52,7 @@ $ ./venus seed genesis add-miner localnet.json ~/.genesis-sectors/pre-seal-t0100
 
 - 启动 venus
 ```sh
-$ nohup ./venus daemon --make-genesis=devgen.car --genesis-template=localnet.json --network=2k --auth-url=http://127.0.0.1:8989 --auth-token=<venus-auth token>  > venus.log 2>&1 &
+$ nohup ./venus daemon --make-genesis=devgen.car --genesis-template=localnet.json --network=2k --auth-url=http://127.0.0.1:8989 --auth-token=<sophon-auth token>  > venus.log 2>&1 &
 ```
 > venus 作为公共服务组件需要监听不同 IP 时需要修改配置文件 `.venus/config.json`
 ```bash
@@ -77,28 +74,28 @@ $ ./venus chain head
 }
 ```
 
-### venus-message
+### sophon-message
 
-&ensp;&ensp; venus-auth 管理着其他 venus 模块使用的 jwt 令牌，以便它们在网络上安全地相互通信。为共享模块生成 token。
+&ensp;&ensp; sophon-auth 管理着其他 venus 模块使用的 jwt 令牌，以便它们在网络上安全地相互通信。为共享模块生成 token。
 
 ```bash
 # --perm specifies admin, sign, wirte or read permission of the token generated
-$ ./venus-auth token gen --perm admin <SHARED>
+$ ./sophon-auth token gen --perm admin <SHARED>
 <SHARED_ADMIN_AUTH_TOKEN>
 ```
 > SHARED 是 token 名，共享组件可以随便起。
 
 - 为矿工 t01000 和 wallet 生成 token
 ```bash
-$ ./venus-auth user add test
-$ ./venus-auth user miner add test t01000
-$ ./venus-auth token gen --perm write test
+$ ./sophon-auth user add test
+$ ./sophon-auth user miner add test t01000
+$ ./sophon-auth token gen --perm write test
 <USER_WRITE_AUTH_TOKEN>
 ```
 
 查询 token 及 user
 ```bash
-$ ./venus-auth user list
+$ ./sophon-auth user list
 number: 1
 name: test
 miner: f01000
@@ -108,14 +105,14 @@ comment:
 createTime: Thu, 05 Aug 2021 09:36:00 CST
 updateTime: Thu, 05 Aug 2021 09:36:00 CST
 
-$ ./venus-auth token list
+$ ./sophon-auth token list
 num     name            perm            createTime              token
 1       share-test      admin   2021-08-05 09:27:56     eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoic2hhcmUtdGVzdCIsInBlcm0iOiJhZG1pbiIsImV4dCI6IiJ9.q3Euz4CwlqlLCTUciT4gkee6au_zhhyUAkyTXlkG51E
 2       test            write   2021-08-05 09:36:44     eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoidGVzdCIsInBlcm0iOiJ3cml0ZSIsImV4dCI6IiJ9.X8L5SWVzoRpr5X5hEOAh17n22zOgfkla7POva0zCihY
 ```
 
 ```bash
-nohup ./venus-messager run \
+nohup ./sophon-messager run \
 --auth-url=http://127.0.0.1:8989 \
 --node-url=/ip4/127.0.0.1/tcp/3453 \
 --gateway-url=/ip4/127.0.0.1/tcp/45132 \
@@ -136,60 +133,60 @@ nohup ./venus-messager run \
 ```
 
 
-### venus-miner
+### sophon-miner
 ```bash
 # init miner repo
-./venus-miner init --auth-api=http://127.0.0.1:8989 \
+./sophon-miner init --auth-api=http://127.0.0.1:8989 \
  --gateway-api=/ip4/127.0.0.1/tcp/45132 \
  --api=/ip4/127.0.0.1/tcp/3453 --token=<SHARED_ADMIN_AUTH_TOKEN> \
  --slash-filter local
 ```
 
-&ensp;&ensp; 此时没有启动 venus-sealer，所以无法出块，因为获得出块权后需要计算证明，这个是 venus-sealer 负责的 (管理所有的扇区永久存储),故暂时不启动 venus-miner。
+&ensp;&ensp; 此时没有启动 sophon-sealer，所以无法出块，因为获得出块权后需要计算证明，这个是 sophon-sealer 负责的 (管理所有的扇区永久存储),故暂时不启动 sophon-miner。
 
 
 ## 创世节点
 
-### venus-wallet
+### sophon-wallet
 
 ```sh
-$ nohup ./venus-wallet run > wallet.log 2>&1 &
+$ nohup ./sophon-wallet run > wallet.log 2>&1 &
 
 # 设置密码
-$ ./venus-wallet setpwd
+$ ./sophon-wallet setpwd
 Password:******
 Enter Password again:******
 
 # 导入钱包
-$ ./venus-wallet import ~/.genesis-sectors/pre-seal-t01000.key
+$ ./sophon-wallet import ~/.genesis-sectors/pre-seal-t01000.key
 
 # 查询
-$ ./venus-wallet list
+$ ./sophon-wallet list
 t3sjhgun7xcklmyga6x3c5sq6pbncdlmrjmepfz7ms4fuqimtk4fida37dhq7kpq3tn7nyu5hpnn7mtp3a7lia
 ```
 
-设置接入 venus-gateway，提供签名服务，这一步很重要，否则出块，消息等都没法签名，业务无法正常运行。
+设置接入 sophon-gateway，提供签名服务，这一步很重要，否则出块，消息等都没法签名，业务无法正常运行。
 ```bash
-# 修改`~/.venus_wallet/config.toml`
+# 修改`~/.sophon-gateway/config.toml`
 [APIRegisterHub]
 RegisterAPI = ["/ip4/127.0.0.1/tcp/45132"]
 Token = "<USER_WRITE_AUTH_TOKEN>"
-# 矿工集群的别名，在venus-auth中注册
+# 矿工集群的别名，在sophon-auth中注册
 SupportAccounts = ["test"]
 ```
-***保存后重启 venus-wallet，需要 unlock***
+***保存后重启 sophon-wallet，需要 unlock***
 ```bash
-$ ./venus-wallet unlock
+$ ./sophon-wallet unlock
 ```
 
-查看是否成功，在 venus-gateway 的日志中查询：
+查看是否成功，在 sophon-gateway 的日志中查询：
 ```bash
 2021-08-05T10:01:07.665+0800    INFO    event_stream    walletevent/wallet_conn_mgr.go:89       add wallet connection   {"channel": "58309445-87da-4160-831a-44e5236ab3c7", "walletName": "test", "addrs": ["t3sjhgun7xcklmyga6x3c5sq6pbncdlmrjmepfz7ms4fuqimtk4fida37dhq7kpq3tn7nyu5hpnn7mtp3a7lia"], "support": {"test":{}}, "signBytes": "6VzoKBejPzmFp/DvJzSO16s5SziYZKYjU2l2EkDUKy0="}
 2021-08-05T10:01:07.666+0800    INFO    event_stream    walletevent/wallet_event.go:79  add new connections test 58309445-87da-4160-831a-44e5236ab3c7
 ```
 或用命令查询
 ```bash
-$ ./venus-gateway wallet list
+$ ./sophon-gateway wallet list
 [
         {
                 "Account": "test",
@@ -213,48 +210,10 @@ $ ./venus-gateway wallet list
 > 上面日志即表示 wallet 注册服务组件成功，可提供签名服务。
 
 
-### venus-sealer
+### damocles
 
-- 初始化
-```bash
-$ ./venus-sealer --network=2k init --genesis-miner --actor=t01000 --sector-size=2048 --pre-sealed-sectors=~/.genesis-sectors --pre-sealed-metadata=~/.genesis-sectors/pre-seal-t01000.json --nosync \
---node-url=/ip4/127.0.0.1/tcp/3453 \
---messager-url=/ip4/127.0.0.1/tcp/39812 \
---gateway-url=/ip4/127.0.0.1/tcp/45132 \
---auth-token=<USER_WRITE_AUTH_TOKEN>
---no-local-storage
-```
-   
-- 启动
-```bash
-$  TMPDIR=<SPECIFIC_PATH> nohup ./venus-sealer --network=2k run --nosync > sealer.log 2>&1 &
+- 初始化，具体请参考：[部署文档](https://github.com/ipfs-force-community/damocles/tree/main/docs)
 
-$ ./venus-sealer info
-Chain: [sync behind! (15h45m53s behind)] [basefee 100 pFIL]
-Sealer: t01000 (2 KiB sectors)
-Power: 40 Ki / 40 Ki (100.0000%)
-        Raw: 4 KiB / 4 KiB (100.0000%)
-        Committed: 4 KiB
-        Proving: 4 KiB
-Projected average block win rate: 20024.16/week (every 30s)
-Projected block win with 99.9% probability every 41s
-(projections DO NOT account for future network and miner growth)
-
-Sealer Balance:    3.242 μFIL
-      PreCommit:  0
-      Pledge:     1.192 μFIL
-      Vesting:    0
-      Available:  2.05 μFIL
-Market Balance:   0
-       Locked:    0
-       Available: 0
-Worker Balance:   50000000 FIL
-Total Spendable:  50000000 FIL
-
-Sectors:
-        Total: 2
-        Proving: 2
-```
 
 查看是不是在服务组件注册成功，gateway 日志：
 ```bash
@@ -262,20 +221,20 @@ Sectors:
 ```
 或
 ```
-$ ./venus-gateway miner list
+$ ./sophon-gateway miner list
 t01000
 ```
 
 - 开始出块
-&ensp;&ensp; 这个时候我们就可以启动 venus-miner 了
+&ensp;&ensp; 这个时候我们就可以启动 sophon-miner 了
 ```
 # run 
-nohup ./venus-miner run --nettype=2k --nosync > miner.log 2>& 1 &
+nohup ./sophon-miner run --nettype=2k --nosync > miner.log 2>& 1 &
 ```
 
-启动时会从 venus-auth 请求当前已加入 venus 分布式矿池中的 miner 列表，可以根据命令查询：
+启动时会从 sophon-auth 请求当前已加入 venus 分布式矿池中的 miner 列表，可以根据命令查询：
 ```
-$ ./venus-miner address state
+$ ./sophon-miner address state
 [
         {
                 "Addr": "f01000",
@@ -285,12 +244,12 @@ $ ./venus-miner address state
 ]
 ```
 
-在 venus-miner 的运行过程中可以暂停或继续某个 miner_id 的出块：
+在 sophon-miner 的运行过程中可以暂停或继续某个 miner_id 的出块：
 ```
-./venus-miner address stop/start f01000
+./sophon-miner address stop/start f01000
 ```
 
-查看 venus-miner 日志
+查看 sophon-miner 日志
 ```
 2021-08-05T12:04:28.562+0800    INFO    miner   miner/minerwpp.go:88    GenerateWinningPoSt took 3.202841ms
 2021-08-05T12:04:28.562+0800    INFO    miner   miner/warmup.go:94      winning PoSt warmup successful  {"took": 0.00494326}
@@ -321,7 +280,7 @@ $ ./venus chain ls
 
 ## 普通节点
 
-&ensp;&ensp; 普通节点和其他网络接入共享组件流程一致，可参考文档：https://venus.filecoin.io/guide/Using-venus-Shared-Modules.html#pre-requisites
+&ensp;&ensp; 普通节点和其他网络接入共享组件流程一致，可参考文档：https://venus.filecoin.io/guide/Using-sophon-Shared-Modules.html#pre-requisites
 
 &ensp;&ensp; 唯一需要说明的是给普通节点钱包转账的问题：因为 venus 服务组件是限制 Send 消息的，而 2k 私网的原始 fil 在创世钱包里，故需要一个转账节点。
 
@@ -332,8 +291,8 @@ $ ./venus chain ls
 
 - 导入创世钱包
 ```
-# 在venus-wallet导出钱包密钥
-$ ./venus-wallet export t3sjhgun7xcklmyga6x3c5sq6pbncdlmrjmepfz7ms4fuqimtk4fida37dhq7kpq3tn7nyu5hpnn7mtp3a7lia
+# 在sophon-wallet导出钱包密钥
+$ ./sophon-wallet export t3sjhgun7xcklmyga6x3c5sq6pbncdlmrjmepfz7ms4fuqimtk4fida37dhq7kpq3tn7nyu5hpnn7mtp3a7lia
 Password:*
 7b2254797065223a22626c73222c22507269766174654b6579223a224541326e6a463363326b4f467977323079564f574b66733371794d6451767a35334c667459497347456b673d227d
 
@@ -367,39 +326,3 @@ $ ./venus wallet default
 $ ./venus wallet set-default <wallet>
 ```
 > venus 转账节点重启后也需要 unlock，不然无法转账。
-
-## 扇区封装
-
-&ensp;&ensp; 和主网逻辑差不多，请查阅：[扇区封装](https://venus.filecoin.io/zh/guide/Using-venus-Shared-Modules.html#开始封装)，需要注意的是：
-
-1. 文档中 init 时没有添加 storage，故如果要做扇区封装，先 attach storage；
-
-2. 如果机器上同时运行看了别的占用 gpu 的程序，如多个 venus-worker，需要用 TMP_DIR 指定不同路径，避免竞争锁。
-
-3. 第一个sector时没有生成/var/tmp/s-basic-unsealed-2048，需要手动执行拷贝命令：
-```
-cp <unsealed file> /var/tmp/s-basic-unsealed-2048
-```
-
-&ensp;&ensp; 测试结果：2~8 是新做的 Sector，已上链
-```
-$ ./venus-sealer sectors list
-ID  State    OnChain  Active  Expiration                   Deals  DealWeight  
-0   Proving  YES      YES     1550097 (in 10 weeks 1 day)  CC                 
-1   Proving  YES      YES     1550097 (in 10 weeks 1 day)  1      0B          
-2   Proving  YES      NO      1550097 (in 10 weeks 1 day)  CC                 
-3   Proving  YES      NO      1550097 (in 10 weeks 1 day)  CC                 
-4   Proving  YES      NO      1550097 (in 10 weeks 1 day)  CC                 
-5   Proving  YES      NO      1550097 (in 10 weeks 1 day)  CC                 
-6   Proving  YES      NO      1550097 (in 10 weeks 1 day)  CC                 
-7   Proving  YES      NO      1550097 (in 10 weeks 1 day)  CC                 
-8   Proving  YES      NO      1550097 (in 10 weeks 1 day)  CC  
-
-$ ./venus-sealer info
-Chain: [sync behind! (22s behind)] [basefee 100 aFIL]
-Sealer: f01000 (2 KiB sectors)
-Power: 40 Ki / 40 Ki (100.0000%)
-        Raw: 4 KiB / 4 KiB (100.0000%)
-        Committed: 18 KiB
-        Proving: 4 KiB
-```
