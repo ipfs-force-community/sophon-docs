@@ -33,11 +33,6 @@ venus daemon --import-snapshot https://snapshots.mainnet.filops.net/minimal/late
 
 # 另一种方法是先下载并使用该文件
 venus daemon --import-snapshot <filename.car>
-
-# sha256sum 与临时快照一起存储，可以通过以下方式获取
-curl -sI https://snapshots.mainnet.filops.net/minimal/latest \
-| perl -ne '/^x-amz-website-redirect-location:(.+)\.car\s*$/ && print "$1.sha256sum"' \
-| xargs curl -s
 ```
 
 ::: 如果您不信任快照的来源，或者只是想让 Venus 验证链，则需要按照下一节中的步骤进行操作。完整验证链的速度要慢一个数量级，预计需要几天的时间。:::
