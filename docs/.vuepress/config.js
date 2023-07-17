@@ -220,11 +220,21 @@ module.exports = {
                         title: '智子服务组件',
                         collapsable: false,
                         children: [
-                            ['venus-daemon.md', 'Venus daemon'],
-                            ['venus-auth.md', 'sophon-auth', "https://github.com/ipfs-force-community/sophon-auth/blob/master/docs/zh/%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B.md"],
-                            ['venus-miner.md', 'sophon-miner', "https://github.com/ipfs-force-community/sophon-miner/blob/master/docs/zh/getting-start.md"],
-                            ['venus-messager.md', 'sophon-messager', "https://github.com/ipfs-force-community/sophon-messager/blob/master/docs/zh/%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B.md"],
-                            ['venus-gateway.md', 'sophon-gateway', "https://github.com/ipfs-force-community/venus-gateway/blob/master/docs/zh/%E5%BF%AB%E9%80%9F%E5%90%AF%E7%94%A8.md"],
+                            ['venus-daemon.md', 'venus daemon'],
+                            ['sophon-auth.md', 'sophon-auth', "https://github.com/ipfs-force-community/sophon-auth/blob/master/docs/zh/%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B.md"],
+                            ['sophon-miner.md', 'sophon-miner', "https://github.com/ipfs-force-community/sophon-miner/blob/master/docs/zh/getting-start.md"],
+                            ['sophon-messager.md', 'sophon-messager', "https://github.com/ipfs-force-community/sophon-messager/blob/master/docs/zh/%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B.md"],
+                            ['sophon-gateway.md', 'sophon-gateway', "https://github.com/ipfs-force-community/venus-gateway/blob/master/docs/zh/%E5%BF%AB%E9%80%9F%E5%90%AF%E7%94%A8.md"],
+                        ]
+                    },
+                    {
+                        title: '配置文件',
+                        collapsable: false,
+                        children: [
+                            ['sophon-auth-config.md', 'sophon-auth', "https://github.com/ipfs-force-community/sophon-auth/blob/master/docs/zh/config-desc.md"],
+                            ['sophon-miner-config.md', 'sophon-miner', "https://github.com/ipfs-force-community/sophon-miner/blob/master/docs/zh/config-desc.md"],
+                            ['sophon-messager-config.md', 'sophon-messager', "https://github.com/ipfs-force-community/sophon-messager/tree/master/docs/zh/config-desc.md"],
+                            ['sophon-gateway-config.md', 'sophon-gateway', "https://github.com/ipfs-force-community/sophon-gateway/tree/master/docs/zh/config-desc.md"],
                         ]
                     },
                     {
