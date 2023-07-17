@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>配置文件解析 | 智子</title>
+    <meta name="generator" content="VuePress 1.8.0">
+    <link rel="icon" href="/assets/sophon-icon.png">
+    <script async="true" src="https://www.googletagmanager.com/gtag/js?id=G-RHJWEBDXVD"></script>
+    <script>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-RHJWEBDXVD');</script>
+    <meta name="description" content="智子，原Venus链服务，是一个Filecoin超级节点解决方案">
+    
+    <link rel="preload" href="/assets/css/0.styles.117964e0.css" as="style"><link rel="preload" href="/assets/js/app.c78dcdb4.js" as="script"><link rel="preload" href="/assets/js/2.20e7910a.js" as="script"><link rel="preload" href="/assets/js/64.0704e793.js" as="script"><link rel="prefetch" href="/assets/js/10.f067a250.js"><link rel="prefetch" href="/assets/js/11.2a60a7f2.js"><link rel="prefetch" href="/assets/js/12.0d1843dc.js"><link rel="prefetch" href="/assets/js/13.647f3f5f.js"><link rel="prefetch" href="/assets/js/14.476c8200.js"><link rel="prefetch" href="/assets/js/15.0770bc0e.js"><link rel="prefetch" href="/assets/js/16.8f2df686.js"><link rel="prefetch" href="/assets/js/17.f13feb39.js"><link rel="prefetch" href="/assets/js/18.01482bd2.js"><link rel="prefetch" href="/assets/js/19.3e4e1d23.js"><link rel="prefetch" href="/assets/js/20.9ce550c8.js"><link rel="prefetch" href="/assets/js/21.7dec4985.js"><link rel="prefetch" href="/assets/js/22.2b7829c7.js"><link rel="prefetch" href="/assets/js/23.509ca501.js"><link rel="prefetch" href="/assets/js/24.b4a42c92.js"><link rel="prefetch" href="/assets/js/25.d96952a2.js"><link rel="prefetch" href="/assets/js/26.dc528c39.js"><link rel="prefetch" href="/assets/js/27.ad555126.js"><link rel="prefetch" href="/assets/js/28.7f1ab36e.js"><link rel="prefetch" href="/assets/js/29.bfbaf1f1.js"><link rel="prefetch" href="/assets/js/3.badb68ea.js"><link rel="prefetch" href="/assets/js/30.6f6fb490.js"><link rel="prefetch" href="/assets/js/31.57f2ce80.js"><link rel="prefetch" href="/assets/js/32.9f9a4eee.js"><link rel="prefetch" href="/assets/js/33.315f97ca.js"><link rel="prefetch" href="/assets/js/34.5236c653.js"><link rel="prefetch" href="/assets/js/35.20e22266.js"><link rel="prefetch" href="/assets/js/36.e10c8196.js"><link rel="prefetch" href="/assets/js/37.97bfbb2e.js"><link rel="prefetch" href="/assets/js/38.27982756.js"><link rel="prefetch" href="/assets/js/39.ca4037bd.js"><link rel="prefetch" href="/assets/js/4.06777882.js"><link rel="prefetch" href="/assets/js/40.3ce1d405.js"><link rel="prefetch" href="/assets/js/41.6df97013.js"><link rel="prefetch" href="/assets/js/42.3cae37fd.js"><link rel="prefetch" href="/assets/js/43.720a1d98.js"><link rel="prefetch" href="/assets/js/44.0b1a4d92.js"><link rel="prefetch" href="/assets/js/45.1a34b47b.js"><link rel="prefetch" href="/assets/js/46.2d68c635.js"><link rel="prefetch" href="/assets/js/47.008b2138.js"><link rel="prefetch" href="/assets/js/48.2edc44b6.js"><link rel="prefetch" href="/assets/js/49.263dd958.js"><link rel="prefetch" href="/assets/js/5.d51f6b5b.js"><link rel="prefetch" href="/assets/js/50.d3d4b631.js"><link rel="prefetch" href="/assets/js/51.073e0046.js"><link rel="prefetch" href="/assets/js/52.cf494c22.js"><link rel="prefetch" href="/assets/js/53.58095bec.js"><link rel="prefetch" href="/assets/js/54.f3808261.js"><link rel="prefetch" href="/assets/js/55.98f35d10.js"><link rel="prefetch" href="/assets/js/56.d7f0da33.js"><link rel="prefetch" href="/assets/js/57.d0a38443.js"><link rel="prefetch" href="/assets/js/58.03a0a0b6.js"><link rel="prefetch" href="/assets/js/59.f3368deb.js"><link rel="prefetch" href="/assets/js/6.0f01c240.js"><link rel="prefetch" href="/assets/js/60.2f444e47.js"><link rel="prefetch" href="/assets/js/61.fee56bbb.js"><link rel="prefetch" href="/assets/js/62.19ee616e.js"><link rel="prefetch" href="/assets/js/63.a29fffde.js"><link rel="prefetch" href="/assets/js/65.e1f8dbe8.js"><link rel="prefetch" href="/assets/js/66.13358587.js"><link rel="prefetch" href="/assets/js/67.57a66036.js"><link rel="prefetch" href="/assets/js/68.782f6559.js"><link rel="prefetch" href="/assets/js/69.11f51a61.js"><link rel="prefetch" href="/assets/js/7.6468bc2e.js"><link rel="prefetch" href="/assets/js/8.a56e2715.js"><link rel="prefetch" href="/assets/js/9.5ad987d3.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.117964e0.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/zh/" class="home-link router-link-active"><img src="/assets/sophon-icon.png" alt="智子" class="logo"> <span class="site-name can-hide">智子</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/zh/intro/" class="nav-link">
+  功能介绍
+</a></div><div class="nav-item"><a href="/zh/operation/" class="nav-link router-link-active">
+  部署/运维
+</a></div><div class="nav-item"><a href="/zh/developer/" class="nav-link">
+  研发/设计
+</a></div><div class="nav-item"><a href="/zh/about/" class="nav-link">
+  关于
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Select language" class="dropdown-title"><span class="title">选择语言</span> <span class="arrow down"></span></button> <button type="button" aria-label="Select language" class="mobile-dropdown-title"><span class="title">选择语言</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/" class="nav-link">
+  English
+</a></li><li class="dropdown-item"><!----> <a href="/zh/operation/sophon-miner-config.html" aria-current="page" class="nav-link router-link-exact-active router-link-active">
+  简体中文
+</a></li></ul></div></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/zh/intro/" class="nav-link">
+  功能介绍
+</a></div><div class="nav-item"><a href="/zh/operation/" class="nav-link router-link-active">
+  部署/运维
+</a></div><div class="nav-item"><a href="/zh/developer/" class="nav-link">
+  研发/设计
+</a></div><div class="nav-item"><a href="/zh/about/" class="nav-link">
+  关于
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Select language" class="dropdown-title"><span class="title">选择语言</span> <span class="arrow down"></span></button> <button type="button" aria-label="Select language" class="mobile-dropdown-title"><span class="title">选择语言</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/" class="nav-link">
+  English
+</a></li><li class="dropdown-item"><!----> <a href="/zh/operation/sophon-miner-config.html" aria-current="page" class="nav-link router-link-exact-active router-link-active">
+  简体中文
+</a></li></ul></div></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>部署</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/zh/operation/" aria-current="page" class="sidebar-link">部署前准备</a></li><li><a href="/zh/operation/deploy-a-cs.html" class="sidebar-link">部署智子服务</a></li><li><a href="/zh/operation/venus-run-in-docker.html" class="sidebar-link">使用 Docker 部署智子服务</a></li><li><a href="/zh/operation/join-a-cs.html" class="sidebar-link">使用智子服务</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>智子服务组件</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/zh/operation/venus-daemon.html" class="sidebar-link">venus daemon</a></li><li><a href="/zh/operation/sophon-auth.html" class="sidebar-link">sophon-auth</a></li><li><a href="/zh/operation/sophon-miner.html" class="sidebar-link">sophon-miner</a></li><li><a href="/zh/operation/sophon-messager.html" class="sidebar-link">sophon-messager</a></li><li><a href="/zh/operation/sophon-gateway.html" class="sidebar-link">sophon-gateway</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>配置文件</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/zh/operation/sophon-auth-config.html" class="sidebar-link">sophon-auth</a></li><li><a href="/zh/operation/sophon-miner-config.html" aria-current="page" class="active sidebar-link">sophon-miner</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/zh/operation/sophon-miner-config.html#新版本" class="sidebar-link">新版本</a></li><li class="sidebar-sub-header"><a href="/zh/operation/sophon-miner-config.html#旧版本" class="sidebar-link">旧版本</a></li></ul></li><li><a href="/zh/operation/sophon-messager-config.html" class="sidebar-link">sophon-messager</a></li><li><a href="/zh/operation/sophon-gateway-config.html" class="sidebar-link">sophon-gateway</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>可选组件</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/zh/operation/venus-wallet-builtin.html" class="sidebar-link">venus-wallet（内置）</a></li><li><a href="/zh/operation/venus-wallet.html" class="sidebar-link">venus-wallet（远程）</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>运维</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/zh/operation/chain-mng.html" class="sidebar-link">链管理</a></li><li><a href="/zh/operation/simple-load-balancing.html" class="sidebar-link">简易负载均衡</a></li><li><a href="/zh/operation/ha.html" class="sidebar-link">高可用解决方案</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="配置文件解析"><a href="#配置文件解析" class="header-anchor">#</a> 配置文件解析</h1> <p><code>sophon-miner</code> 的配置文件默认位于 <code>~/.sophon-miner/config.toml</code>，执行命令 <code>sophon-miner init</code> 时生成。文件中以 <code>#</code> 开头的行为注释。</p> <h2 id="新版本"><a href="#新版本" class="header-anchor">#</a> 新版本</h2> <p>版本号 <code>&gt;= v1.7.0</code> 的版本.</p> <div class="language-toml extra-class"><pre class="language-toml"><code><span class="token comment"># 等待base延迟的秒数</span>
+<span class="token key property">PropagationDelaySecs</span> <span class="token punctuation">=</span> <span class="token number">12</span>
+<span class="token comment"># 计算出块证明等待超时</span>
+<span class="token key property">MinerOnceTimeout</span> <span class="token punctuation">=</span> <span class="token string">&quot;15s&quot;</span>
+<span class="token comment"># 选择消息API的超时(单位:秒),0-不启用</span>
+<span class="token key property">MpoolSelectDelaySecs</span> <span class="token punctuation">=</span> <span class="token number">0</span>
+
+<span class="token comment"># `sophon-miner` 服务监听地址</span>
+<span class="token punctuation">[</span><span class="token table class-name">API</span><span class="token punctuation">]</span>
+  <span class="token key property">ListenAddress</span> <span class="token punctuation">=</span> <span class="token string">&quot;/ip4/127.0.0.1/tcp/12308&quot;</span>
+
+<span class="token punctuation">[</span><span class="token table class-name">FullNode</span><span class="token punctuation">]</span>
+  <span class="token key property">Addr</span> <span class="token punctuation">=</span> <span class="token string">&quot;/ip4/127.0.0.1/tcp/3453&quot;</span>
+  <span class="token comment"># [Gateway],[Auth],[FullNode] 是同一个token</span>
+  <span class="token key property">Token</span> <span class="token punctuation">=</span> <span class="token string">&quot;eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiZWx2aW4iLCJwZXJtIjoiYWRtaW4iLCJleHQiOiIifQ.y2vEhxUd2Q9N6kYKe1nsKA4Xelam_ZIVRw7Ul_LgNkk&quot;</span>
+
+<span class="token punctuation">[</span><span class="token table class-name">Gateway</span><span class="token punctuation">]</span>
+  <span class="token key property">ListenAPI</span> <span class="token punctuation">=</span> <span class="token punctuation">[</span><span class="token string">&quot;/ip4/0.0.0.0/tcp/4569&quot;</span><span class="token punctuation">]</span>
+  <span class="token comment"># [Gateway],[Auth],[FullNode] 是同一个token</span>
+  <span class="token key property">Token</span> <span class="token punctuation">=</span> <span class="token string">&quot;eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiZWx2aW4iLCJwZXJtIjoiYWRtaW4iLCJleHQiOiIifQ.y2vEhxUd2Q9N6kYKe1nsKA4Xelam_ZIVRw7Ul_LgNkk&quot;</span>
+
+<span class="token punctuation">[</span><span class="token table class-name">Auth</span><span class="token punctuation">]</span>
+  <span class="token key property">Addr</span> <span class="token punctuation">=</span> <span class="token string">&quot;127.0.0.1:8989&quot;</span>
+  <span class="token comment"># [Gateway],[Auth],[FullNode] 是同一个token</span>
+  <span class="token key property">Token</span> <span class="token punctuation">=</span> <span class="token string">&quot;eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiZWx2aW4iLCJwZXJtIjoiYWRtaW4iLCJleHQiOiIifQ.y2vEhxUd2Q9N6kYKe1nsKA4Xelam_ZIVRw7Ul_LgNkk&quot;</span>
+
+<span class="token punctuation">[</span><span class="token table class-name">SlashFilter</span><span class="token punctuation">]</span>
+  <span class="token key property">Type</span> <span class="token punctuation">=</span> <span class="token string">&quot;local&quot;</span>
+  <span class="token punctuation">[</span><span class="token table class-name">SlashFilter.MySQL</span><span class="token punctuation">]</span>
+    <span class="token key property">Conn</span> <span class="token punctuation">=</span> <span class="token string">&quot;&quot;</span>
+    <span class="token key property">MaxOpenConn</span> <span class="token punctuation">=</span> <span class="token number">100</span>
+    <span class="token key property">MaxIdleConn</span> <span class="token punctuation">=</span> <span class="token number">10</span>
+    <span class="token key property">ConnMaxLifeTime</span> <span class="token punctuation">=</span> <span class="token string">&quot;1m0s&quot;</span>
+    <span class="token key property">Debug</span> <span class="token punctuation">=</span> <span class="token boolean">false</span>
+
+<span class="token punctuation">[</span><span class="token table class-name">Tracing</span><span class="token punctuation">]</span>
+  <span class="token key property">JaegerTracingEnabled</span> <span class="token punctuation">=</span> <span class="token boolean">false</span>
+  <span class="token key property">ProbabilitySampler</span> <span class="token punctuation">=</span> <span class="token number">1.0</span>
+  <span class="token key property">JaegerEndpoint</span> <span class="token punctuation">=</span> <span class="token string">&quot;localhost:6831&quot;</span>
+  <span class="token key property">ServerName</span> <span class="token punctuation">=</span> <span class="token string">&quot;&quot;</span>
+
+<span class="token punctuation">[</span><span class="token table class-name">Metrics</span><span class="token punctuation">]</span>
+  <span class="token comment"># 是否开启metrics指标统计，默认为false</span>
+  <span class="token key property">Enabled</span> <span class="token punctuation">=</span> <span class="token boolean">false</span>
+  
+  <span class="token punctuation">[</span><span class="token table class-name">Metrics.Exporter</span><span class="token punctuation">]</span>
+    <span class="token comment"># 指标导出器类型，目前可选：prometheus或graphite，默认为prometheus</span>
+    <span class="token key property">Type</span> <span class="token punctuation">=</span> <span class="token string">&quot;prometheus&quot;</span>
+    
+    <span class="token punctuation">[</span><span class="token table class-name">Metrics.Exporter.Prometheus</span><span class="token punctuation">]</span>
+      <span class="token comment"># multiaddr</span>
+      <span class="token key property">EndPoint</span> <span class="token punctuation">=</span> <span class="token string">&quot;/ip4/0.0.0.0/tcp/12310&quot;</span>
+      <span class="token comment"># 命名规范: &quot;a_b_c&quot;, 不能带&quot;-&quot;</span>
+      <span class="token key property">Namespace</span> <span class="token punctuation">=</span> <span class="token string">&quot;miner&quot;</span> 
+      <span class="token comment"># 指标注册表类型，可选：default（默认，会附带程序运行的环境指标）或 define（自定义）</span>
+      <span class="token key property">RegistryType</span> <span class="token punctuation">=</span> <span class="token string">&quot;define&quot;</span>
+      <span class="token comment"># prometheus 服务路径</span>
+      <span class="token key property">Path</span> <span class="token punctuation">=</span> <span class="token string">&quot;/debug/metrics&quot;</span>
+      <span class="token comment"># 上报周期，单位为 秒（s）</span>
+      <span class="token key property">ReportingPeriod</span> <span class="token punctuation">=</span> <span class="token number">10</span>
+      
+    <span class="token punctuation">[</span><span class="token table class-name">Metrics.Exporter.Graphite</span><span class="token punctuation">]</span>
+      <span class="token comment"># 命名规范: &quot;a_b_c&quot;, 不能带&quot;-&quot;</span>
+      <span class="token key property">Namespace</span> <span class="token punctuation">=</span> <span class="token string">&quot;miner&quot;</span> 
+      <span class="token comment"># graphite exporter 收集器服务地址</span>
+      <span class="token key property">Host</span> <span class="token punctuation">=</span> <span class="token string">&quot;127.0.0.1&quot;</span>
+      <span class="token comment"># graphite exporter 收集器服务监听端口</span>
+      <span class="token key property">Port</span> <span class="token punctuation">=</span> <span class="token number">12310</span>
+      <span class="token comment"># 上报周期，单位为 秒（s）</span>
+      <span class="token key property">ReportingPeriod</span> <span class="token punctuation">=</span> <span class="token number">10</span>
+</code></pre></div><p>如果选择 <code>Metrics.Exporter</code> 为 <code>Prometheus</code>, 可通过命令行快速查看指标：</p> <div class="language-bash extra-class"><pre class="language-bash"><code> $ <span class="token function">curl</span> http://127.0.0.1:12310/debug/metrics
+ <span class="token comment"># HELP miner_getbaseinfo_ms Duration of GetBaseInfo in miner</span>
+ <span class="token comment"># TYPE miner_getbaseinfo_ms histogram</span>
+ miner_getbaseinfo_ms_bucket<span class="token punctuation">{</span>miner_id<span class="token operator">=</span><span class="token string">&quot;t010938&quot;</span>,le<span class="token operator">=</span><span class="token string">&quot;100&quot;</span><span class="token punctuation">}</span> <span class="token number">50</span>
+ miner_getbaseinfo_ms_bucket<span class="token punctuation">{</span>miner_id<span class="token operator">=</span><span class="token string">&quot;t010938&quot;</span>,le<span class="token operator">=</span><span class="token string">&quot;200&quot;</span><span class="token punctuation">}</span> <span class="token number">51</span>
+ miner_getbaseinfo_ms_bucket<span class="token punctuation">{</span>miner_id<span class="token operator">=</span><span class="token string">&quot;t010938&quot;</span>,le<span class="token operator">=</span><span class="token string">&quot;400&quot;</span><span class="token punctuation">}</span> <span class="token number">51</span>
+ miner_getbaseinfo_ms_bucket<span class="token punctuation">{</span>miner_id<span class="token operator">=</span><span class="token string">&quot;t010938&quot;</span>,le<span class="token operator">=</span><span class="token string">&quot;600&quot;</span><span class="token punctuation">}</span> <span class="token number">51</span>
+ miner_getbaseinfo_ms_bucket<span class="token punctuation">{</span>miner_id<span class="token operator">=</span><span class="token string">&quot;t010938&quot;</span>,le<span class="token operator">=</span><span class="token string">&quot;800&quot;</span><span class="token punctuation">}</span> <span class="token number">51</span>
+ miner_getbaseinfo_ms_bucket<span class="token punctuation">{</span>miner_id<span class="token operator">=</span><span class="token string">&quot;t010938&quot;</span>,le<span class="token operator">=</span><span class="token string">&quot;1000&quot;</span><span class="token punctuation">}</span> <span class="token number">51</span>
+ miner_getbaseinfo_ms_bucket<span class="token punctuation">{</span>miner_id<span class="token operator">=</span><span class="token string">&quot;t010938&quot;</span>,le<span class="token operator">=</span><span class="token string">&quot;2000&quot;</span><span class="token punctuation">}</span> <span class="token number">51</span>
+ miner_getbaseinfo_ms_bucket<span class="token punctuation">{</span>miner_id<span class="token operator">=</span><span class="token string">&quot;t010938&quot;</span>,le<span class="token operator">=</span><span class="token string">&quot;20000&quot;</span><span class="token punctuation">}</span> <span class="token number">51</span>
+ miner_getbaseinfo_ms_bucket<span class="token punctuation">{</span>miner_id<span class="token operator">=</span><span class="token string">&quot;t010938&quot;</span>,le<span class="token operator">=</span><span class="token string">&quot;+Inf&quot;</span><span class="token punctuation">}</span> <span class="token number">51</span>
+ miner_getbaseinfo_ms_sum<span class="token punctuation">{</span>miner_id<span class="token operator">=</span><span class="token string">&quot;t010938&quot;</span><span class="token punctuation">}</span> <span class="token number">470.23516</span>
+ <span class="token punctuation">..</span>. <span class="token punctuation">..</span>.
+</code></pre></div><blockquote><p>如果遇到错误 <code>curl: (56) Recv failure: Connection reset by peer</code>, 请使用本机 <code>ip</code> 地址, 如下所示:</p></blockquote> <div class="language-bash extra-class"><pre class="language-bash"><code>$  <span class="token function">curl</span> http://<span class="token operator">&lt;</span>ip<span class="token operator">&gt;</span>:12310/debug/metrics
+</code></pre></div><h3 id="submitnodes-配置项解析"><a href="#submitnodes-配置项解析" class="header-anchor">#</a> <code>SubmitNodes</code> 配置项解析</h3> <p>当选择消息的节点和广播区块的节点 <code>mpool</code> 中的消息不一致时, 有可能导致新出的区块无法验证,如区块中打包的消息在广播节点的 <code>mpool</code> 中不存在, 故引入<code>SubmitNodes</code>配置项, 保证区块正常上链.</p> <p>默认的配置是空的,如下:</p> <div class="language-toml extra-class"><pre class="language-toml"><code><span class="token key property">SubmitNodes</span> <span class="token punctuation">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+</code></pre></div><p>当使用了 <code>chain-co</code> 组建时,需要将对接的所有同步节点配置到 <code>SubmitNodes</code>, 参考配置如下:</p> <div class="language-toml extra-class"><pre class="language-toml"><code><span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token table class-name">SubmitNodes</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+  <span class="token key property">Addr</span> <span class="token punctuation">=</span> <span class="token string">&quot;/192.168.200.108/tcp/3453&quot;</span>
+  <span class="token key property">Token</span> <span class="token punctuation">=</span> <span class="token string">&quot;eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiY2hhaW4tc2VydmljZSIsInBlcm0iOiJhZG1pbiIsImV4dCI6IiJ9.DxlsJO-XrrdQLvJdA6wdWJxeYOhZt_kMYMHc7NdfQNw&quot;</span>
+
+<span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token table class-name">SubmitNodes</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+  <span class="token key property">Addr</span> <span class="token punctuation">=</span> <span class="token string">&quot;/ip4/192.168.200.107/tcp/3453&quot;</span>
+  <span class="token key property">Token</span> <span class="token punctuation">=</span> <span class="token string">&quot;eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiY2hhaW4tc2VydmljZSIsInBlcm0iOiJhZG1pbiIsImV4dCI6IiJ9.DxlsJO-XrrdQLvJdA6wdWJxeYOhZt_kMYMHc7NdfQNw&quot;</span>
+</code></pre></div><h2 id="旧版本"><a href="#旧版本" class="header-anchor">#</a> 旧版本</h2> <p>旧版本指的是版本号 <code>&lt; v1.7.0</code> 的版本</p> <div class="language-toml extra-class"><pre class="language-toml"><code><span class="token comment"># 链服务监听地址</span>
+<span class="token key property">ListenAPI</span> <span class="token punctuation">=</span> <span class="token string">&quot;/ip4/127.0.0.1/tcp/3453&quot;</span>
+<span class="token key property">Token</span> <span class="token punctuation">=</span> <span class="token string">&quot;eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiYWRtaW4iLCJwZXJtIjoiYWRtaW4iLCJleHQiOiIifQ.RRSdeQ-c1Ei-8roAj-L-wpOr-y6PssDorbGijMPxjoc&quot;</span>
+<span class="token comment"># 生产的区块记录方式，已废弃，由 `slash filter` 取代</span>
+<span class="token key property">BlockRecord</span> <span class="token punctuation">=</span> <span class="token string">&quot;cache&quot;</span>
+
+<span class="token comment"># `sophon-miner` 服务监听地址</span>
+<span class="token punctuation">[</span><span class="token table class-name">API</span><span class="token punctuation">]</span>
+  <span class="token key property">ListenAddress</span> <span class="token punctuation">=</span> <span class="token string">&quot;/ip4/0.0.0.0/tcp/12308/http&quot;</span>
+  <span class="token key property">RemoteListenAddress</span> <span class="token punctuation">=</span> <span class="token string">&quot;&quot;</span>
+  <span class="token key property">Timeout</span> <span class="token punctuation">=</span> <span class="token string">&quot;30s&quot;</span>
+
+<span class="token comment"># 事件网关服务监听地址</span>
+<span class="token punctuation">[</span><span class="token table class-name">Gateway</span><span class="token punctuation">]</span>
+  <span class="token key property">ListenAPI</span> <span class="token punctuation">=</span> <span class="token punctuation">[</span><span class="token string">&quot;/ip4/127.0.0.1/tcp/45132&quot;</span><span class="token punctuation">]</span>
+  <span class="token key property">Token</span> <span class="token punctuation">=</span> <span class="token string">&quot;eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiYWRtaW4iLCJwZXJtIjoiYWRtaW4iLCJleHQiOiIifQ.RRSdeQ-c1Ei-8roAj-L-wpOr-y6PssDorbGijMPxjoc&quot;</span>
+
+<span class="token comment"># 数据库信息</span>
+<span class="token punctuation">[</span><span class="token table class-name">Db</span><span class="token punctuation">]</span>
+  <span class="token comment"># 矿工管理方式，已废弃，从 `sophon-auth` 获取</span>
+  <span class="token key property">Type</span> <span class="token punctuation">=</span> <span class="token string">&quot;auth&quot;</span>
+  <span class="token comment"># `slash filter` 模块区块存取方式</span>
+  <span class="token key property">SFType</span> <span class="token punctuation">=</span> <span class="token string">&quot;mysql&quot;</span>
+  <span class="token punctuation">[</span><span class="token table class-name">Db.MySQL</span><span class="token punctuation">]</span>
+    <span class="token key property">Conn</span> <span class="token punctuation">=</span> <span class="token string">&quot;root:kuangfengjuexizhan@tcp(192.168.200.2:3308)/sophon-miner-butterfly-200-19?charset=utf8mb4&amp;parseTime=True&amp;loc=Local&amp;timeout=10s&quot;</span>
+    <span class="token key property">MaxOpenConn</span> <span class="token punctuation">=</span> <span class="token number">100</span>
+    <span class="token key property">MaxIdleConn</span> <span class="token punctuation">=</span> <span class="token number">10</span>
+    <span class="token key property">ConnMaxLifeTime</span> <span class="token punctuation">=</span> <span class="token number">60</span>
+    <span class="token key property">Debug</span> <span class="token punctuation">=</span> <span class="token boolean">false</span>
+  <span class="token punctuation">[</span><span class="token table class-name">Db.Auth</span><span class="token punctuation">]</span>
+    <span class="token key property">ListenAPI</span> <span class="token punctuation">=</span> <span class="token string">&quot;http://127.0.0.1:8989&quot;</span>
+    <span class="token key property">Token</span> <span class="token punctuation">=</span> <span class="token string">&quot;eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiYWRtaW4iLCJwZXJtIjoiYWRtaW4iLCJleHQiOiIifQ.RRSdeQ-c1Ei-8roAj-L-wpOr-y6PssDorbGijMPxjoc&quot;</span>
+
+<span class="token comment"># Jaeger Tracing 服务信息，默认不启用</span>
+<span class="token punctuation">[</span><span class="token table class-name">Tracing</span><span class="token punctuation">]</span>
+  <span class="token key property">JaegerTracingEnabled</span> <span class="token punctuation">=</span> <span class="token boolean">false</span>
+  <span class="token key property">JaegerEndpoint</span> <span class="token punctuation">=</span> <span class="token string">&quot;localhost:6831&quot;</span>
+  <span class="token key property">ProbabilitySampler</span> <span class="token punctuation">=</span> <span class="token number">1.0</span>
+  <span class="token key property">ServerName</span> <span class="token punctuation">=</span> <span class="token string">&quot;sophon-miner&quot;</span>
+</code></pre></div></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/ipfs-force-community/sophon-docs/edit/main/docs/zh/operation/sophon-miner-config.md" target="_blank" rel="noopener noreferrer">Edit this page</a> <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></div> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/zh/operation/sophon-auth-config.html" class="prev">
+        sophon-auth
+      </a></span> <span class="next"><a href="/zh/operation/sophon-messager-config.html">
+        sophon-messager
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.c78dcdb4.js" defer></script><script src="/assets/js/2.20e7910a.js" defer></script><script src="/assets/js/64.0704e793.js" defer></script>
+  </body>
+</html>
