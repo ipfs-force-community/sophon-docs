@@ -231,7 +231,7 @@ module.exports = {
                         title: '配置文件',
                         collapsable: false,
                         children: [
-                            ['venus-auth-config.md', 'sophon-auth', "https://github.com/ipfs-force-community/sophon-auth/blob/master/docs/zh/config-desc.md"],
+                            ['sophon-auth-config.md', 'sophon-auth', "https://github.com/ipfs-force-community/sophon-auth/blob/master/docs/zh/config-desc.md"],
                             ['venus-miner-config.md', 'sophon-miner', "https://github.com/ipfs-force-community/sophon-miner/blob/master/docs/zh/config-desc.md"],
                             ['venus-messager-config.md', 'sophon-messager', "https://github.com/ipfs-force-community/sophon-messager/tree/master/docs/zh/config-desc.md"],
                             ['venus-gateway-config.md', 'sophon-gateway', "https://github.com/ipfs-force-community/sophon-gateway/tree/master/docs/zh/config-desc.md"],
