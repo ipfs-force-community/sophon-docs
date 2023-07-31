@@ -31,7 +31,7 @@
 
 下图展示了 venus 模块如何相互交互。
 
-![venus-cluster](../../.vuepress/public/venus-arch.png)
+![venus](https://github.com/ipfs-force-community/venus-core-devs/assets/1591330/27f50f09-5d14-4d6d-b0ab-fa4456a6f076)
 
 ## 硬件要求
 

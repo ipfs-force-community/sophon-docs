@@ -32,7 +32,7 @@ Sophon service could be thought as the plumbings of what you need to start seali
 
 Diagram below illustrates how Venus products interact with one and another.
 
-![venus-cluster](../.vuepress/public/venus-arch.png)
+![venus](https://github.com/ipfs-force-community/venus-core-devs/assets/1591330/27f50f09-5d14-4d6d-b0ab-fa4456a6f076)
 
 ## Hardware requirements
 
