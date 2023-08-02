@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>订单过滤器 | 智子</title>
+    <meta name="generator" content="VuePress 1.8.0">
+    <link rel="icon" href="/assets/sophon-icon.png">
+    <script async="true" src="https://www.googletagmanager.com/gtag/js?id=G-RHJWEBDXVD"></script>
+    <script>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-RHJWEBDXVD');</script>
+    <meta name="description" content="智子，原Venus链服务，是一个Filecoin超级节点解决方案">
+    
+    <link rel="preload" href="/assets/css/0.styles.117964e0.css" as="style"><link rel="preload" href="/assets/js/app.1ff1f9d6.js" as="script"><link rel="preload" href="/assets/js/2.14d77408.js" as="script"><link rel="preload" href="/assets/js/69.a01f34b1.js" as="script"><link rel="prefetch" href="/assets/js/10.29cb021f.js"><link rel="prefetch" href="/assets/js/11.a1e4cbff.js"><link rel="prefetch" href="/assets/js/12.db72b018.js"><link rel="prefetch" href="/assets/js/13.a55081f6.js"><link rel="prefetch" href="/assets/js/14.c6121f7e.js"><link rel="prefetch" href="/assets/js/15.1b305743.js"><link rel="prefetch" href="/assets/js/16.f013aac0.js"><link rel="prefetch" href="/assets/js/17.d78264f5.js"><link rel="prefetch" href="/assets/js/18.aaacba87.js"><link rel="prefetch" href="/assets/js/19.c3025f2c.js"><link rel="prefetch" href="/assets/js/20.ff17b38d.js"><link rel="prefetch" href="/assets/js/21.2913962d.js"><link rel="prefetch" href="/assets/js/22.03ab4280.js"><link rel="prefetch" href="/assets/js/23.da2ba50e.js"><link rel="prefetch" href="/assets/js/24.3b63a5c0.js"><link rel="prefetch" href="/assets/js/25.324eae9f.js"><link rel="prefetch" href="/assets/js/26.b52880ce.js"><link rel="prefetch" href="/assets/js/27.d23ead71.js"><link rel="prefetch" href="/assets/js/28.ec8c6bb6.js"><link rel="prefetch" href="/assets/js/29.d723a083.js"><link rel="prefetch" href="/assets/js/3.b20c1bd0.js"><link rel="prefetch" href="/assets/js/30.d50dd718.js"><link rel="prefetch" href="/assets/js/31.cba31552.js"><link rel="prefetch" href="/assets/js/32.c2143f48.js"><link rel="prefetch" href="/assets/js/33.affbf73a.js"><link rel="prefetch" href="/assets/js/34.3c570762.js"><link rel="prefetch" href="/assets/js/35.45617957.js"><link rel="prefetch" href="/assets/js/36.862abca2.js"><link rel="prefetch" href="/assets/js/37.0fc29d8c.js"><link rel="prefetch" href="/assets/js/38.92988a47.js"><link rel="prefetch" href="/assets/js/39.31379f1f.js"><link rel="prefetch" href="/assets/js/4.f5efd4bd.js"><link rel="prefetch" href="/assets/js/40.60ad93d2.js"><link rel="prefetch" href="/assets/js/41.dfa2892a.js"><link rel="prefetch" href="/assets/js/42.22c41a6f.js"><link rel="prefetch" href="/assets/js/43.cd59cb67.js"><link rel="prefetch" href="/assets/js/44.070e51f2.js"><link rel="prefetch" href="/assets/js/45.f28e6d06.js"><link rel="prefetch" href="/assets/js/46.b28cf92e.js"><link rel="prefetch" href="/assets/js/47.6dad2275.js"><link rel="prefetch" href="/assets/js/48.36027998.js"><link rel="prefetch" href="/assets/js/49.96b7bf22.js"><link rel="prefetch" href="/assets/js/5.dd6b93c6.js"><link rel="prefetch" href="/assets/js/50.e6c2facd.js"><link rel="prefetch" href="/assets/js/51.86794129.js"><link rel="prefetch" href="/assets/js/52.b31859a1.js"><link rel="prefetch" href="/assets/js/53.d4e9a317.js"><link rel="prefetch" href="/assets/js/54.2541b333.js"><link rel="prefetch" href="/assets/js/55.05f7366c.js"><link rel="prefetch" href="/assets/js/56.8a24a461.js"><link rel="prefetch" href="/assets/js/57.e7e43767.js"><link rel="prefetch" href="/assets/js/58.484a9a16.js"><link rel="prefetch" href="/assets/js/59.674f5c1c.js"><link rel="prefetch" href="/assets/js/6.fd2aecb1.js"><link rel="prefetch" href="/assets/js/60.250abd09.js"><link rel="prefetch" href="/assets/js/61.02da3a87.js"><link rel="prefetch" href="/assets/js/62.bdfc396d.js"><link rel="prefetch" href="/assets/js/63.ca51d57b.js"><link rel="prefetch" href="/assets/js/64.de63625a.js"><link rel="prefetch" href="/assets/js/65.309dd0a8.js"><link rel="prefetch" href="/assets/js/66.739d62cf.js"><link rel="prefetch" href="/assets/js/67.ed716c81.js"><link rel="prefetch" href="/assets/js/68.c1702142.js"><link rel="prefetch" href="/assets/js/7.5ca775d3.js"><link rel="prefetch" href="/assets/js/70.ea79f8ce.js"><link rel="prefetch" href="/assets/js/8.8e5097c5.js"><link rel="prefetch" href="/assets/js/9.1f320f2b.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.117964e0.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/zh/" class="home-link router-link-active"><img src="/assets/sophon-icon.png" alt="智子" class="logo"> <span class="site-name can-hide">智子</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/zh/intro/" class="nav-link">
+  功能介绍
+</a></div><div class="nav-item"><a href="/zh/operation/" class="nav-link router-link-active">
+  部署/运维
+</a></div><div class="nav-item"><a href="/zh/developer/" class="nav-link">
+  研发/设计
+</a></div><div class="nav-item"><a href="/zh/about/" class="nav-link">
+  关于
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Select language" class="dropdown-title"><span class="title">选择语言</span> <span class="arrow down"></span></button> <button type="button" aria-label="Select language" class="mobile-dropdown-title"><span class="title">选择语言</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/" class="nav-link">
+  English
+</a></li><li class="dropdown-item"><!----> <a href="/zh/operation/venus-wallet-signfilter.html" aria-current="page" class="nav-link router-link-exact-active router-link-active">
+  简体中文
+</a></li></ul></div></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/zh/intro/" class="nav-link">
+  功能介绍
+</a></div><div class="nav-item"><a href="/zh/operation/" class="nav-link router-link-active">
+  部署/运维
+</a></div><div class="nav-item"><a href="/zh/developer/" class="nav-link">
+  研发/设计
+</a></div><div class="nav-item"><a href="/zh/about/" class="nav-link">
+  关于
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Select language" class="dropdown-title"><span class="title">选择语言</span> <span class="arrow down"></span></button> <button type="button" aria-label="Select language" class="mobile-dropdown-title"><span class="title">选择语言</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/" class="nav-link">
+  English
+</a></li><li class="dropdown-item"><!----> <a href="/zh/operation/venus-wallet-signfilter.html" aria-current="page" class="nav-link router-link-exact-active router-link-active">
+  简体中文
+</a></li></ul></div></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>部署</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/zh/operation/" aria-current="page" class="sidebar-link">部署前准备</a></li><li><a href="/zh/operation/deploy-a-cs.html" class="sidebar-link">部署智子服务</a></li><li><a href="/zh/operation/venus-run-in-docker.html" class="sidebar-link">使用 Docker 部署智子服务</a></li><li><a href="/zh/operation/join-a-cs.html" class="sidebar-link">使用智子服务</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>智子服务组件</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/zh/operation/venus-daemon.html" class="sidebar-link">venus daemon</a></li><li><a href="/zh/operation/sophon-auth.html" class="sidebar-link">sophon-auth</a></li><li><a href="/zh/operation/sophon-miner.html" class="sidebar-link">sophon-miner</a></li><li><a href="/zh/operation/sophon-messager.html" class="sidebar-link">sophon-messager</a></li><li><a href="/zh/operation/sophon-gateway.html" class="sidebar-link">sophon-gateway</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>配置文件</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/zh/operation/sophon-auth-config.html" class="sidebar-link">sophon-auth</a></li><li><a href="/zh/operation/sophon-miner-config.html" class="sidebar-link">sophon-miner</a></li><li><a href="/zh/operation/sophon-messager-config.html" class="sidebar-link">sophon-messager</a></li><li><a href="/zh/operation/sophon-gateway-config.html" class="sidebar-link">sophon-gateway</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>Wallet</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/zh/operation/venus-wallet-builtin.html" class="sidebar-link">venus wallet（内置）</a></li><li><a href="/zh/operation/venus-wallet.html" class="sidebar-link">venus-wallet（远程）</a></li><li><a href="/zh/operation/venus-wallet-signfilter.html" aria-current="page" class="active sidebar-link">venus-wallet 签名过滤器</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/zh/operation/venus-wallet-signfilter.html#json输入格式如下" class="sidebar-link">json输入格式如下</a></li><li class="sidebar-sub-header"><a href="/zh/operation/venus-wallet-signfilter.html#jq过滤器-示例" class="sidebar-link">jq过滤器 示例</a></li><li class="sidebar-sub-header"><a href="/zh/operation/venus-wallet-signfilter.html#javascript脚本过滤器" class="sidebar-link">javascript脚本过滤器</a></li></ul></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>运维</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/zh/operation/chain-mng.html" class="sidebar-link">链管理</a></li><li><a href="/zh/operation/simple-load-balancing.html" class="sidebar-link">简易负载均衡</a></li><li><a href="/zh/operation/ha.html" class="sidebar-link">高可用解决方案</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="订单过滤器"><a href="#订单过滤器" class="header-anchor">#</a> 订单过滤器</h1> <p>订单过滤器基于脚本运行，输入参数是一个固定格式的签名， 具体格式如下。脚本行为是白名单模式， 返回0代表通过，其他形式返回代表失败</p> <h2 id="json输入格式如下"><a href="#json输入格式如下" class="header-anchor">#</a> json输入格式如下</h2> <ol><li>Unknow 任意类型的签名请求</li></ol> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">{</span>
+    <span class="token property">&quot;SignType&quot;</span><span class="token operator">:</span> <span class="token string">&quot;unknown&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;Data&quot;</span><span class="token operator">:</span> <span class="token string">&quot;Atr07xEANQWh7ROmHCuYSA==&quot;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><ol start="2"><li>Message 消息类型</li></ol> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">{</span>
+  <span class="token property">&quot;SignType&quot;</span><span class="token operator">:</span> <span class="token string">&quot;message&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;Data&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token property">&quot;CID&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token property">&quot;/&quot;</span><span class="token operator">:</span> <span class="token string">&quot;bafy2bzacear2n4ycnqjwtomnoeghubwjzw7hzao74yrvzm6i3lfuk6gtsq57q&quot;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;Version&quot;</span><span class="token operator">:</span> <span class="token number">2444968627297155987</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;To&quot;</span><span class="token operator">:</span> <span class="token string">&quot;t08332628015320862903&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;From&quot;</span><span class="token operator">:</span> <span class="token string">&quot;t3kbwxng5pwwg557tw2us4fnggphbsbsvhreu2bdlnthumhbx2eliw7bzyahdx2n6eztwdigj5axtsjdsicy5a&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;Nonce&quot;</span><span class="token operator">:</span> <span class="token number">3740335547662638783</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;Value&quot;</span><span class="token operator">:</span> <span class="token string">&quot;-975788697497809581006163199035224656&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;GasLimit&quot;</span><span class="token operator">:</span> <span class="token number">4282355688707494097</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;GasFeeCap&quot;</span><span class="token operator">:</span> <span class="token string">&quot;912296103548088579871476377389990303&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;GasPremium&quot;</span><span class="token operator">:</span> <span class="token string">&quot;1320896501926152015536953388071793382&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;Method&quot;</span><span class="token operator">:</span> <span class="token number">2204816356752865940</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;Params&quot;</span><span class="token operator">:</span> <span class="token string">&quot;zrnFGEN3Fj1y4xyqKYMJOw==&quot;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><ol start="3"><li>BlockHeader  签blockHeader 出块使用</li></ol> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">{</span>
+  <span class="token property">&quot;SignType&quot;</span><span class="token operator">:</span> <span class="token string">&quot;block&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;Data&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token property">&quot;Miner&quot;</span><span class="token operator">:</span> <span class="token string">&quot;t3vv3kbwqxp34wl3tmqb7v53i2wbu5r2bj2ew3zfdw5n7wyn5rkfamzsicfzskj5fxh7gn3fdkf4stzlt6klsa&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;Ticket&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token property">&quot;VRFProof&quot;</span><span class="token operator">:</span> <span class="token string">&quot;ZTllYjQyZDQzMGExYjU0MDQxYWJhODZlYmZhODAxYzk=&quot;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;ElectionProof&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token property">&quot;WinCount&quot;</span><span class="token operator">:</span> <span class="token number">3199911358100100289</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;VRFProof&quot;</span><span class="token operator">:</span> <span class="token string">&quot;Zjg2NWFhMTI2MzdhZDAzOWQ5N2Y4MDA2ZWE1ZmFmY2M=&quot;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;BeaconEntries&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+      <span class="token punctuation">{</span>
+        <span class="token property">&quot;Round&quot;</span><span class="token operator">:</span> <span class="token number">7432925912533959900</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;Data&quot;</span><span class="token operator">:</span> <span class="token string">&quot;IRbjoLa9HfBQXveU8u8BzA==&quot;</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;WinPoStProof&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+      <span class="token punctuation">{</span>
+        <span class="token property">&quot;PoStProof&quot;</span><span class="token operator">:</span> <span class="token number">9065943393210184747</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;ProofBytes&quot;</span><span class="token operator">:</span> <span class="token string">&quot;QHAN+HBEFmTILChWA0dlkQ==&quot;</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;Parents&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+      <span class="token punctuation">{</span>
+        <span class="token property">&quot;/&quot;</span><span class="token operator">:</span> <span class="token string">&quot;bafy2bzaced6ghmr7hr6ghkkds5n5vadqgwgykjxbwvnetngbf3rldktibhknc&quot;</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;ParentWeight&quot;</span><span class="token operator">:</span> <span class="token string">&quot;623276483858531870747041268427681083&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;Height&quot;</span><span class="token operator">:</span> <span class="token number">1316567932866987913</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;ParentStateRoot&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token property">&quot;/&quot;</span><span class="token operator">:</span> <span class="token string">&quot;bafy2bzacecnvcrfwl3wehlp2o7t5v5rdztw55q5adjjz7ck6qju7iyf7uage4&quot;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;ParentMessageReceipts&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token property">&quot;/&quot;</span><span class="token operator">:</span> <span class="token string">&quot;bafy2bzaced7yjgbm4av7tyxox74gb4zbgngblufjldyonrxb5vperjtt647iw&quot;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;Messages&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token property">&quot;/&quot;</span><span class="token operator">:</span> <span class="token string">&quot;bafy2bzacec3u65n7xqv42fdcwgmx6esrxdxvdkfddrkwnv7yqme6eldomp7ng&quot;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;BLSAggregate&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token property">&quot;Type&quot;</span><span class="token operator">:</span> <span class="token number">2</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;Data&quot;</span><span class="token operator">:</span> <span class="token string">&quot;h6AHgAU4UNQrNOQ+t9FPAQ==&quot;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;Timestamp&quot;</span><span class="token operator">:</span> <span class="token number">3742226815733021007</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;BlockSig&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token property">&quot;Type&quot;</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;Data&quot;</span><span class="token operator">:</span> <span class="token string">&quot;d+Z/kgfDflfBGCMHEcTrZg==&quot;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;ForkSignaling&quot;</span><span class="token operator">:</span> <span class="token number">6517981467652975258</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;ParentBaseFee&quot;</span><span class="token operator">:</span> <span class="token string">&quot;556231998514121926756971426438976110&quot;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><ol start="4"><li>DrawRandomParam 签随机数 出块使用</li></ol> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">{</span>
+  <span class="token property">&quot;SignType&quot;</span><span class="token operator">:</span> <span class="token string">&quot;drawrandomparam&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;Data&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token property">&quot;Rbase&quot;</span><span class="token operator">:</span> <span class="token string">&quot;vDc1+fzj1BKYDCTestRdGQ==&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;Pers&quot;</span><span class="token operator">:</span> <span class="token number">7646088051308888681</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;Round&quot;</span><span class="token operator">:</span> <span class="token number">7764645693368415036</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;Entropy&quot;</span><span class="token operator">:</span> <span class="token string">&quot;7KPPmEUJ9ac+2nWPZfiJyQ==&quot;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><ol start="6"><li>AskResponse  签Ask响应信息 市场使用</li></ol> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">{</span>
+  <span class="token property">&quot;SignType&quot;</span><span class="token operator">:</span> <span class="token string">&quot;askresponse&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;Data&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token property">&quot;Ask&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token property">&quot;Ask&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token property">&quot;Price&quot;</span><span class="token operator">:</span> <span class="token string">&quot;876769343940609135856544637649618760&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;VerifiedPrice&quot;</span><span class="token operator">:</span> <span class="token string">&quot;-423379214357071078461170406986732960&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;MinPieceSize&quot;</span><span class="token operator">:</span> <span class="token number">4096</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;MaxPieceSize&quot;</span><span class="token operator">:</span> <span class="token number">34359738368</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;Miner&quot;</span><span class="token operator">:</span> <span class="token string">&quot;t36bzqatys5kyw4jkviqsbb4www4yppufavkbzjctw63ck7a4btqfdp4ca4ynvd6kghy5ocfkmazq27hgogvaa&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;Timestamp&quot;</span><span class="token operator">:</span> <span class="token number">94205847225915303</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;Expiry&quot;</span><span class="token operator">:</span> <span class="token number">722654141236847609</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;SeqNo&quot;</span><span class="token operator">:</span> <span class="token number">6062932104092928274</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;Signature&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token property">&quot;Type&quot;</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;Data&quot;</span><span class="token operator">:</span> <span class="token string">&quot;Hq8rj+qBL8ODCQHh4c30eA==&quot;</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><ol start="3"><li>StorageAsk 签存储 市场使用</li></ol> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">{</span>
+  <span class="token property">&quot;SignType&quot;</span><span class="token operator">:</span> <span class="token string">&quot;storageask&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;Data&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token property">&quot;Price&quot;</span><span class="token operator">:</span> <span class="token string">&quot;719994981195590266343102388204369970&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;VerifiedPrice&quot;</span><span class="token operator">:</span> <span class="token string">&quot;748694542022590025127711955652923242&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;MinPieceSize&quot;</span><span class="token operator">:</span> <span class="token number">9007199254740992</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;MaxPieceSize&quot;</span><span class="token operator">:</span> <span class="token number">35184372088832</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;Miner&quot;</span><span class="token operator">:</span> <span class="token string">&quot;t01230808583741956570&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;Timestamp&quot;</span><span class="token operator">:</span> <span class="token number">3010190245328398123</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;Expiry&quot;</span><span class="token operator">:</span> <span class="token number">6073288181466151141</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;SeqNo&quot;</span><span class="token operator">:</span> <span class="token number">6945466807109953627</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><ol start="4"><li>ClientDeal  签客户端订单 市场使用</li></ol> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">{</span>
+  <span class="token property">&quot;SignType&quot;</span><span class="token operator">:</span> <span class="token string">&quot;clientdeal&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;Data&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token property">&quot;Proposal&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token property">&quot;PieceCID&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token property">&quot;/&quot;</span><span class="token operator">:</span> <span class="token string">&quot;bafy2bzacedkthe3gtj3xcwmblkqyskvps5m4yo6o44gg74pnz422el7gc2li6&quot;</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;PieceSize&quot;</span><span class="token operator">:</span> <span class="token number">128</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;VerifiedDeal&quot;</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;Client&quot;</span><span class="token operator">:</span> <span class="token string">&quot;t1j236245g6mviscio4weby7j7dnssarqialyqynq&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;Provider&quot;</span><span class="token operator">:</span> <span class="token string">&quot;t06305738302858884039&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;Label&quot;</span><span class="token operator">:</span> <span class="token string">&quot;0a97531553fe21025e5d82c18aa9ee68&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;StartEpoch&quot;</span><span class="token operator">:</span> <span class="token number">513424421293552762</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;EndEpoch&quot;</span><span class="token operator">:</span> <span class="token number">3747388252008935428</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;StoragePricePerEpoch&quot;</span><span class="token operator">:</span> <span class="token string">&quot;417693738761263006641117675603187051&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;ProviderCollateral&quot;</span><span class="token operator">:</span> <span class="token string">&quot;803912607344509151922250619993055103&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;ClientCollateral&quot;</span><span class="token operator">:</span> <span class="token string">&quot;213611766944708452191700924930145887&quot;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;ClientSignature&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token property">&quot;Type&quot;</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;Data&quot;</span><span class="token operator">:</span> <span class="token string">&quot;mknqGHaNB0EIAW5eunn9WQ==&quot;</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><ol start="5"><li>DealProposal 签订单信息 市场使用</li></ol> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">{</span>
+  <span class="token property">&quot;SignType&quot;</span><span class="token operator">:</span> <span class="token string">&quot;dealproposal&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;Data&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token property">&quot;PieceCID&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token property">&quot;/&quot;</span><span class="token operator">:</span> <span class="token string">&quot;bafy2bzacedd5rgozi7npb2jsijebzciy3nljqsgmx5hi3ukhtbpid5ifmyyhe&quot;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;PieceSize&quot;</span><span class="token operator">:</span> <span class="token number">8192</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;VerifiedDeal&quot;</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;Client&quot;</span><span class="token operator">:</span> <span class="token string">&quot;t1bqrqhrkkujkurrjtknnaxvk6bvjjrutvo65afti&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;Provider&quot;</span><span class="token operator">:</span> <span class="token string">&quot;t1seivchsnbggqbjxb5znyxsfj6dz4q7srv7cz3zq&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;Label&quot;</span><span class="token operator">:</span> <span class="token string">&quot;9180fd5021b7ce7df5f2b267be6cd72a&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;StartEpoch&quot;</span><span class="token operator">:</span> <span class="token number">560058135229642805</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;EndEpoch&quot;</span><span class="token operator">:</span> <span class="token number">5758166429440783409</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;StoragePricePerEpoch&quot;</span><span class="token operator">:</span> <span class="token string">&quot;424686176949526803042686184357263858&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;ProviderCollateral&quot;</span><span class="token operator">:</span> <span class="token string">&quot;-119795694841418693127842572130627227&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;ClientCollateral&quot;</span><span class="token operator">:</span> <span class="token string">&quot;-836958944296813066609357371376465576&quot;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><ol start="6"><li>NetworkResponse 签网络响应 市场使用</li></ol> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">{</span>
+  <span class="token property">&quot;SignType&quot;</span><span class="token operator">:</span> <span class="token string">&quot;networkresposne&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;Data&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token property">&quot;State&quot;</span><span class="token operator">:</span> <span class="token number">4617742545728625595</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;Message&quot;</span><span class="token operator">:</span> <span class="token string">&quot;1b94004ba927b4e62fa8fb390bfd00a4&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;Proposal&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token property">&quot;/&quot;</span><span class="token operator">:</span> <span class="token string">&quot;bafy2bzacedz7txpajv2jjooy2fb46uoasanmzvx54gep6qr7nmfp2htyjfkeo&quot;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;PublishMessage&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token property">&quot;/&quot;</span><span class="token operator">:</span> <span class="token string">&quot;bafy2bzacebw2zidtr4fgwshcjofb5udtcennxi5h4cgfjuhm2fqqeelaxig42&quot;</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><ol start="7"><li>SignedVoucher 签Paychannel信息 市场使用</li></ol> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">{</span>
+  <span class="token property">&quot;SignType&quot;</span><span class="token operator">:</span> <span class="token string">&quot;signedvoucher&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;Data&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token property">&quot;ChannelAddr&quot;</span><span class="token operator">:</span> <span class="token string">&quot;t3dhakxdepgekvrpy2tghgpwu4whzw6cvmibyqsyudfnyzyxcxewmrg633wysjzgu7batceqnxjobdchlzagma&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;TimeLockMin&quot;</span><span class="token operator">:</span> <span class="token number">8062818293762699587</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;TimeLockMax&quot;</span><span class="token operator">:</span> <span class="token number">1215837457230280974</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;SecretPreimage&quot;</span><span class="token operator">:</span> <span class="token string">&quot;b+nU8pBDeWWvr04HCf+87Q==&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;Extra&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token property">&quot;Actor&quot;</span><span class="token operator">:</span> <span class="token string">&quot;t3owhfd3q5crjjxg7ba2sd4ki5v4don76di5zqvmpk5jn76zq7jidm3m3wvxf7pv622a26i7yx6pdkhzghif6a&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;Method&quot;</span><span class="token operator">:</span> <span class="token number">2814310330734337689</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;Data&quot;</span><span class="token operator">:</span> <span class="token string">&quot;EwJS40N2TNl25Cx/duJsUw==&quot;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;Lane&quot;</span><span class="token operator">:</span> <span class="token number">1594676427337122628</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;Nonce&quot;</span><span class="token operator">:</span> <span class="token number">5638699559370206144</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;Amount&quot;</span><span class="token operator">:</span> <span class="token string">&quot;852321156424351894084048080709189129&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;MinSettleHeight&quot;</span><span class="token operator">:</span> <span class="token number">3573882704948875979</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;Merges&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+      <span class="token punctuation">{</span>
+        <span class="token property">&quot;Lane&quot;</span><span class="token operator">:</span> <span class="token number">1865589806043563536</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;Nonce&quot;</span><span class="token operator">:</span> <span class="token number">3497224577891096239</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;Signature&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token property">&quot;Type&quot;</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;Data&quot;</span><span class="token operator">:</span> <span class="token string">&quot;y1yZyEho+vZaCnr+cIlTuQ==&quot;</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><ol start="8"><li>ProviderDealstate 签存储订单信息 市场使用</li></ol> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">{</span>
+  <span class="token property">&quot;SignType&quot;</span><span class="token operator">:</span> <span class="token string">&quot;providerdealstate&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;Data&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token property">&quot;State&quot;</span><span class="token operator">:</span> <span class="token number">2249531363633528266</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;Message&quot;</span><span class="token operator">:</span> <span class="token string">&quot;fe26487118515a657634c90f015d7e55&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;Proposal&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token property">&quot;PieceCID&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token property">&quot;/&quot;</span><span class="token operator">:</span> <span class="token string">&quot;bafy2bzaceacsukba7yjo3xedgelylpe24hmogiened6yrwurcm6y7xxtxe2t2&quot;</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;PieceSize&quot;</span><span class="token operator">:</span> <span class="token number">8589934592</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;VerifiedDeal&quot;</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;Client&quot;</span><span class="token operator">:</span> <span class="token string">&quot;t1fmg7n5hyzcupyqscllnsq7ly6egdmhwuy7qzkki&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;Provider&quot;</span><span class="token operator">:</span> <span class="token string">&quot;t13hrxbyl7qxke4nr7h43lak5naujtna55lzrj7lq&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;Label&quot;</span><span class="token operator">:</span> <span class="token string">&quot;&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;StartEpoch&quot;</span><span class="token operator">:</span> <span class="token number">6347307826864809625</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;EndEpoch&quot;</span><span class="token operator">:</span> <span class="token number">1724993406456267541</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;StoragePricePerEpoch&quot;</span><span class="token operator">:</span> <span class="token string">&quot;-754967228854409089321131956816507836&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;ProviderCollateral&quot;</span><span class="token operator">:</span> <span class="token string">&quot;279347961707834779099087641125705202&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;ClientCollateral&quot;</span><span class="token operator">:</span> <span class="token string">&quot;-576424698295802851049249504821521666&quot;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;ProposalCid&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token property">&quot;/&quot;</span><span class="token operator">:</span> <span class="token string">&quot;bafy2bzaceadky2ukixnq7gmef4j6vqwjvzed6pz7xvj2pp3ph2zwc66s2odsg&quot;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;AddFundsCid&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token property">&quot;/&quot;</span><span class="token operator">:</span> <span class="token string">&quot;bafy2bzacec5gnjl6kinqs6lwvnez6a6tzmkg7o6ckkws3pv5kilofgb54pvyi&quot;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;PublishCid&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token property">&quot;/&quot;</span><span class="token operator">:</span> <span class="token string">&quot;bafy2bzaceavvmglvzyru5ant4t6kubhyoxtqygrsl6jfwylvsa3hgwsgyqmom&quot;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;DealID&quot;</span><span class="token operator">:</span> <span class="token number">5913897054946672202</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;FastRetrieval&quot;</span><span class="token operator">:</span> <span class="token boolean">false</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h2 id="jq过滤器-示例"><a href="#jq过滤器-示例" class="header-anchor">#</a> jq过滤器 示例</h2> <p>使用jq脚本来运行订单过滤 需要先安装jq命令 <a href="https://stedolan.github.io/jq/download/" target="_blank" rel="noopener noreferrer">jq install<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a>.</p> <ol><li>仅允许确定类型的签名</li></ol> <div class="language-toml extra-class"><pre class="language-toml"><code><span class="token punctuation">[</span><span class="token table class-name">SignFilter</span><span class="token punctuation">]</span>
+  <span class="token key property">expr</span> <span class="token punctuation">=</span> <span class="token string">&quot;jq -e '.SignType!=\&quot;unknown\&quot;'&quot;</span>
+</code></pre></div><ol start="2"><li>仅允许签出块过程的消息</li></ol> <div class="language-toml extra-class"><pre class="language-toml"><code><span class="token punctuation">[</span><span class="token table class-name">SignFilter</span><span class="token punctuation">]</span>
+  <span class="token key property">expr</span> <span class="token punctuation">=</span> <span class="token string">&quot;jq -e '.SignType==\&quot;block\&quot; or .SignType==\&quot;drawrandomparam\&quot;'&quot;</span>
+</code></pre></div><ol start="3"><li>仅允许签t01001在封装过程中发送的消息</li></ol> <div class="language-toml extra-class"><pre class="language-toml"><code><span class="token punctuation">[</span><span class="token table class-name">SignFilter</span><span class="token punctuation">]</span>
+  <span class="token key property">expr</span> <span class="token punctuation">=</span> <span class="token string">&quot;jq -e '.SignType==\&quot;message\&quot; and .Data.To[1:]==\&quot;01001\&quot; and (.Data.Method == 32 or (.Data.Method &gt;= 5  and .Data.Method &lt;= 11 ) or (.Data.Method &gt;= 18  and .Data.Method &lt;= 20 ) or (.Data.Method &gt;= 24  and .Data.Method &lt;= 29 ))'&quot;</span>
+</code></pre></div><ol start="4"><li>仅签名从t01001提取资金消息</li></ol> <div class="language-toml extra-class"><pre class="language-toml"><code><span class="token punctuation">[</span><span class="token table class-name">SignFilter</span><span class="token punctuation">]</span>
+  <span class="token key property">expr</span> <span class="token punctuation">=</span> <span class="token string">&quot;jq -e '.SignType==\&quot;message\&quot; and .Data.To[1:]==\&quot;01001\&quot; and (.Data.Method == 16)'&quot;</span>
+</code></pre></div><h2 id="javascript脚本过滤器"><a href="#javascript脚本过滤器" class="header-anchor">#</a> javascript脚本过滤器</h2> <p>使用javascript脚本来运行订单过滤,相对于jq脚本，用js脚本可以直接编辑，并且立即生效。 需要先安装node工具 <a href="https://nodejs.org/en/download/" target="_blank" rel="noopener noreferrer">nodejs install<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a>.</p> <p>配置方式</p> <div class="language-toml extra-class"><pre class="language-toml"><code><span class="token punctuation">[</span><span class="token table class-name">SignFilter</span><span class="token punctuation">]</span>
+  <span class="token key property">expr</span> <span class="token punctuation">=</span> <span class="token string">&quot;node &lt;path to js script&gt;&quot;</span>
+</code></pre></div><ol><li>仅允许确定类型的签名</li></ol> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">var</span> fs <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;fs&quot;</span><span class="token punctuation">)</span>
+
+<span class="token keyword">var</span> stdinBuffer <span class="token operator">=</span> fs<span class="token punctuation">.</span><span class="token function">readFileSync</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span>
+<span class="token keyword">var</span> signMsg <span class="token operator">=</span> <span class="token constant">JSON</span><span class="token punctuation">.</span><span class="token function">parse</span><span class="token punctuation">(</span>stdinBuffer<span class="token punctuation">)</span>
+
+<span class="token keyword">function</span> <span class="token function">accept</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    process<span class="token punctuation">.</span><span class="token function">exit</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">function</span> <span class="token function">refuse</span><span class="token punctuation">(</span><span class="token parameter">reason</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    process<span class="token punctuation">.</span>stderr<span class="token punctuation">.</span><span class="token function">write</span><span class="token punctuation">(</span>reason<span class="token punctuation">)</span>
+    process<span class="token punctuation">.</span><span class="token function">exit</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token punctuation">(</span><span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>signMsg<span class="token punctuation">.</span>SignType <span class="token operator">==</span> <span class="token string">&quot;unknown&quot;</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">refuse</span><span class="token punctuation">(</span><span class="token string">&quot;refuse unknown sign request&quot;</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+</code></pre></div><ol start="2"><li>仅允许签出块过程的消息</li></ol> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">var</span> fs <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;fs&quot;</span><span class="token punctuation">)</span>
+
+<span class="token keyword">var</span> stdinBuffer <span class="token operator">=</span> fs<span class="token punctuation">.</span><span class="token function">readFileSync</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span>
+<span class="token keyword">var</span> signMsg <span class="token operator">=</span> <span class="token constant">JSON</span><span class="token punctuation">.</span><span class="token function">parse</span><span class="token punctuation">(</span>stdinBuffer<span class="token punctuation">)</span>
+
+<span class="token keyword">function</span> <span class="token function">accept</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    process<span class="token punctuation">.</span><span class="token function">exit</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">function</span> <span class="token function">refuse</span><span class="token punctuation">(</span><span class="token parameter">reason</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    process<span class="token punctuation">.</span>stderr<span class="token punctuation">.</span><span class="token function">write</span><span class="token punctuation">(</span>reason<span class="token punctuation">)</span>
+    process<span class="token punctuation">.</span><span class="token function">exit</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token punctuation">(</span><span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>signMsg<span class="token punctuation">.</span>SignType <span class="token operator">==</span> <span class="token string">&quot;block&quot;</span><span class="token operator">||</span>signMsg<span class="token punctuation">.</span>SignType <span class="token operator">==</span> <span class="token string">&quot;drawrandomparam&quot;</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">refuse</span><span class="token punctuation">(</span><span class="token string">&quot;only support block/drawrandom sign request&quot;</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+</code></pre></div><ol start="3"><li>仅允许签t01001在封装过程中发送的消息</li></ol> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">var</span> fs <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;fs&quot;</span><span class="token punctuation">)</span>
+
+<span class="token keyword">var</span> stdinBuffer <span class="token operator">=</span> fs<span class="token punctuation">.</span><span class="token function">readFileSync</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span>
+<span class="token keyword">var</span> signMsg <span class="token operator">=</span> <span class="token constant">JSON</span><span class="token punctuation">.</span><span class="token function">parse</span><span class="token punctuation">(</span>stdinBuffer<span class="token punctuation">)</span>
+
+<span class="token keyword">function</span> <span class="token function">accept</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    process<span class="token punctuation">.</span><span class="token function">exit</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">function</span> <span class="token function">refuse</span><span class="token punctuation">(</span><span class="token parameter">reason</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    process<span class="token punctuation">.</span>stderr<span class="token punctuation">.</span><span class="token function">write</span><span class="token punctuation">(</span>reason<span class="token punctuation">)</span>
+    process<span class="token punctuation">.</span><span class="token function">exit</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token punctuation">(</span><span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>signMsg<span class="token punctuation">.</span>SignType <span class="token operator">==</span> <span class="token string">&quot;message&quot;</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>signMsg<span class="token punctuation">.</span>Data<span class="token punctuation">.</span>To<span class="token punctuation">.</span><span class="token function">substring</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token string">&quot;01001&quot;</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>signMsg<span class="token punctuation">.</span>Data<span class="token punctuation">.</span>Method <span class="token operator">==</span> <span class="token number">32</span>
+                <span class="token operator">||</span> <span class="token punctuation">(</span>signMsg<span class="token punctuation">.</span>Data<span class="token punctuation">.</span>Method <span class="token operator">&gt;=</span> <span class="token number">5</span> <span class="token operator">&amp;&amp;</span> signMsg<span class="token punctuation">.</span>Data<span class="token punctuation">.</span>Method <span class="token operator">&lt;=</span> <span class="token number">11</span><span class="token punctuation">)</span>
+                <span class="token operator">||</span> <span class="token punctuation">(</span>signMsg<span class="token punctuation">.</span>Data<span class="token punctuation">.</span>Method <span class="token operator">&gt;=</span> <span class="token number">18</span> <span class="token operator">&amp;&amp;</span> signMsg<span class="token punctuation">.</span>Data<span class="token punctuation">.</span>Method <span class="token operator">&lt;=</span> <span class="token number">20</span><span class="token punctuation">)</span>
+                <span class="token operator">||</span> <span class="token punctuation">(</span>signMsg<span class="token punctuation">.</span>Data<span class="token punctuation">.</span>Method <span class="token operator">&gt;=</span> <span class="token number">24</span> <span class="token operator">&amp;&amp;</span> signMsg<span class="token punctuation">.</span>Data<span class="token punctuation">.</span>Method <span class="token operator">&lt;=</span> <span class="token number">29</span><span class="token punctuation">)</span>
+            <span class="token punctuation">)</span><span class="token punctuation">{</span>
+                <span class="token function">accept</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+                <span class="token keyword">return</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    <span class="token function">refuse</span><span class="token punctuation">(</span><span class="token string">&quot;refuse non-sealing message sign request of miner t01001&quot;</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+</code></pre></div><ol start="4"><li>拒绝转账或者一些高风险的消息(owner/worker/beneficiary)签名</li></ol> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">var</span> fs <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;fs&quot;</span><span class="token punctuation">)</span>
+
+<span class="token keyword">var</span> stdinBuffer <span class="token operator">=</span> fs<span class="token punctuation">.</span><span class="token function">readFileSync</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span>
+<span class="token keyword">var</span> signMsg <span class="token operator">=</span> <span class="token constant">JSON</span><span class="token punctuation">.</span><span class="token function">parse</span><span class="token punctuation">(</span>stdinBuffer<span class="token punctuation">)</span>
+
+<span class="token keyword">function</span> <span class="token function">accept</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    process<span class="token punctuation">.</span><span class="token function">exit</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">function</span> <span class="token function">refuse</span><span class="token punctuation">(</span><span class="token parameter">reason</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    process<span class="token punctuation">.</span>stderr<span class="token punctuation">.</span><span class="token function">write</span><span class="token punctuation">(</span>reason<span class="token punctuation">)</span>
+    process<span class="token punctuation">.</span><span class="token function">exit</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token punctuation">(</span><span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>signMsg<span class="token punctuation">.</span>SignType <span class="token operator">==</span> <span class="token string">&quot;message&quot;</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>signMsg<span class="token punctuation">.</span>Data<span class="token punctuation">.</span>Method <span class="token operator">==</span> <span class="token number">0</span> <span class="token punctuation">)</span> <span class="token punctuation">{</span>  <span class="token comment">//send fund</span>
+            <span class="token function">refuse</span><span class="token punctuation">(</span><span class="token string">&quot;refuse send message sign request&quot;</span><span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>signMsg<span class="token punctuation">.</span>Data<span class="token punctuation">.</span>To<span class="token punctuation">.</span><span class="token function">substring</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token string">&quot;01001&quot;</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>signMsg<span class="token punctuation">.</span>Data<span class="token punctuation">.</span>Method <span class="token operator">==</span> <span class="token number">4</span>    <span class="token comment">//change worker/controller</span>
+               <span class="token operator">||</span>signMsg<span class="token punctuation">.</span>Data<span class="token punctuation">.</span>Method <span class="token operator">==</span> <span class="token number">16</span>  <span class="token comment">//withdraw</span>
+                <span class="token operator">||</span>signMsg<span class="token punctuation">.</span>Data<span class="token punctuation">.</span>Method <span class="token operator">==</span> <span class="token number">23</span> <span class="token comment">//change owner</span>
+                <span class="token operator">||</span>signMsg<span class="token punctuation">.</span>Data<span class="token punctuation">.</span>Method <span class="token operator">==</span> <span class="token number">21</span> <span class="token comment">//confirm update worker key</span>
+                <span class="token operator">||</span>signMsg<span class="token punctuation">.</span>Data<span class="token punctuation">.</span>Method <span class="token operator">==</span> <span class="token number">30</span> <span class="token comment">//change beneficiary</span>
+            <span class="token punctuation">)</span><span class="token punctuation">{</span>
+                <span class="token function">refuse</span><span class="token punctuation">(</span><span class="token string">&quot;refuse high risk message sign request&quot;</span><span class="token punctuation">)</span>
+                <span class="token keyword">return</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token keyword">else</span><span class="token punctuation">{</span>
+        <span class="token function">refuse</span><span class="token punctuation">(</span><span class="token string">&quot;refuse non-message sign request&quot;</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+</code></pre></div><ol start="5"><li>允许市场相关的签名签名</li></ol> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">var</span> fs <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;fs&quot;</span><span class="token punctuation">)</span>
+
+<span class="token keyword">var</span> stdinBuffer <span class="token operator">=</span> fs<span class="token punctuation">.</span><span class="token function">readFileSync</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span>
+<span class="token keyword">var</span> signMsg <span class="token operator">=</span> <span class="token constant">JSON</span><span class="token punctuation">.</span><span class="token function">parse</span><span class="token punctuation">(</span>stdinBuffer<span class="token punctuation">)</span>
+
+<span class="token keyword">function</span> <span class="token function">accept</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    process<span class="token punctuation">.</span><span class="token function">exit</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">function</span> <span class="token function">refuse</span><span class="token punctuation">(</span><span class="token parameter">reason</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    process<span class="token punctuation">.</span>stderr<span class="token punctuation">.</span><span class="token function">write</span><span class="token punctuation">(</span>reason<span class="token punctuation">)</span>
+    process<span class="token punctuation">.</span><span class="token function">exit</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token punctuation">(</span><span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>signMsg<span class="token punctuation">.</span>SignType <span class="token operator">==</span> <span class="token string">&quot;dealproposal&quot;</span>
+        <span class="token operator">||</span>signMsg<span class="token punctuation">.</span>SignType <span class="token operator">==</span> <span class="token string">&quot;signedvoucher&quot;</span>
+        <span class="token operator">||</span>signMsg<span class="token punctuation">.</span>SignType <span class="token operator">==</span> <span class="token string">&quot;storageask&quot;</span>
+        <span class="token operator">||</span>signMsg<span class="token punctuation">.</span>SignType <span class="token operator">==</span> <span class="token string">&quot;askresponse&quot;</span>
+        <span class="token operator">||</span>signMsg<span class="token punctuation">.</span>SignType <span class="token operator">==</span> <span class="token string">&quot;networkresposne&quot;</span>
+        <span class="token operator">||</span>signMsg<span class="token punctuation">.</span>SignType <span class="token operator">==</span> <span class="token string">&quot;clientdeal&quot;</span>
+        <span class="token operator">||</span>signMsg<span class="token punctuation">.</span>SignType <span class="token operator">==</span> <span class="token string">&quot;providerdealstate&quot;</span>
+    <span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">accept</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span>
+    <span class="token punctuation">}</span>
+    
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>signMsg<span class="token punctuation">.</span>SignType <span class="token operator">==</span> <span class="token string">&quot;message&quot;</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>signMsg<span class="token punctuation">.</span>Data<span class="token punctuation">.</span>To<span class="token punctuation">.</span><span class="token function">substring</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token string">&quot;01001&quot;</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>signMsg<span class="token punctuation">.</span>Data<span class="token punctuation">.</span>Method <span class="token operator">==</span> <span class="token number">18</span>    <span class="token comment">//ChangeMultiaddrs</span>
+               <span class="token operator">||</span>signMsg<span class="token punctuation">.</span>Data<span class="token punctuation">.</span>Method <span class="token operator">==</span> <span class="token number">4</span>  <span class="token comment">//ChangePeerID</span>
+            <span class="token punctuation">)</span><span class="token punctuation">{</span>
+                <span class="token function">accept</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+                <span class="token keyword">return</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+        
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>signMsg<span class="token punctuation">.</span>Data<span class="token punctuation">.</span>To<span class="token punctuation">.</span><span class="token function">substring</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token string">&quot;04&quot;</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>  <span class="token comment">//market actor</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>signMsg<span class="token punctuation">.</span>Data<span class="token punctuation">.</span>Method <span class="token operator">==</span><span class="token number">2</span> <span class="token operator">||</span> signMsg<span class="token punctuation">.</span>Data<span class="token punctuation">.</span>Method <span class="token operator">==</span> <span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+                <span class="token function">accept</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+                <span class="token keyword">return</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+        
+    <span class="token punctuation">}</span><span class="token keyword">else</span><span class="token punctuation">{</span>
+        <span class="token function">refuse</span><span class="token punctuation">(</span><span class="token string">&quot;refuse non-message sign request&quot;</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+</code></pre></div></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/ipfs-force-community/sophon-docs/edit/main/docs/zh/operation/venus-wallet-signfilter.md" target="_blank" rel="noopener noreferrer">Edit this page</a> <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></div> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/zh/operation/venus-wallet.html" class="prev">
+        venus-wallet（远程）
+      </a></span> <span class="next"><a href="/zh/operation/chain-mng.html">
+        链管理
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.1ff1f9d6.js" defer></script><script src="/assets/js/2.14d77408.js" defer></script><script src="/assets/js/69.a01f34b1.js" defer></script>
+  </body>
+</html>
