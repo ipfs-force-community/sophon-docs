@@ -22,26 +22,22 @@ $ nohup ./sophon-auth run > auth.log 2>&1 &
 `sophon-auth` 的默认配置文件位于 `~/.sophon-auth/config.toml`
 :::
 
-:::tip Logs
-
-日志默认打印到控制台。通过配置可以支持 `InfluxDB`。
-
 :::
 
 :::tip port
 `sophon-auth`默认端口为 8989，下面其他组件使用参数--auth-url，填写的相关参数就是这个端口号与相应 ip。
 :::
 
-### 查看配置
-
-```shell
-$ head  ~/.sophon-auth/config.toml
-Port = "8989"
-```
-
 ### 使用 MySQL (可选)
 
-支持 MySQL 5.7 及以上版本，可替代默认的 `Badger` 键值数据库。要使用 MySQL 数据库，请修改配置中的 `db` 部分。
+支持 MySQL 5.7 及以上版本，并创建好组件所需的数据库。可替代默认的 `Badger` 键值数据库。
+
+```bash
+# 创建数据库
+create database sophon_auth default charset utf8;
+```
+
+要使用 MySQL 数据库，请修改配置中的 `db` 部分。
 
 ```shell script
 $ vim ~/.sophon-auth/config.toml
@@ -59,6 +55,7 @@ maxIdleConns = 128
 maxLifeTime = "120s"
 maxIdleTime = "30s"
 ```
+
 重启 `sophon-auth` 使配置生效。
 
 ```shell script
@@ -67,7 +64,7 @@ $ kill <VENUS_AUTH_PID>
 $ nohup ./sophon-auth run > auth.log 2>&1 &
 ```
 
-### user 及 token 生成
+### 生成user 及 token
 
 `sophon-auth` 管理着其他 venus 模块使用的[jwt](https://jwt.io/)令牌，以便它们在网络上安全地相互通信。
 
@@ -76,30 +73,32 @@ $ nohup ./sophon-auth run > auth.log 2>&1 &
 `venus` 集群中 `token` 的理论知识可参考 `venus` 集群 `token` [认证体系](https://github.com/filecoin-project/venus/discussions/4880)
 :::
 
-
 为链服务组件生成 token 需要先生成用户。
+
+生成`admin`权限token，用于链服务使用。后面`venus`,`sophon-gateway`,`sophon-messsager`,`sophon-miner`,`sophon-co`5个组件都需要使用本次生成的token。
 
 ```shell script
 # 先生成用户
 $ ./sophon-auth user add <USERNAME>
 
-# 生成用户token
+# 为用户生成token，权限是admin
 $ ./sophon-auth token gen --perm admin <USERNAME>
 <SHARED_ADMIN_AUTH_TOKEN>
 ```
 
 给 `user` 绑定矿工 (`miner`)，一个 `user` 可以有多个矿工。
 
-```
+```shell
 $ ./sophon-auth user miner add <USER> <MINER_ID>
 
 # 查看user列表
 $ ./sophon-auth user list
 ```
 
-设置 `user` 可用，否则在其他组件请求 `user` 列表时请求不到。
- 
- ```
+如user的`state`不是`enabled`的话，需要设置 `user` 可用，否则在其他组件请求 `user` 列表时请求不到。
+
+ ```bash
+# 设置用户可用
 $ ./sophon-auth user update --name=<USER> --state=1
   update user success
  ```
@@ -123,6 +122,7 @@ $ make
 github.com/dgraph-io/badger/v3@v3.2011.1/fb/BlockOffset.go:6:2: missing go.sum entry for module providing package github.com/google/flatbuffers/go (imported by github.com/dgraph-io/badger/v3/table); to add:
         go get github.com/dgraph-io/badger/v3/table@v3.2011.1
 ```
+
 :::
 
 启动 `sophon-gateway`
@@ -137,17 +137,25 @@ $ ./sophon-gateway --listen /ip4/0.0.0.0/tcp/45132 run \
 
 ## 启动 venus daemon
 
+获取网络快照。
+
+```bash
+# mainnet网:
+aria2c -x5 https://snapshots.mainnet.filops.net/minimal/latest.zst -o snapshot.car
+
+# calibnet网络：
+aria2c -x5 https://snapshots.calibrationnet.filops.net/minimal/latest.zst -o snapshot.car
+```
+
 启动 `venus` 进程进行链同步。使用 `--network` 来指定 `venus` 连接的网络。
 
 ```shell script
-$ nohup ./venus daemon --network=calibrationnet --auth-url=<http://VENUS_AUTH_IP_ADDRESS:PORT> --auth-token=<SHARED_ADMIN_AUTH_TOKEN> > venus.log 2>&1 &
+$ ./venus daemon 
+--network=calibrationnet \
+--auth-url=<http://VENUS_AUTH_IP_ADDRESS:PORT> \
+--auth-token=<SHARED_ADMIN_AUTH_TOKEN> \
+--import-snapshot snapshot.car
 ```
-
-:::tip
-
-使用 `tail -f venus.log` 或 `./venus sync status` 检查同步过程中是否有任何错误。
-
-:::
 
 ### venus 监听远程访问
 
@@ -170,7 +178,11 @@ vim ~/.venus/config.json
 ```bash
 $ ps -ef | grep venus
 $ kill -9 <VENUS_PID>
-$ nohup ./venus daemon --network=calibrationnet --auth-url=<http://VENUS_AUTH_IP_ADDRESS:PORT> --auth-token=<SHARED_ADMIN_AUTH_TOKEN> > venus.log 2>&1 &
+$ venus daemon \
+--network=calibrationnet \
+--auth-url=<http://VENUS_AUTH_IP_ADDRESS:PORT> \
+--auth-token=<SHARED_ADMIN_AUTH_TOKEN> \
+--import-snapshot snapshot.car
 ```
 
 在其他机器上执行 `telnet` 验证配置生效：
@@ -179,14 +191,55 @@ $ nohup ./venus daemon --network=calibrationnet --auth-url=<http://VENUS_AUTH_IP
 telnet <VENUS_IP_ADDRESS> <PORT>
 ```
 
+可以使用 `tail -f venus.log` 或 `./venus sync status` 或`./venus chain head`多种办法检查同步过程中是否有任何错误。
 
-:::tip
+```bash
+# 查看`Timestamp`如果是当前时间，说明节点同步完成。
+$ ./venus chain head
+{
+	"Height": 769959,
+	"ParentWeight": "14246387999",
+	"Cids": [
+		{
+			"/": "bafy2bzacebuy3bxoxy7h2rlhttwvnte27ebpcro6kfew7ce3fojgghpctlchm"
+		},
+		{
+			"/": "bafy2bzaceawzuc6l3dnj3jbnqc5xynfz6ak3kzad4iejnmu7owaon2iygmqfq"
+		}
+	],
+	"Timestamp": "2023-07-27 10:32:30"
+}
+```
 
-为了链服务能够与链进行交互，`daemon`需要与网络其他节点同步最新的链。具体如何导入一个链的 `snapshot` 进行链同步可参见[这个文档](/zh/operation/chain-mng)。
+## 启动sophon-co（可选）
 
-:::
+```bash
+$ sophon-co --listen 0.0.0.0:6666 run \
+--auth <SHARED_ADMIN_AUTH_TOKEN:http://VENUS_AUTH_IP_ADDRESS:PORT \
+--node <SHARED_ADMIN_AUTH_TOKEN:/ip4/VENUS_DAEMON_IP_ADDRESS/tcp/VENUS_DAEMON_PORT/ws>
+--node <SHARED_ADMIN_AUTH_TOKEN:/ip4/VENUS_DAEMON_IP_ADDRESS/tcp/VENUS_DAEMON_PORT/ws>
+```
+
+如果启动多个节点，可以通过 `--node` 来指定多个节点选择最优链信息，返回给请求组件。
+
+查看 `sophon-co` 下的所有节点，以及调度的优先级:
+
+```bash
+./sophon-co --listen 0.0.0.0:6666 weight list
+#Address                        Weight  Priority
+#/ip4/10.10.66.141/tcp/3453/ws  1       2
+```
 
 ## 启动 sophon-messager
+
+> 如果没有指定与数据库相关的参数，`sophon-messager` 将默认使用 `sqlite3` 数据库。
+
+选择mysql数据库的话，首先需要创建数据库。
+
+```bash
+# 创建数据库
+$ create database sophon_messager default charset utf8;
+```
 
 启动 `sophon-messager`。请注意，`--auth-url`、`--node-url` 和`--auth-token` 是为了让 sophon-messager 了解其他 `venus` 模块的存在并进行自身的身份验证。
 
@@ -201,16 +254,19 @@ $ nohup ./sophon-messager run \
 > msg.log 2>&1 &
 ```
 
-:::tip
-
-如果没有指定与数据库相关的参数，`sophon-messager` 将默认使用 `sqlite3` 数据库。
-
-:::
-
 
 ## 启动 sophon-miner
 
-初始化 `sophon-miner`。
+### 初始化 `sophon-miner`。
+
+选择mysql数据库的话，首先需要创建数据库。
+
+```bash
+# 创建数据库
+$ create database sophon_miner default charset utf8;
+```
+
+初始化。
 
 ```shell script
 $ ./sophon-miner init \
@@ -222,7 +278,7 @@ $ ./sophon-miner init \
 --mysql-conn "<USER>:<PASSWORD>@(127.0.0.1:3306)/venus_miner?parseTime=true&loc=Local&readTimeout=10s&writeTimeout=10s" 
 ```
 
-启动 `sophon-miner`。
+### 启动 `sophon-miner`。
 
 ```shell script
 $ nohup ./sophon-miner run > miner.log 2>& 1 &
@@ -242,7 +298,9 @@ $ ./sophon-miner address list
 ```
 
 如果列表中没有在 `sophon-auth` 中配置的矿工，则需要从 `sophon-auth` 检查配置是否正确
+
 - `检查venus-miner` 初始化配置的 `auth-token` 对应的 `user`是激活状态，即 `state=enabled`
+
 ```shell script
 $ ./sophon-auth user list
 name: ***
@@ -256,6 +314,7 @@ state: enabled
 name: ***
 miners: [***,***,...]
 ```
+
 :::tip 
 `miners` 列表有此矿工为正确。
 :::
