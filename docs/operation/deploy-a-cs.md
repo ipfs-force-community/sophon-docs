@@ -191,7 +191,7 @@ $ nohup ./venus daemon --network=calibrationnet --auth-url <http://VENUS_AUTH_IP
 
 :::tip
 
-In order for the chain service to interact with the chain, daemon needs to be synced with the network by importing a snapshot of the filecoin chain. Please refer to [this guide](Chain.md) for more details.
+In order for the chain service to interact with the chain, daemon needs to be synced with the network by importing a snapshot of the filecoin chain. Please refer to [this guide](venus-daemon.md) for more details.
 
 :::
 
