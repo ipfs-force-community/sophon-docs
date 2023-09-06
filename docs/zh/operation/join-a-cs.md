@@ -49,7 +49,7 @@ Gateway = ["/dns/gateway.xxxxxxxx.com/tcp/83/wss"]
 Token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lxxxxx.MoaizhRLYe0IFq7QBxxxxxxxxxxxxx"
 #ChainEventInterval = "1m0s"
 ```
-除此之外，damocles-manager还需要配置节点的[[Miners]]、[Miners.Sector]、[Miners.Commitment.Pre]、[Miners.Commitment.Prove]、[Miners.PoSt]和[Miners.Proof]信息，打开部份注释根据实际情况填写，可参考下文的**配置 damocles-manager**。
+除此之外，damocles-manager 还需要配置节点的 [[Miners]]、[Miners.Sector]、[Miners.Commitment.Pre]、[Miners.Commitment.Prove]、[Miners.PoSt] 和 [Miners.Proof] 信息。打开部份注释根据实际情况填写，可参考下文的[配置 damocles-manager](#配置-damocles-manager)。
 
 :::tip
 
