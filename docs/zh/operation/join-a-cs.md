@@ -38,7 +38,7 @@ SupportAccounts = ["xxxxx"]
 初始化`damocles-manager daemon init`生成配置文件;
 修改`.damocles-manager/sector-manager.cfg`前面几行
 
-```
+```toml
 # Default config:
 [Common]
 [Common.API]
