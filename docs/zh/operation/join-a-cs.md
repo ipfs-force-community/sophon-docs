@@ -27,7 +27,7 @@
 \#初始化`venus-wallet run`生成配置文件;
 \#修改最后几行: `.venus_wallet/config.toml`
 
-```
+```toml
 [APIRegisterHub]
 RegisterAPI = ["/dns/gateway.xxxxxxxx.com/tcp/83/wss"]
 Token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lxxxxx.MoaizhRLYe0IFq7QBxxxxxxxxxxxxx"
