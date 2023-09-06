@@ -19,7 +19,37 @@
 
 #### 对于需接入共享模块的用户
 
-如果您尝试连接到第三方托管的共享 venus 模块，联系上述服务的管理员并让他们为您设置。
+如果您尝试连接到第三方托管的共享智子服务（链服务），你需要提供**机房的公网地址段**和**Miner ID**，并由管理员加入到服务访问白名单中。联系上述服务的管理员并让他们为您设置。
+
+##### 管理员会生成类似如下信息
+主网接入 token 信息。
+###### venus-wallet配置文件:
+\#初始化`venus-wallet run`生成配置文件;
+\#修改最后几行: `.venus_wallet/config.toml`
+
+```toml
+[APIRegisterHub]
+RegisterAPI = ["/dns/gateway.xxxxxxxx.com/tcp/83/wss"]
+Token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lxxxxx.MoaizhRLYe0IFq7QBxxxxxxxxxxxxx"
+SupportAccounts = ["xxxxx"]
+```
+
+###### damocles-manager配置文件:
+初始化`damocles-manager daemon init`生成配置文件;
+修改`.damocles-manager/sector-manager.cfg`前面几行
+
+```toml
+# Default config:
+[Common]
+[Common.API]
+Chain = "/dns/node.xxxxxxxx.com/tcp/81/wss"
+Messager = "/dns/messager.xxxxxxxx.com/tcp/82/wss"
+Market = "/dns/market.xxxxxxxx.com/tcp/84/wss"
+Gateway = ["/dns/gateway.xxxxxxxx.com/tcp/83/wss"]
+Token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lxxxxx.MoaizhRLYe0IFq7QBxxxxxxxxxxxxx"
+#ChainEventInterval = "1m0s"
+```
+除此之外，damocles-manager 还需要配置节点的 [[Miners]]、[Miners.Sector]、[Miners.Commitment.Pre]、[Miners.Commitment.Prove]、[Miners.PoSt] 和 [Miners.Proof] 信息。打开部份注释根据实际情况填写，可参考下文的[配置 damocles-manager](#配置-damocles-manager)。
 
 :::tip
 
