@@ -170,10 +170,32 @@ $ kill [PID]
 $ nohup ./venus-wallet run > wallet.log 2>&1 &
 ```
 
-如成功连接 `sophon-gateway`，您将看到以下日志。
+到sophon-gateway确认钱包。
+查看哪些钱包连接过来。
 
 ```bash
-2021-07-12T15:14:12.457+0800    INFO    wallet_event    wallet_event/listenevent.go:197 connect to server fcf714b2-eeb6-498b-aafc-5e58eccd9d0f  {"api hub": "/ip4/<IP_ADDRESS>/tcp/45132"}
+./sophon-gateway wallet list
+
+[
+ 	{
+ 		"Account": "venus-test",
+ 		"SupportAccounts": [
+ 			"venus-test"
+ 		],
+ 		"ConnectStates": [
+ 			{
+ 				"Addrs": [
+ 					"f3sqqttrfpchw6usau4e2lr7cb6jbkvbes2nxudf42kxxxxxxxxglnga",
+ 					"f3slzp2qdxtw44l6decoutkzyc5l4xxxxxxxxxxxxxxxxxxxxxxxxxxa"
+ 				],
+ 				"ChannelId": "0b210b25-d01b-4aa2-ac75-324c8b1815e9",
+ 				"Ip": "10.10.66.141:44486",
+ 				"RequestCount": 0,
+ 				"CreateTime": "2023-07-26T16:55:42.286652971+08:00"
+ 			}
+ 		]
+ 	}
+ ]
 ```
 
 :::tip
