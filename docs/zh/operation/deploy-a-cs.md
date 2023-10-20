@@ -156,6 +156,23 @@ $ ./venus daemon
 --auth-token=<SHARED_ADMIN_AUTH_TOKEN> \
 --import-snapshot snapshot.car
 ```
+### 节点磁盘数据合并
+当节点系统磁盘空间不足时，需要重新导入快照文件，以保证venus节点的稳定运行。具体操作方法如下:
+1、停止venus进程运行，可以用 `kill <venus_pid>` 方法停止进程运行；
+2、移除老的 `badge` 、 `chain` 和 `version` 文件，并备份文件；
+```shell script
+cd ~/.venus/
+mkdir backup
+mv badger chain version backup/
+```
+3、导入新的快照文件，并开始同步；同步完成后，就可以把 `~/.venus/backup` 删除。
+```shell script
+./venus daemon 
+--network=calibrationnet \
+--auth-url=<http://VENUS_AUTH_IP_ADDRESS:PORT> \
+--auth-token=<SHARED_ADMIN_AUTH_TOKEN> \
+--import-snapshot snapshot.car
+```
 
 ### venus 监听远程访问
 
