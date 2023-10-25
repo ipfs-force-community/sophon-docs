@@ -279,9 +279,11 @@ List all miner ids that have connected to sophon-miner.
 $ ./sophon-miner address list
 ```
 
-### Configure unified entry for chain service
+### Configure unified endpoint for chain service
 
-Due to the existence of multiple chain service components, it can be cumbersome for downstream components to connect to multiple chain service components of the same chain service. Additionally, it requires configuring multiple entry points for the chain services. To simplify this process and provide a unified entry point for chain services, you can use sophon-gateway to proxy requests for other chain services. [configure unified entry](https://sophon.venus-fil.io/zh/operation/sophon-gateway.html#%E4%BD%BF%E7%94%A8-gateway-%E4%BB%A3%E7%90%86%E5%AF%B9%E5%85%B6%E4%BB%96%E7%BA%BF%E4%B8%8A%E7%BB%84%E4%BB%B6%E7%9A%84%E8%AF%B7%E6%B1%82)
+Given the complexity that a Sophon chain service consists of multiple chain service components (endpoints), it can be cumbersome for downstream consumers to configure multiple endpoints to chain service components before they can use the Sophon chain service. 
+
+To simplify this process and provide a unified endpoint for chain services, you can use `sophon-gateway` as a  proxy for requests to chain services. Details can be found at [configuring unified entry](https://sophon.venus-fil.io/zh/operation/sophon-gateway.html#%E4%BD%BF%E7%94%A8-gateway-%E4%BB%A3%E7%90%86%E5%AF%B9%E5%85%B6%E4%BB%96%E7%BA%BF%E4%B8%8A%E7%BB%84%E4%BB%B6%E7%9A%84%E8%AF%B7%E6%B1%82).
 
 ## Next steps
 
