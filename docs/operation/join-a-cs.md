@@ -180,7 +180,7 @@ Pls keep the wallet unlock state. If the state is locked , it will block sealer 
 
 :::
 
-## Install Damocles
+## Install damocles
 
 Download source code.
 
@@ -192,6 +192,7 @@ Compile `damocles`.
 
 ```bash
 $ cd damocles
+$ git checkout <LATEST_RELEASE>
 $ make all
 ```
 
@@ -236,21 +237,37 @@ You will see logs similar to the following once successfully created new miner-i
 
 ### damocles-manager configurations
 
-Tailor `~/.damocles-manager/sector-manager.cfg` to your own hardware. Detailed instructions on each configurations could be found [here](/zh/cluster/Venus-Sector-Manager).
+Tailor `~/.damocles-manager/sector-manager.cfg` to your own hardware. Detailed instructions on each configurations could be found [here](/zh/cluster/damocles-manager).
 
 ```toml
 [Common]
   [Common.API]
-    # *mandatory* node address (chain service)
-    Chain = "/ip4/{api_host}/tcp/{api_port}"
-    # *mandatory* messager address (chain service)
-    Messager = "/ip4/{api_host}/tcp/{api_port}"
-    # market node address
-    # Market = "/ip4/{api_host}/tcp/{api_port}"
-    # *mandatory* gateway address (chain service)
-    Gateway = "/ip4/{api_host}/tcp/{api_port}"
-    # *mandatory* authentication token (chain service)
-    Token = "{auth token}"
+  # Gateway service infos, required, string type
+  # Fill in according to the actual situation of the service used
+  # For each one contained, if the item is valid as a token-included-info-string ("{token}:{multiaddr}"), the token included would be used to construct the rpc client instead of the common token.
+  Gateway = ["/ip4/{api_host}/tcp/{api_port}"]
+
+  # common token for services, required, string type
+  # Fill in according to the actual situation of the service used
+  Token = "{some token}"
+
+  # Chain service info, optional, string type
+  # Fill in according to the actual situation of the service used
+  # If the field is valid as a token-included-info-string ("{token}:{multiaddr}"), the token included would be used to construct the rpc client instead of the common token.
+  # If not set, use value of Gateway as default 
+  Chain = "/ip4/{api_host}/tcp/{api_port}"
+
+  # Message service info, optional, string type
+  # Fill in according to the actual situation of the service used
+  # If the field is valid as a token-included-info-string ("{token}:{multiaddr}"), the token included would be used to construct the rpc client instead of the common token.
+  # If not set, use value of Gateway as default 
+  Messager = "/ip4/{api_host}/tcp/{api_port}"
+
+  # Market service info, optional, string type
+  # Fill in according to the actual situation of the service used
+  # If the field is valid as a token-included-info-string ("{token}:{multiaddr}"), the token included would be used to construct the rpc client instead of the common token.
+  # If not set, use value of Gateway as default 
+  Market = "/ip4/{api_host}/tcp/{api_port}"
    
 [[Common.PieceStores]]
   # *mandatory*
@@ -354,11 +371,11 @@ Attach permanent storage and init directories.
 $ ./dist/bin/damocles-worker store file-init -l <dir1>
 ```
 
-Plan CPU cores, numa, etc for eahc sealing tasks and tailor your configuration file to it. The following is an example configuration for `damocles-worker`. More detailed instructions on each configurations could be found [here](/zh/cluster/Venus-Worker-c)
+Plan CPU cores, numa, etc for eahc sealing tasks and tailor your configuration file to it. The following is an example configuration for `damocles-worker`. More detailed instructions on each configurations could be found [here](/zh/cluster/damocles-worker-c)
 
 ```toml
 [worker]
-  # optional, instance name of venus-sector-manager
+  # optional, instance name of damocles-manager
   # name = "bytest"
   # rpc_server.host = "0.0.0.0"
   # rpc_server.port = 17890
@@ -369,7 +386,7 @@ Plan CPU cores, numa, etc for eahc sealing tasks and tailor your configuration f
   # piece_token = "{auth token}"
 
 [sealing]
-  # miner IDs that this venus-worker can serve; Ex: [22908, 11034, 191107]
+  # miner IDs that this damocles-worker can serve; Ex: [22908, 11034, 191107]
   allowed_miners = [33680]
   allowed_sizes = ["32GiB","64GiB"]
   # When set to ture, you will need to configure `piece_token` in `sector_manager`
