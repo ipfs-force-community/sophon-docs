@@ -271,16 +271,32 @@ $ ./damocles-manager util miner create
 ```toml
 [Common]
   [Common.API]
-    # 链服务地址，必填项，字符串类型
-    Chain = "/ip4/{api_host}/tcp/{api_port}"
-    # 消息服务地址，必填项，字符串类型
-    Messager = "/ip4/{api_host}/tcp/{api_port}"
-    # 市场服务地址，封装真实数据时为必填项，字符串类型，CC 数据非必填项
-    # Market = "/ip4/{api_host}/tcp/{api_port}"
-    # 网关服务地址，必填项，字符串类型
-    Gateway = "/ip4/{api_host}/tcp/{api_port}"
-    # 服务 token，必填项，字符串类型
-    Token = "{auth token}"
+  # 网关服务地址，必填项，字符串类型
+  # 根据所使用的服务实际情况填写
+  # 对于每一条信息，如果使用了合法的 "{token}:{multiaddr}" 格式，构造客户端时将使用本字段中提取的 token，否则使用通用 sophon-auth 产生的 token
+  Gateway = ["/ip4/{api_host}/tcp/{api_port}"]
+
+  # 链服务信息，可选项，字符串类型
+  # 根据所使用的服务实际情况填写
+  # 如果使用了合法的 "{token}:{multiaddr}" 格式，构造客户端时将使用本字段中提取的 token，否则使用通用 sophon-auth 产生的 token
+  # 如果不填写，会默认使用 Gateway 的地址和 token 作为链服务的入口 
+  Chain = "/ip4/{api_host}/tcp/{api_port}"
+
+  # 消息服务信息，可选项，字符串类型
+  # 根据所使用的服务实际情况填写
+  # 如果使用了合法的 "{token}:{multiaddr}" 格式，构造客户端时将使用本字段中提取的 token，否则使用通用 sophon-auth 产生的 token
+  # 如果不填写，会默认使用 Gateway 的地址和 token 作为消息服务的入口 
+  Messager = "/ip4/{api_host}/tcp/{api_port}"
+
+  # 市场服务信息，可选项，字符串类型
+  # 根据所使用的服务实际情况填写
+  # 如果使用了合法的 "{token}:{multiaddr}" 格式，构造客户端时将使用本字段中提取的 token，否则使用通用 sophon-auth 产生的 token
+  # 如果不填写，会默认使用 Gateway 的地址和 token 作为消息服务的入口 
+  Market = "/ip4/{api_host}/tcp/{api_port}"
+
+  # 服务 sophon-auth 产生的 token，必填项，字符串类型
+  # 根据所使用的服务实际情况填写
+  Token = "{some token}"
    
 [[Common.PieceStores]]
   # 路径，必填项，字符串类型
