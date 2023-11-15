@@ -352,7 +352,7 @@ $ ./sophon-miner address stop <MINER_ID>
 ## 配置链服务统一入口
 
 因为链服务组件比较多，当下游组件想要链接同一个链服务的多个链服务组件时，配置会比较繁琐，并且需要提供多个链服务的入口。
-可以使用 `sophon-gateway` 代理其他链服务的请求，对外提供一个统一的链服务入口。参考[部署统一链服务入口]。(https://sophon.venus-fil.io/zh/operation/sophon-gateway.html#%E4%BD%BF%E7%94%A8-gateway-%E4%BB%A3%E7%90%86%E5%AF%B9%E5%85%B6%E4%BB%96%E7%BA%BF%E4%B8%8A%E7%BB%84%E4%BB%B6%E7%9A%84%E8%AF%B7%E6%B1%82)
+可以使用 `sophon-gateway` 代理其他链服务的请求，对外提供一个统一的链服务入口。参考[部署统一链服务入口](https://sophon.venus-fil.io/zh/operation/sophon-gateway.html#%E4%BD%BF%E7%94%A8-gateway-%E4%BB%A3%E7%90%86%E5%AF%B9%E5%85%B6%E4%BB%96%E7%BA%BF%E4%B8%8A%E7%BB%84%E4%BB%B6%E7%9A%84%E8%AF%B7%E6%B1%82)
 
 ## 启动 droplet（可选）
 
