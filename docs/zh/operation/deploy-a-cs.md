@@ -141,10 +141,10 @@ $ ./sophon-gateway --listen /ip4/0.0.0.0/tcp/45132 run \
 
 ```bash
 # mainnet网:
-aria2c -x5 https://snapshots.mainnet.filops.net/minimal/latest.zst -o snapshot.car
+aria2c -x5 https://forest-archive.chainsafe.dev/latest/mainnet -o snapshot.car
 
 # calibnet网络：
-aria2c -x5 https://snapshots.calibrationnet.filops.net/minimal/latest.zst -o snapshot.car
+aria2c -x5 https://forest-archive.chainsafe.dev/latest/calibnet -o snapshot.car
 ```
 
 启动 `venus` 进程进行链同步。使用 `--network` 来指定 `venus` 连接的网络。
@@ -267,7 +267,7 @@ $ nohup ./sophon-messager run \
 --gateway-url=/ip4/<IP_ADDRESS_OF_VENUS_GATEWAY>/tcp/45132 \
 --auth-token <SHARED_ADMIN_AUTH_TOKEN> \
 --db-type mysql \
---mysql-dsn "<USER>:<PASSWORD>@(127.0.0.1:3306)/venus_messager?parseTime=true&loc=Local&readTimeout=10s&writeTimeout=10s" \
+--mysql-dsn "<USER>:<PASSWORD>@(127.0.0.1:3306)/sophon_messager?parseTime=true&loc=Local&readTimeout=10s&writeTimeout=10s" \
 > msg.log 2>&1 &
 ```
 
@@ -292,7 +292,7 @@ $ ./sophon-miner init \
 --gateway-api /ip4/<VENUS_GATEWAY_IP_ADDRESS>/tcp/45132 \
 --api /ip4/<VENUS_DAEMON_IP_ADDRESS>/tcp/3453 \
 --slash-filter mysql \
---mysql-conn "<USER>:<PASSWORD>@(127.0.0.1:3306)/venus_miner?parseTime=true&loc=Local&readTimeout=10s&writeTimeout=10s" 
+--mysql-conn "<USER>:<PASSWORD>@(127.0.0.1:3306)/sophon_miner?parseTime=true&loc=Local&readTimeout=10s&writeTimeout=10s" 
 ```
 
 ### 启动 `sophon-miner`。
