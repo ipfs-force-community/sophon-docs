@@ -111,7 +111,6 @@ $ ./sophon-auth user update --name=<USER> --state=1
 $ git clone https://github.com/ipfs-force-community/sophon-gateway.git
 $ cd sophon-gateway
 $ git checkout <RELEASE_TAG>
-$ make deps
 $ make
 ```
 

@@ -62,9 +62,7 @@
 ```shell script
 $ git clone https://github.com/filecoin-project/venus.git
 $ cd venus
-$ git checkout -b v1.0.0 v1.0.0
-$ git submodule update --init --recursive
-$ make deps
+$ git checkout v1.15.1
 $ make
 ```
 
@@ -73,7 +71,7 @@ $ make
 ```shell script
 $ git clone https://github.com/ipfs-force-community/sophon-auth.git
 $ cd sophon-auth
-$ git checkout -b v1.0.0 v1.0.0
+$ git checkout v1.15.0
 $ make 
 ```
 
@@ -82,8 +80,7 @@ $ make
 ```shell script
 $ git clone https://github.com/ipfs-force-community/sophon-gateway.git
 $ cd sophon-gateway
-$ git checkout -b v1.0.0 v1.0.0
-$ git submodule update --init --recursive
+$ git checkout v1.15.0
 $ make
 ```
 
@@ -102,7 +99,7 @@ $ go get github.com/google/flatbuffers@v1.12.1
 ```shell script
 $ git clone https://github.com/ipfs-force-community/sophon-messager.git
 $ cd sophon-messager
-$ git checkout -b v1.0.0 v1.0.0
+$ git checkout v1.15.0
 $ make 
 ```
 
@@ -111,8 +108,7 @@ $ make
 ```shell script
 $ git clone https://github.com/ipfs-force-community/sophon-miner.git
 $ cd sophon-miner
-$ git checkout -b v1.0.0 v1.0.0
-$ git submodule update --init --recursive
+$ git checkout v1.15.0
 $ make
 ```
 

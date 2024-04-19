@@ -19,7 +19,7 @@ git clone https://github.com/filecoin-project/venus.git /path/to/filecoin-projec
 
 #### 安装 Go
 
-`venus` 的构建过程需要 [Go](https://golang.org/doc/install) >= v1.17。
+`venus` 的构建过程需要 [Go](https://golang.org/doc/install) >= v1.20。
 
 > 第一次安装 Go？我们推荐 [这个教程](https://www.ardanlabs.com/blog/2016/05/installing-go-and-your-workspace.html) 其中包括环境设置。
 

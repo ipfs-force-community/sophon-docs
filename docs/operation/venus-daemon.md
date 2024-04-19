@@ -12,7 +12,7 @@ To run a venus node, your computer must have:
 
 #### Installing Go
 
-The build process for `venus` requires [Go](https://golang.org/doc/install) >= v1.17.
+The build process for `venus` requires [Go](https://golang.org/doc/install) >= v1.20.
 
 > Installing Go for the first time? We recommend [this tutorial](https://www.ardanlabs.com/blog/2016/05/installing-go-and-your-workspace.html) which includes environment setup.
 
