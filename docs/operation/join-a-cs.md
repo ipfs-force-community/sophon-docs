@@ -200,6 +200,11 @@ $ make all
 After compilation, two executable, `damocles-worker` and `damocles-manager`, will be generated under `./dist/bin`.
 :::
 
+:::tip 
+Fetch the Filecoin Proof Parameters if you don't have them already by running the following command:
+```bash
+./dist/bin/damocles-manager util fetch-params 32GiB
+```
 
 ### damocles-manager
 
